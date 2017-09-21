@@ -1,0 +1,12 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "dom","es2017"
+        ],
+        "module": "es2015",
+        "watch": true      
+    }
+}

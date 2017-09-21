@@ -1,0 +1,9 @@
+{
+  "name": "zlvlg",
+  "version": "0.0.0",
+  "description": "zlvlg",
+  "main": "app.js",
+  "author": {
+    "name": "a.tretyakov"
+  }
+}
