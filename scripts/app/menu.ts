@@ -2,9 +2,9 @@ import { } from "../../node_modules/phaser-ce/typescript/phaser";
 
 export class MainMenu {
     constructor(game: Phaser.Game) {
-        this.titleText = game.make.text(game.world.centerX, 250,
+        this.titleText = game.make.text(game.world.centerX, 100,
             " Zombie\nGraveyards", {
-                font: 'bold 60pt TheMinion',
+                font: 'bold 42pt TheMinion',
                 fill: '#45ea3f',
                 align: 'center'
             });
