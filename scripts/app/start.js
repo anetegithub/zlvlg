@@ -15,5 +15,9 @@ define(["require", "exports", "./menu"], function (require, exports, m) {
         };
         return SimpleGame;
     }());
-    var game = new SimpleGame();
+    WebFont.load({
+        active: function () {
+            new SimpleGame();
+        }
+    });
 });

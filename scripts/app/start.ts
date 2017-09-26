@@ -19,4 +19,11 @@ class SimpleGame {
     }
 }
 
-var game = new SimpleGame();
+//comment for intellisence
+declare var WebFont: any;
+
+WebFont.load({
+    active: () => {
+        new SimpleGame();
+    }
+});
