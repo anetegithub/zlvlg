@@ -1,4 +1,4 @@
-import { } from "./node_modules/phaser-ce/typescript/phaser";
+import { } from "../../node_modules/phaser-ce/typescript/phaser";
 
 class SimpleGame {
     constructor() {
