@@ -23,6 +23,10 @@ class SimpleGame {
 declare var WebFont: any;
 
 WebFont.load({
+    custom: {
+        families: ['TheMinion'],
+        urls: ['/style/app.css']
+    },
     active: () => {
         new SimpleGame();
     }

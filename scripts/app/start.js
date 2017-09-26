@@ -16,6 +16,10 @@ define(["require", "exports", "./menu"], function (require, exports, m) {
         return SimpleGame;
     }());
     WebFont.load({
+        custom: {
+            families: ['TheMinion'],
+            urls: ['/style/app.css']
+        },
         active: function () {
             new SimpleGame();
         }
