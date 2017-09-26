@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var MainMenu = /** @class */ (function () {
     function MainMenu(game) {
         this.titleText = game.make.text(game.world.centerX, 100, "Game Title", {
@@ -10,4 +12,4 @@ var MainMenu = /** @class */ (function () {
     }
     return MainMenu;
 }());
-export { MainMenu };
+exports.MainMenu = MainMenu;

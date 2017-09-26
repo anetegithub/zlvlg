@@ -4,9 +4,10 @@
         "alwaysStrict": true,
         "experimentalDecorators": true,
         "lib": [
-            "dom","es2017"
+            "dom",
+            "es2017"
         ],
-        "module": "es2015",
-        "watch": true      
+        "module": "commonjs",
+        "watch": true
     }
 }

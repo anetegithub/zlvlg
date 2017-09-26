@@ -1,4 +1,6 @@
-import { MainMenu } from "./menu";
+"use strict";
+exports.__esModule = true;
+var m = require("./menu");
 var SimpleGame = /** @class */ (function () {
     function SimpleGame() {
         this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
@@ -9,7 +11,7 @@ var SimpleGame = /** @class */ (function () {
     SimpleGame.prototype.create = function () {
         var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
         logo.anchor.setTo(0.5, 0.5);
-        new MainMenu(this.game);
+        new m.MainMenu(this.game);
     };
     return SimpleGame;
 }());
