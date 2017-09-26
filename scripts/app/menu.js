@@ -4,7 +4,7 @@ define(["require", "exports"], function (require, exports) {
     var MainMenu = /** @class */ (function () {
         function MainMenu(game) {
             this.titleText = game.make.text(game.world.centerX, 100, "Game Title", {
-                font: 'bold 60pt TheMinion',
+                font: 'bold 60pt Arial',
                 fill: '#FDFFB5',
                 align: 'center'
             });
