@@ -10,7 +10,6 @@ define(["require", "exports"], function (require, exports) {
         };
         SimpleGame.prototype.create = function () {
             var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
-            logo.width = 800;
             logo.anchor.setTo(0.5, 0.5);
         };
         return SimpleGame;
