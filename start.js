@@ -7,7 +7,6 @@ define(["require", "exports"], function (require, exports) {
         }
         SimpleGame.prototype.preload = function () {
             var img = this.game.load.image('logo', 'images/logo.png');
-            img.crossOrigin = "";
         };
         SimpleGame.prototype.create = function () {
             var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
