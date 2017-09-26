@@ -8,7 +8,7 @@ class SimpleGame {
     game: Phaser.Game;
 
     preload() {
-        var img = this.game.load.image('logo', 'images/logo.png');
+        var img = this.game.load.image('logo', 'images/environment/BG.png');
     }
 
     create() {
