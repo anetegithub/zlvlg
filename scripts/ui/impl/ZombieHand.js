@@ -15,7 +15,7 @@ define(["require", "exports", "../abstract/BaseCursor"], function (require, expo
         __extends(ZombieHand, _super);
         function ZombieHand() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.url = './images/environment/objects/cursor.png';
+            _this.url = './images/environment/Objects/cursor.png';
             return _this;
         }
         return ZombieHand;
