@@ -19,7 +19,7 @@ define(["require", "exports", "../ui/impl/ZombieHand", "./menu"], function (requ
     WebFont.load({
         custom: {
             families: ['TheMinion'],
-            urls: ['/style/app.css']
+            urls: ['./style/app.css']
         },
         active: function () {
             new SimpleGame(new ZombieCursor.ZombieHand());

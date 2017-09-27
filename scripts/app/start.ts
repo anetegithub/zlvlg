@@ -28,7 +28,7 @@ declare var WebFont: any;
 WebFont.load({
     custom: {
         families: ['TheMinion'],
-        urls: ['/style/app.css']
+        urls: ['./style/app.css']
     },
     active: () => {
         new SimpleGame(new ZombieCursor.ZombieHand());
