@@ -5,8 +5,11 @@ define(["require", "exports"], function (require, exports) {
         function BaseCursor() {
         }
         BaseCursor.prototype.set = function (game) {
-            if (game.device.desktop) {
-                game.canvas.style.cursor = "url(\"" + this.url + "\") pointer";
+            if (game.device.android || game.device.iOS || game.device.windowsPhone) {
+                return;
+            }
+            else {
+                document.getElementById('content').style.cursor = "url(" + this.url + "), auto";
             }
         };
         return BaseCursor;
