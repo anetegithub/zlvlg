@@ -1,9 +1,10 @@
-define(["require", "exports", "./menu"], function (require, exports, m) {
+define(["require", "exports", "../ui/impl/ZombieHand", "./menu"], function (require, exports, ZombieCursor, m) {
     "use strict";
     exports.__esModule = true;
     var SimpleGame = /** @class */ (function () {
-        function SimpleGame() {
+        function SimpleGame(cursor) {
             this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
+            cursor.set(this.game);
         }
         SimpleGame.prototype.preload = function () {
             this.game.load.image('logo', 'images/environment/BG0.png');
@@ -21,7 +22,7 @@ define(["require", "exports", "./menu"], function (require, exports, m) {
             urls: ['/style/app.css']
         },
         active: function () {
-            new SimpleGame();
+            new SimpleGame(new ZombieCursor.ZombieHand());
         }
     });
 });

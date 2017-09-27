@@ -1,9 +1,12 @@
 import { } from "../../node_modules/phaser-ce/typescript/phaser";
+import ICursor = require('../ui/interfaces/ICursor');
+import ZombieCursor = require('../ui/impl/ZombieHand');
 import m = require('./menu');
 
 class SimpleGame {
-    constructor() {
+    constructor(cursor: ICursor.ICursor) {
         this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
+        cursor.set(this.game);
     }
 
     game: Phaser.Game;
@@ -28,6 +31,6 @@ WebFont.load({
         urls: ['/style/app.css']
     },
     active: () => {
-        new SimpleGame();
+        new SimpleGame(new ZombieCursor.ZombieHand());
     }
 });
