@@ -3,7 +3,7 @@ define(["require", "exports"], function (require, exports) {
     exports.__esModule = true;
     var MainMenu = /** @class */ (function () {
         function MainMenu(game) {
-            this.titleText = game.make.text(game.world.centerX, 100, " Zombie\nGraveyards", {
+            this.titleText = game.make.text(game.world.centerX, 150, " Zombie\nGraveyards", {
                 font: 'bold 42pt TheMinion',
                 fill: '#45ea3f',
                 align: 'center'
