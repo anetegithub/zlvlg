@@ -7,6 +7,7 @@ define(["require", "exports"], function (require, exports) {
         }
         GlobalGame.prototype.run = function () {
             this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
+            this.game['args'] = this.args;
         };
         GlobalGame.prototype.preload = function () {
             this.game.load.image('logo', 'images/environment/BG0.png');
