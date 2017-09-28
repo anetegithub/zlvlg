@@ -1,4 +1,5 @@
 
+import { } from "../../../node_modules/phaser-ce/typescript/phaser";
 import { } from "../../ui/interfaces/IGlobalGameArg";
 import { GlobalArgs } from "./GlobalArgs";
 
@@ -23,10 +24,10 @@ export class GlobalGame {
         var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
         logo.anchor.setTo(0.5, 0.5);
 
-
-        for (var key in this.game['args']) {
-            if (this.args.hasOwnProperty(key)) {
-                var arg: IGlobalGameArg = this.args[key];
+        let args = this.game['args'] as GlobalArgs;
+        for (var key in args) {
+            if (args.hasOwnProperty(key)) {
+                var arg: IGlobalGameArg = args[key];
                 arg.release(this.game);
             }
         }
