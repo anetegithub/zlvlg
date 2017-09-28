@@ -286,8 +286,8 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
-*.js
+#*.js
 
 #includes
-!/scripts/lib/
-!/scripts/lib/*
+#!/scripts/lib/
+#!/scripts/lib/*
