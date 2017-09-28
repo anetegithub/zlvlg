@@ -1,3 +1,4 @@
+
 import { } from "../../ui/interfaces/IGlobalGameArg";
 import { GlobalArgs } from "./GlobalArgs";
 
@@ -23,7 +24,7 @@ export class GlobalGame {
         logo.anchor.setTo(0.5, 0.5);
 
 
-        for (var key in this.args) {
+        for (var key in this.game['args']) {
             if (this.args.hasOwnProperty(key)) {
                 var arg: IGlobalGameArg = this.args[key];
                 arg.release(this.game);
