@@ -6,9 +6,12 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/*.js": {"when": "$(basename).ts"}
+        "**/*.js": {
+            "when": "$(basename).ts"
+        }
     },
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
 }
