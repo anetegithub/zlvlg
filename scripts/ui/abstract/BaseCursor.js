@@ -4,7 +4,7 @@ define(["require", "exports"], function (require, exports) {
     var BaseCursor = /** @class */ (function () {
         function BaseCursor() {
         }
-        BaseCursor.prototype.set = function (game) {
+        BaseCursor.prototype.release = function (game) {
             if (game.device.android || game.device.iOS || game.device.windowsPhone) {
                 return;
             }

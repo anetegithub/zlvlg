@@ -1,26 +1,7 @@
-import { } from "../../node_modules/phaser-ce/typescript/phaser";
-import ICursor = require('../ui/interfaces/ICursor');
-import ZombieCursor = require('../ui/impl/ZombieHand');
-import m = require('./menu');
-
-class SimpleGame {
-    constructor(cursor: ICursor.ICursor) {
-        this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
-        cursor.set(this.game);
-    }
-
-    game: Phaser.Game;
-
-    preload() {
-        this.game.load.image('logo', 'images/environment/BG0.png');
-    }
-
-    create() {
-        var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
-        logo.anchor.setTo(0.5, 0.5);
-        new m.MainMenu(this.game);
-    }
-}
+import { ZombieHand } from "../ui/impl/ZombieHand";
+import { MainMenu } from "../ui/impl/Menu";
+import { GlobalArgs } from "./core/GlobalArgs";
+import { GlobalGame } from "./core/GlobalGame";
 
 //comment for intellisence
 declare var WebFont: any;
@@ -31,6 +12,11 @@ WebFont.load({
         urls: ['./styles/app.css']
     },
     active: () => {
-        new SimpleGame(new ZombieCursor.ZombieHand());
+        var args = new GlobalArgs();
+        args.cursor = new ZombieHand();
+        args.menu = new MainMenu();
+
+        var game = new GlobalGame(args);
+        game.run();
     }
 });

@@ -1,4 +1,5 @@
-export interface ICursor {
+import { } from "./IGlobalGameArg";
+
+export interface ICursor extends IGlobalGameArg {
     url: string;
-    set(game: Phaser.Game): void;
 }
