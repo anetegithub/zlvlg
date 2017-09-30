@@ -3,6 +3,7 @@ define(["require", "exports"], function (require, exports) {
     exports.__esModule = true;
     var MemorySceneManager = /** @class */ (function () {
         function MemorySceneManager() {
+            this.scenes = [];
         }
         MemorySceneManager.prototype.add = function (scene) {
             this.existedScene(scene.name, false);

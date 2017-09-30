@@ -3,6 +3,10 @@ import { ISceneManager } from "../interfaces/ISceneManager";
 export class MemorySceneManager implements ISceneManager {
     private scenes: IScene[];
 
+    constructor() {
+        this.scenes = [];
+    }
+
     add(scene: IScene): void {
         this.existedScene(scene.name, false);
         this.scenes.push(scene);
