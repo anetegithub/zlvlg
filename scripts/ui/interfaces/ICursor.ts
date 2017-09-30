@@ -1,5 +1,5 @@
-import { } from "./IGlobalGameArg";
+import { } from "../../app/core/interfaces/IManagedResource";
 
-export interface ICursor extends IGlobalGameArg {
+export interface ICursor extends IManagedResource {
     url: string;
 }

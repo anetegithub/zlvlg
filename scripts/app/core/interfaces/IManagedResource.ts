@@ -1,3 +1,3 @@
-interface IGlobalGameArg {
+interface IManagedResource {
     release(game: Phaser.Game): void;
 }

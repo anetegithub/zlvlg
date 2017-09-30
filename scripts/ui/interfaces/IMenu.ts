@@ -1,4 +1,4 @@
-import { } from "./IGlobalGameArg";
+import { } from "../../app/core/interfaces/IManagedResource";
 
-export interface IMenu extends IGlobalGameArg {
+export interface IMenu extends IManagedResource {
 }
