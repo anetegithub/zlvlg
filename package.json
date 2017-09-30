@@ -3,6 +3,7 @@
     "@types/webfontloader": "^1.6.29",
     "phaser-ce": "^2.8.7",
     "requirejs": "^2.3.5",
+    "typescript": "^2.5.3",
     "webfontloader": "^1.6.28"
   }
 }
