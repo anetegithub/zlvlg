@@ -35,5 +35,11 @@ export class GlobalGame {
                 arg.release(this.game);
             }
         }
+
+        if (this.inited) {
+            this.inited();
+        }
     }
+
+    inited: () => void;
 }

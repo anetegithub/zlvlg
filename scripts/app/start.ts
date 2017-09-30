@@ -21,10 +21,11 @@ WebFont.load({
         args.menu = new MainMenu();
 
         var game = new GlobalGame(args);
+        game.inited = () => {
+            Container.sceneMgr = new MemorySceneManager();
+            Container.sceneMgr.add(new MainMenuScene());
+            Container.sceneMgr.next("MainMenu");
+        };
         game.run();
-
-        Container.sceneMgr = new MemorySceneManager();
-        Container.sceneMgr.add(new MainMenuScene());
-        Container.sceneMgr.next("MainMenu");
     }
 });

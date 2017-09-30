@@ -11,10 +11,12 @@ define(["require", "exports", "../ui/impl/ZombieHand", "../ui/impl/Menu", "./cor
             args.cursor = new ZombieHand_1.ZombieHand();
             args.menu = new Menu_1.MainMenu();
             var game = new GlobalGame_1.GlobalGame(args);
+            game.inited = function () {
+                IoC_1.Container.sceneMgr = new MemorySceneManager_1.MemorySceneManager();
+                IoC_1.Container.sceneMgr.add(new MainMenuScene_1.MainMenuScene());
+                IoC_1.Container.sceneMgr.next("MainMenu");
+            };
             game.run();
-            IoC_1.Container.sceneMgr = new MemorySceneManager_1.MemorySceneManager();
-            IoC_1.Container.sceneMgr.add(new MainMenuScene_1.MainMenuScene());
-            IoC_1.Container.sceneMgr.next("MainMenu");
         }
     });
 });

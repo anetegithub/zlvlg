@@ -26,6 +26,9 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
                     arg.release(this.game);
                 }
             }
+            if (this.inited) {
+                this.inited();
+            }
         };
         return GlobalGame;
     }());
