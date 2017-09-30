@@ -1,4 +1,4 @@
-define(["require", "exports", "../../utils/globals/IoC", "../../scene/scenes/MainMenuScene"], function (require, exports, IoC_1, MainMenuScene_1) {
+define(["require", "exports", "../../utils/globals/IoC"], function (require, exports, IoC_1) {
     "use strict";
     exports.__esModule = true;
     /**
@@ -7,7 +7,6 @@ define(["require", "exports", "../../utils/globals/IoC", "../../scene/scenes/Mai
     var GlobalGame = /** @class */ (function () {
         function GlobalGame(args) {
             this.args = args;
-            IoC_1.Container.sceneMgr = args.sceneMgr;
         }
         GlobalGame.prototype.run = function () {
             this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
@@ -27,11 +26,6 @@ define(["require", "exports", "../../utils/globals/IoC", "../../scene/scenes/Mai
                     arg.release(this.game);
                 }
             }
-            this.startTheGame();
-        };
-        GlobalGame.prototype.startTheGame = function () {
-            IoC_1.Container.sceneMgr.add(new MainMenuScene_1.MainMenuScene());
-            IoC_1.Container.sceneMgr.next("MainMenu");
         };
         return GlobalGame;
     }());
