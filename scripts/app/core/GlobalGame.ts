@@ -37,8 +37,9 @@ export class GlobalGame {
             }
         }
 
-        if (this.inited) {
-            this.inited();
+        let initFunc = this.game['inited'] as () => void;
+        if (initFunc) {
+            initFunc();
         }
     }
 
