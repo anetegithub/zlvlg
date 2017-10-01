@@ -25,7 +25,7 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/Te
         MainMenuScene.prototype.newGame = function () {
             return new TextButton_1.TextButton({
                 size: 24,
-                y: 200,
+                y: 600,
                 text: 'New Game'
             });
         };
