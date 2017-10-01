@@ -11,6 +11,7 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
         GlobalGame.prototype.run = function () {
             this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
             this.game['args'] = this.args;
+            this.game['inited'] = this.inited;
             IoC_1.Container.game = this.game;
         };
         GlobalGame.prototype.preload = function () {
