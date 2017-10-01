@@ -5,3 +5,4 @@ export class GlobalArgs {
     cursor?: ICursor;
     menu: IMenu;
 }
+//dsa
