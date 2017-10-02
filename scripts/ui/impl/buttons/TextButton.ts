@@ -28,6 +28,8 @@ export class TextButton implements IManagedResource {
             console.log('onInputOut');
         });
 
+        text.inputEnabled = true;
+
         text.events.onInputOver.add(() => {
             debugger;
             console.log('onInputOver');

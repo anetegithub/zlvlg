@@ -21,6 +21,7 @@ define(["require", "exports", "../../../utils/ui/TextFactory"], function (requir
                 debugger;
                 console.log('onInputOut');
             });
+            text.inputEnabled = true;
             text.events.onInputOver.add(function () {
                 debugger;
                 console.log('onInputOver');
