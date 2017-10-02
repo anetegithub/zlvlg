@@ -1,5 +1,6 @@
 import { BaseScene } from "../abstract/BaseScene";
 import { TextButton } from "../../ui/impl/buttons/textbutton/TextButton";
+import { Container } from "../../utils/globals/IoC";
 
 export class MainMenuScene extends BaseScene {
     protected resources: IManagedResource[] = [
@@ -19,11 +20,20 @@ export class MainMenuScene extends BaseScene {
             events: {
                 over: function () {
                     var fxdStyle = closure.fontStyle;
-                    fxdStyle.fill = '#45cc5b'
+                    fxdStyle.fill = '#45cc5b';
                     this.setStyle(fxdStyle, true);
                 },
                 out: function () {
                     this.setStyle(closure.fontStyle, true);
+                },
+                down: function () {
+                    var fxdStyle = closure.fontStyle;
+                    fxdStyle.font = `bold 20pt TheMinion`;
+                    fxdStyle.fill = '#45cc5b';
+                    this.setStyle(fxdStyle, true);
+                },
+                up: function () {
+                    Container.sceneMgr.next('NicknameInput');
                 }
             }
         });

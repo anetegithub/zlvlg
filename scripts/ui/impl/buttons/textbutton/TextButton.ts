@@ -1,6 +1,6 @@
 import { } from "../../app/core/interfaces/IManagedResource";
 import { TextButtonArgs } from "./TextButtonArgs";
-import { TextFactory } from "../../../../utils/ui/TextFactory";
+import { TextFactory } from "../../../../utils/ui/textfactory/TextFactory";
 
 export class TextButton implements IManagedResource {
     constructor(args: TextButtonArgs) {

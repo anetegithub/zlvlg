@@ -1,4 +1,4 @@
-define(["require", "exports", "../../../../utils/ui/TextFactory"], function (require, exports, TextFactory_1) {
+define(["require", "exports", "../../../../utils/ui/textfactory/TextFactory"], function (require, exports, TextFactory_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class TextButton {

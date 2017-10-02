@@ -1,13 +1,9 @@
-import { } from "../../../node_modules/phaser-ce/typescript/phaser";
-import * as ioc from "../globals/IoC";
+import { } from "../../../../node_modules/phaser-ce/typescript/phaser";
+import { } from "./interfaces/ITextFactoryArgs";
+import * as ioc from "../../globals/IoC";
 
 export class TextFactory {
-    static new(options: {
-        y?: number,
-        text?: string,
-        fontStyle?: Phaser.PhaserTextStyle,
-        autoinit?: boolean
-    }): Phaser.Text {
+    static new(options: ITextFactoryArgs): Phaser.Text {
         var text = ioc.Container.game.make.text(
             ioc.Container.game.world.centerX,
             options.y || 0,

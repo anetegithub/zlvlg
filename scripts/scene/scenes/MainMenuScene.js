@@ -1,4 +1,4 @@
-define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton"], function (require, exports, BaseScene_1, TextButton_1) {
+define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC"], function (require, exports, BaseScene_1, TextButton_1, IoC_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class MainMenuScene extends BaseScene_1.BaseScene {
@@ -25,6 +25,15 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
                     },
                     out: function () {
                         this.setStyle(closure.fontStyle, true);
+                    },
+                    down: function () {
+                        var fxdStyle = closure.fontStyle;
+                        fxdStyle.font = `bold 20pt TheMinion`;
+                        fxdStyle.fill = '#45cc5b';
+                        this.setStyle(fxdStyle, true);
+                    },
+                    up: function () {
+                        IoC_1.Container.sceneMgr.next('NicknameInput');
                     }
                 }
             });

@@ -1,4 +1,4 @@
-define(["require", "exports", "../globals/IoC"], function (require, exports, ioc) {
+define(["require", "exports", "../../globals/IoC"], function (require, exports, ioc) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class TextFactory {
