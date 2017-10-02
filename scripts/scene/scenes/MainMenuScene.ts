@@ -1,6 +1,7 @@
 import { BaseScene } from "../abstract/BaseScene";
 import { TextButton } from "../../ui/impl/buttons/textbutton/TextButton";
 import { Container } from "../../utils/globals/IoC";
+import { NicknameInput } from "../scenes/ui/NicknameInput";
 
 export class MainMenuScene extends BaseScene {
     protected resources: IManagedResource[] = [
@@ -33,7 +34,7 @@ export class MainMenuScene extends BaseScene {
                     this.setStyle(fxdStyle, true);
                 },
                 up: function () {
-                    Container.sceneMgr.next('NicknameInput');
+                    Container.sceneMgr.next(NicknameInput);
                 }
             }
         });

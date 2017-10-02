@@ -9,12 +9,14 @@ define(["require", "exports"], function (require, exports) {
             this.existedScene(scene.name, false);
             this.scenes.push(scene);
         }
-        remove(key) {
-            var findedScene = this.existedScene(key, true);
+        remove(scene) {
+            var sceneObj = new scene();
+            var findedScene = this.existedScene(sceneObj.name, true);
             this.scenes = this.scenes.splice(this.scenes.indexOf(findedScene), 1);
         }
-        next(key) {
-            var findedScene = this.existedScene(key, true);
+        next(scene) {
+            var sceneObj = new scene();
+            var findedScene = this.existedScene(sceneObj.name, true);
             findedScene.run();
         }
         existedScene(key, exist) {

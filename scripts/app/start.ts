@@ -24,7 +24,7 @@ WebFont.load({
         game.inited = () => {
             Container.sceneMgr = new MemorySceneManager();
             Container.sceneMgr.add(new MainMenuScene());
-            Container.sceneMgr.next("MainMenu");
+            Container.sceneMgr.next(MainMenuScene);
         };
         game.run();
     }

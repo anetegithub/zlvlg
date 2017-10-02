@@ -12,13 +12,15 @@ export class MemorySceneManager implements ISceneManager {
         this.scenes.push(scene);
     }
 
-    remove(key: string): void {
-        var findedScene = this.existedScene(key, true);
+    remove<T extends IScene>(scene: new (...args) => T): void {
+        var sceneObj = new scene();
+        var findedScene = this.existedScene(sceneObj.name, true);
         this.scenes = this.scenes.splice(this.scenes.indexOf(findedScene), 1);
     }
 
-    next(key: string): void {
-        var findedScene = this.existedScene(key, true);
+    next<T extends IScene>(scene: new (...args) => T): void {
+        var sceneObj = new scene();
+        var findedScene = this.existedScene(sceneObj.name, true);
         findedScene.run();
     }
 
