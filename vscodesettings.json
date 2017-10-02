@@ -1,4 +1,6 @@
 {
+    "git.autorefresh": true,
+    "git.autofetch": true,
     "files.associations": {},
     "files.exclude": {
         "**/.git": true,

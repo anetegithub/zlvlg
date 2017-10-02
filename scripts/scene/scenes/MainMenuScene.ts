@@ -1,6 +1,5 @@
 import { BaseScene } from "../abstract/BaseScene";
 import { TextButton } from "../../ui/impl/buttons/TextButton";
-import { Container } from "../../utils/globals/IoC";
 
 export class MainMenuScene extends BaseScene {
     protected resources: IManagedResource[] = [
