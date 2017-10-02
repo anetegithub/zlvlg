@@ -23,5 +23,7 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
         }
     }
     exports.NicknameInput = NicknameInput;
-    IoC_1.Container.sceneMgr.add(new NicknameInput());
+    IoC_1.Container.onInited(() => {
+        IoC_1.Container.sceneMgr.add(new NicknameInput());
+    });
 });

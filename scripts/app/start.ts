@@ -23,6 +23,8 @@ WebFont.load({
         var game = new GlobalGame(args);
         game.inited = () => {
             Container.sceneMgr = new MemorySceneManager();
+            Container.init();
+
             Container.sceneMgr.add(new MainMenuScene());
             Container.sceneMgr.next(MainMenuScene);
         };

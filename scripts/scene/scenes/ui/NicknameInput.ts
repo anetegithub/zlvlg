@@ -23,4 +23,6 @@ export class NicknameInput extends BaseScene {
     }
 }
 
-Container.sceneMgr.add(new NicknameInput());
+Container.onInited(() => {
+    Container.sceneMgr.add(new NicknameInput());
+});

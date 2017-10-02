@@ -13,6 +13,7 @@ define(["require", "exports", "../ui/impl/ZombieHand", "../ui/impl/Menu", "./cor
             var game = new GlobalGame_1.GlobalGame(args);
             game.inited = () => {
                 IoC_1.Container.sceneMgr = new MemorySceneManager_1.MemorySceneManager();
+                IoC_1.Container.init();
                 IoC_1.Container.sceneMgr.add(new MainMenuScene_1.MainMenuScene());
                 IoC_1.Container.sceneMgr.next(MainMenuScene_1.MainMenuScene);
             };
