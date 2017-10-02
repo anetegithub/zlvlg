@@ -11,27 +11,40 @@ export class MainMenuScene extends BaseScene {
     clear: boolean = false;
 
     newGame(): TextButton {
+        var closure = this;
         return new TextButton({
-            size: 24,
+            fontStyle: this.fontStyle,
             y: 365,
             text: 'New Game',
             events: {
                 over: function () {
-                    this.addColor('#45cc5b', this.text.length);
+                    var fxdStyle = closure.fontStyle;
+                    fxdStyle.fill = '#45cc5b'
+                    this.setStyle(fxdStyle, true);
                 },
                 out: function () {
-                    this.addColor('#FFFFFF', this.text.length);
+                    this.setStyle(closure.fontStyle, true);
                 }
             }
         });
     }
 
     load(): TextButton {
+        var style = this.fontStyle;
+        style.fill = '#929293';
+
         return new TextButton({
-            size: 24,
+            fontStyle: style,
             y: 415,
-            text: 'Load Game',
-            color: '#929293'
+            text: 'Load Game'
         });
+    }
+
+    private get fontStyle(): Phaser.PhaserTextStyle {
+        return {
+            font: `bold 24pt TheMinion`,
+            fill: "#FFFFFF",
+            align: 'center'
+        }
     }
 }

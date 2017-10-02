@@ -3,19 +3,19 @@ import * as ioc from "../globals/IoC";
 
 export class TextFactory {
     static new(options: {
-        size?: number,
         y?: number,
         text?: string,
-        color?: string,
+        fontStyle?: Phaser.PhaserTextStyle,
         autoinit?: boolean
     }): Phaser.Text {
         var text = ioc.Container.game.make.text(
             ioc.Container.game.world.centerX,
             options.y || 0,
             options.text || "",
+            options.fontStyle ||
             {
-                font: `bold ${options.size || 12}pt TheMinion`,
-                fill: options.color || "#FFFFFF",
+                font: `bold 12pt TheMinion`,
+                fill: "#FFFFFF",
                 align: 'center'
             }
         );

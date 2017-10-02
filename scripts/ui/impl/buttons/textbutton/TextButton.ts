@@ -11,11 +11,10 @@ export class TextButton implements IManagedResource {
 
     release(game: Phaser.Game): void {
         var text = TextFactory.new({
-            size: this.args.size,
+            fontStyle: this.args.fontStyle,
             y: this.args.y,
             text: this.args.text,
-            autoinit: true,
-            color: this.args.color
+            autoinit: true
         });
 
         text.inputEnabled = true;

@@ -1,10 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
-    exports.__esModule = true;
-    var Container = /** @class */ (function () {
-        function Container() {
-        }
-        return Container;
-    }());
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class Container {
+    }
     exports.Container = Container;
 });
