@@ -13,8 +13,16 @@ export class MainMenuScene extends BaseScene {
     newGame(): TextButton {
         return new TextButton({
             size: 24,
-            y: 600,
+            y: 350,
             text: 'New Game'
+        });
+    }
+
+    load(): TextButton {
+        return new TextButton({
+            size: 24,
+            y: 400,
+            text: 'Load Game'
         });
     }
 }
