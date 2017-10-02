@@ -16,7 +16,8 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/Te
         function MainMenuScene() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.resources = [
-                _this.newGame()
+                _this.newGame(),
+                _this.load()
             ];
             _this.name = "MainMenu";
             _this.clear = false;
@@ -25,8 +26,15 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/Te
         MainMenuScene.prototype.newGame = function () {
             return new TextButton_1.TextButton({
                 size: 24,
-                y: 600,
+                y: 350,
                 text: 'New Game'
+            });
+        };
+        MainMenuScene.prototype.load = function () {
+            return new TextButton_1.TextButton({
+                size: 24,
+                y: 400,
+                text: 'Load Game'
             });
         };
         return MainMenuScene;

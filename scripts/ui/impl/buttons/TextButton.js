@@ -15,6 +15,7 @@ define(["require", "exports", "../../../utils/ui/TextFactory"], function (requir
                 color: this.args.color
             });
             text.events.onInputOver.add(function () {
+                debugger;
                 if (_this.args.event) {
                     _this.args.event(text);
                 }
