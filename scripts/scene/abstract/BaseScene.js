@@ -3,6 +3,9 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
     Object.defineProperty(exports, "__esModule", { value: true });
     class BaseScene {
         run() {
+            if (this.clear) {
+                IoC_1.Container.game.world.removeAll(true, true);
+            }
             this.resources.forEach(resource => resource.release(IoC_1.Container.game));
         }
     }
