@@ -8,7 +8,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/TextButton"], function (require, exports, BaseScene_1, TextButton_1) {
+define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton"], function (require, exports, BaseScene_1, TextButton_1) {
     "use strict";
     exports.__esModule = true;
     var MainMenuScene = /** @class */ (function (_super) {
@@ -27,14 +27,27 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/Te
             return new TextButton_1.TextButton({
                 size: 24,
                 y: 365,
-                text: 'New Game'
+                text: 'New Game',
+                events: {
+                    over: function () {
+                        this.setStyle({
+                            fill: '#45cc5b'
+                        });
+                    },
+                    out: function () {
+                        this.setStyle({
+                            fill: '#FFFFFF'
+                        });
+                    }
+                }
             });
         };
         MainMenuScene.prototype.load = function () {
             return new TextButton_1.TextButton({
                 size: 24,
                 y: 415,
-                text: 'Load Game'
+                text: 'Load Game',
+                color: '#929293'
             });
         };
         return MainMenuScene;
