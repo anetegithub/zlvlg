@@ -4,7 +4,7 @@ export class Container {
     static game: Phaser.Game
     static sceneMgr: ISceneManager;
 
-    static initActions: (() => void)[];
+    static initActions: (() => void)[] = [];
 
     static onInited(action: () => void) {
         this.initActions.push(action);

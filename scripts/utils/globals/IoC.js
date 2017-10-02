@@ -10,5 +10,6 @@ define(["require", "exports"], function (require, exports) {
             this.initActions = [];
         }
     }
+    Container.initActions = [];
     exports.Container = Container;
 });
