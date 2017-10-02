@@ -6,7 +6,6 @@ define(["require", "exports", "../../../utils/ui/TextFactory"], function (requir
             this.args = args;
         }
         TextButton.prototype.release = function (game) {
-            var _this = this;
             var text = TextFactory_1.TextFactory["new"]({
                 size: this.args.size,
                 y: this.args.y,
@@ -14,15 +13,31 @@ define(["require", "exports", "../../../utils/ui/TextFactory"], function (requir
                 autoinit: true,
                 color: this.args.color
             });
+            text.events.onInputDown.add(function () {
+                debugger;
+                console.log('onInputDown');
+            });
+            text.events.onInputOut.add(function () {
+                debugger;
+                console.log('onInputOut');
+            });
             text.events.onInputOver.add(function () {
                 debugger;
-                if (_this.args.event) {
-                    _this.args.event(text);
-                }
-                text.colors = [
-                    "#FF0000"
-                ];
+                console.log('onInputOver');
             });
+            text.events.onInputUp.add(function () {
+                debugger;
+                console.log('onInputUp');
+            });
+            // text.events.onInputOver.add(() => {
+            //     debugger;
+            //     if (this.args.event) {
+            //         this.args.event(text);
+            //     }
+            //     text.colors = [
+            //         "#FF0000"
+            //     ];
+            // });
         };
         return TextButton;
     }());

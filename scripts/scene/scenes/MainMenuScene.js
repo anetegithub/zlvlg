@@ -26,14 +26,14 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/Te
         MainMenuScene.prototype.newGame = function () {
             return new TextButton_1.TextButton({
                 size: 24,
-                y: 350,
+                y: 365,
                 text: 'New Game'
             });
         };
         MainMenuScene.prototype.load = function () {
             return new TextButton_1.TextButton({
                 size: 24,
-                y: 400,
+                y: 415,
                 text: 'Load Game'
             });
         };

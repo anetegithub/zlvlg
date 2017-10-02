@@ -18,15 +18,35 @@ export class TextButton implements IManagedResource {
             color: this.args.color
         });
 
+        text.events.onInputDown.add(() => {
+            debugger;
+            console.log('onInputDown');
+        });
+
+        text.events.onInputOut.add(() => {
+            debugger;
+            console.log('onInputOut');
+        });
+
         text.events.onInputOver.add(() => {
             debugger;
-            if (this.args.event) {
-                this.args.event(text);
-            }
-
-            text.colors = [
-                "#FF0000"
-            ];
+            console.log('onInputOver');
         });
+
+        text.events.onInputUp.add(() => {
+            debugger;
+            console.log('onInputUp');
+        });
+
+        // text.events.onInputOver.add(() => {
+        //     debugger;
+        //     if (this.args.event) {
+        //         this.args.event(text);
+        //     }
+
+        //     text.colors = [
+        //         "#FF0000"
+        //     ];
+        // });
     }
 }
