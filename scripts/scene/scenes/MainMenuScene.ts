@@ -3,7 +3,8 @@ import { TextButton } from "../../ui/impl/buttons/TextButton";
 
 export class MainMenuScene extends BaseScene {
     protected resources: IManagedResource[] = [
-        this.newGame()
+        this.newGame(),
+        this.load()
     ];
 
     name: string = "MainMenu";
@@ -13,7 +14,7 @@ export class MainMenuScene extends BaseScene {
         return new TextButton({
             size: 24,
             y: 350,
-            text: 'New Game'
+            text: 'New Game',
         });
     }
 

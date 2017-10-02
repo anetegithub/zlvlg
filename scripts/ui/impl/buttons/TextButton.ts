@@ -19,6 +19,7 @@ export class TextButton implements IManagedResource {
         });
 
         text.events.onInputOver.add(() => {
+            debugger;
             if (this.args.event) {
                 this.args.event(text);
             }
