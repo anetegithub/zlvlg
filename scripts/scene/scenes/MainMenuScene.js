@@ -30,14 +30,10 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
                 text: 'New Game',
                 events: {
                     over: function () {
-                        this.setStyle({
-                            fill: '#45cc5b'
-                        });
+                        this.addColor('#45cc5b', this.text.length);
                     },
                     out: function () {
-                        this.setStyle({
-                            fill: '#FFFFFF'
-                        });
+                        this.addColor('#FFFFFF', this.text.length);
                     }
                 }
             });
