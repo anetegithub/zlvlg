@@ -18,6 +18,8 @@ export class TextButton implements IManagedResource {
             color: this.args.color
         });
 
+        text.inputEnabled = true;
+
         text.events.onInputDown.add(() => {
             debugger;
             console.log('onInputDown');
@@ -27,8 +29,6 @@ export class TextButton implements IManagedResource {
             debugger;
             console.log('onInputOut');
         });
-
-        text.inputEnabled = true;
 
         text.events.onInputOver.add(() => {
             debugger;
@@ -40,15 +40,15 @@ export class TextButton implements IManagedResource {
             console.log('onInputUp');
         });
 
-        // text.events.onInputOver.add(() => {
-        //     debugger;
-        //     if (this.args.event) {
-        //         this.args.event(text);
-        //     }
+        text.events.onInputOver.add(() => {
+            debugger;
+            if (this.args.event) {
+                this.args.event(text);
+            }
 
-        //     text.colors = [
-        //         "#FF0000"
-        //     ];
-        // });
+            text.colors = [
+                "#FF0000"
+            ];
+        });
     }
 }
