@@ -1,13 +1,16 @@
 import { BaseScene } from "../../abstract/BaseScene";
 import { ManagedText } from "../../../ui/impl/text/ManagedText";
 import { Container } from "../../../utils/globals/IoC";
+import { ManagedResource } from "../../../app/core/impl/ManagedResource";
+import { } from "../../../../node_modules/@orange-games/phaser-input/build/phaser-input";
 
 export class NicknameInput extends BaseScene {
     name: string = 'NicknameInput';
     clear: boolean = true;
 
     protected resources: IManagedResource[] = [
-        this.title()
+        this.title(),
+        this.input()
     ];
 
     private title(): ManagedText {
@@ -20,6 +23,18 @@ export class NicknameInput extends BaseScene {
                 align: 'center'
             }
         })
+    }
+
+    private input(): ManagedResource {
+        return new ManagedResource(game => {
+            var input = new PhaserInput.InputField(game, game.world.centerX, game.world.centerY, {
+                font: '18pt TheMinion',
+                fill: '#45ea3f',
+                width: 200,
+                max: "20",
+                type: PhaserInput.InputType.text
+            });
+        });
     }
 }
 

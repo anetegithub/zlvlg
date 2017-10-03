@@ -1,4 +1,4 @@
-define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC"], function (require, exports, BaseScene_1, ManagedText_1, IoC_1) {
+define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedResource"], function (require, exports, BaseScene_1, ManagedText_1, IoC_1, ManagedResource_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class NicknameInput extends BaseScene_1.BaseScene {
@@ -7,7 +7,8 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
             this.name = 'NicknameInput';
             this.clear = true;
             this.resources = [
-                this.title()
+                this.title(),
+                this.input()
             ];
         }
         title() {
@@ -19,6 +20,17 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
                     fill: '#45ea3f',
                     align: 'center'
                 }
+            });
+        }
+        input() {
+            return new ManagedResource_1.ManagedResource(game => {
+                var input = new PhaserInput.InputField(game, game.world.centerX, game.world.centerY, {
+                    font: '18pt TheMinion',
+                    fill: '#45ea3f',
+                    width: 200,
+                    max: "20",
+                    type: PhaserInput.InputType.text
+                });
             });
         }
     }
