@@ -2,9 +2,8 @@ import { } from "../../app/core/interfaces/IManagedResource";
 
 export class MainMenu implements IManagedResource {
     release(game: Phaser.Game) {
-        var loader = new Phaser.Loader(game);
-        loader.image('logo', 'images/environment/BG0.png');
-        loader.onLoadComplete.add(() => {
+        game.load.image('logo', 'images/environment/BG0.png');
+        game.load.onLoadComplete.addOnce(() => {
             var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
             logo.anchor.setTo(0.5, 0.5);
 

@@ -3,9 +3,8 @@ define(["require", "exports"], function (require, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     class MainMenu {
         release(game) {
-            var loader = new Phaser.Loader(game);
-            loader.image('logo', 'images/environment/BG0.png');
-            loader.onLoadComplete.add(() => {
+            game.load.image('logo', 'images/environment/BG0.png');
+            game.load.onLoadComplete.addOnce(() => {
                 var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
                 logo.anchor.setTo(0.5, 0.5);
                 this.titleText = game.make.text(game.world.centerX, 150, " Zombie\nGraveyards", {
