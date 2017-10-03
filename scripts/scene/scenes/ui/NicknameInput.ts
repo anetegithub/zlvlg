@@ -34,6 +34,7 @@ export class NicknameInput extends BaseScene {
                 max: "20",
                 type: PhaserInput.InputType.text
             });
+            game.add.existing(input);
         });
     }
 }

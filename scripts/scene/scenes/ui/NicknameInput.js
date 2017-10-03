@@ -31,6 +31,7 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
                     max: "20",
                     type: PhaserInput.InputType.text
                 });
+                game.add.existing(input);
             });
         }
     }
