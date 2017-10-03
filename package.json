@@ -5,5 +5,8 @@
     "requirejs": "^2.3.5",
     "typescript": "^2.5.3",
     "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "@orange-games/phaser-input": "^2.0.5"
   }
 }

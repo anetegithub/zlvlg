@@ -15,6 +15,7 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
             IoC_1.Container.game = this.game;
         }
         preload() {
+            this.game.add.plugin(PhaserInput.Plugin);
         }
         create() {
             let args = this.game['args'];
