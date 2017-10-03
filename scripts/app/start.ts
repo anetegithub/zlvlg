@@ -1,5 +1,4 @@
 import { ZombieHand } from "../ui/impl/ZombieHand";
-import { MainMenu } from "../ui/impl/Menu";
 import { GlobalArgs } from "./core/GlobalArgs";
 import { GlobalGame } from "./core/GlobalGame";
 import { ISceneManager } from "../scene/interfaces/ISceneManager";

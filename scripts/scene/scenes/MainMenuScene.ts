@@ -2,17 +2,29 @@ import { BaseScene } from "../abstract/BaseScene";
 import { TextButton } from "../../ui/impl/buttons/textbutton/TextButton";
 import { Container } from "../../utils/globals/IoC";
 import { NicknameInput } from "../scenes/ui/NicknameInput";
-import { MainMenu } from "../../ui/impl/Menu";
+import { ManagedText } from "../../ui/impl/text/ManagedText";
 
 export class MainMenuScene extends BaseScene {
     protected resources: IManagedResource[] = [
         this.newGame(),
         this.load(),
-        new MainMenu()
+        this.title()
     ];
 
     name: string = "MainMenu";
     clear: boolean = false;
+
+    title(): ManagedText {
+        var fxdStyle = this.fontStyle;
+        fxdStyle.font = `bold 42pt TheMinion`;
+        fxdStyle.fill = '#45ea3f';
+
+        return new ManagedText({
+            fontStyle: fxdStyle,
+            y: 165,
+            text: ' Mystical\nDungeon'
+        });
+    }
 
     newGame(): TextButton {
         var closure = this;
