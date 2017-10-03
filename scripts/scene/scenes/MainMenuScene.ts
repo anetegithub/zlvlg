@@ -2,11 +2,13 @@ import { BaseScene } from "../abstract/BaseScene";
 import { TextButton } from "../../ui/impl/buttons/textbutton/TextButton";
 import { Container } from "../../utils/globals/IoC";
 import { NicknameInput } from "../scenes/ui/NicknameInput";
+import { MainMenu } from "../../ui/impl/Menu";
 
 export class MainMenuScene extends BaseScene {
     protected resources: IManagedResource[] = [
         this.newGame(),
-        this.load()
+        this.load(),
+        new MainMenu()
     ];
 
     name: string = "MainMenu";
@@ -50,6 +52,8 @@ export class MainMenuScene extends BaseScene {
             text: 'Load Game'
         });
     }
+
+
 
     private get fontStyle(): Phaser.PhaserTextStyle {
         return {

@@ -18,7 +18,6 @@ WebFont.load({
     active: () => {
         var args = new GlobalArgs();
         args.cursor = new ZombieHand();
-        args.menu = new MainMenu();
 
         var game = new GlobalGame(args);
         game.inited = () => {

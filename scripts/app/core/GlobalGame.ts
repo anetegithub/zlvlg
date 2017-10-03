@@ -22,13 +22,9 @@ export class GlobalGame {
     }
 
     preload() {
-        this.game.load.image('logo', 'images/environment/BG0.png');
     }
 
     create() {
-        var logo = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
-        logo.anchor.setTo(0.5, 0.5);
-
         let args = this.game['args'] as GlobalArgs;
         for (var key in args) {
             if (args.hasOwnProperty(key)) {
