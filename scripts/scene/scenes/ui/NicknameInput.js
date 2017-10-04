@@ -30,7 +30,7 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
         }
         input() {
             return new ManagedResource_1.ManagedResource(game => {
-                let input = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, game.world.centerY, {
+                this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, game.world.centerY, {
                     font: '28px TheMinion',
                     fill: '#ffffff',
                     fontWeight: 'bold',
@@ -45,7 +45,7 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
                     align: 'center',
                     max: '20'
                 });
-                game.add.existing(input);
+                game.add.existing(this.inputElement);
             });
         }
         okButton() {
@@ -53,7 +53,7 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
                 x: (IoC_1.Container.game.world.centerX / 2) + 300,
                 y: IoC_1.Container.game.world.centerY,
                 text: 'Ok',
-                click: null,
+                click: () => { console.log(this.inputElement.value); },
                 initSpriteKey: 'sqbtninit',
                 overSpriteKey: 'sqbtnover',
                 pressSpriteKey: 'sqbtndown'

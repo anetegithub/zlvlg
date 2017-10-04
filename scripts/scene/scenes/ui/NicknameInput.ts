@@ -34,9 +34,11 @@ export class NicknameInput extends BaseScene {
         })
     }
 
+    inputElement: PhaserInput.InputField;
+
     private input(): ManagedResource {
         return new ManagedResource(game => {
-            let input = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, game.world.centerY, {
+            this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, game.world.centerY, {
                 font: '28px TheMinion',
                 fill: '#ffffff',
                 fontWeight: 'bold',
@@ -51,7 +53,7 @@ export class NicknameInput extends BaseScene {
                 align: 'center',
                 max: '20'
             });
-            game.add.existing(input);
+            game.add.existing(this.inputElement);
         });
     }
 
@@ -60,7 +62,7 @@ export class NicknameInput extends BaseScene {
             x: (Container.game.world.centerX / 2) + 300,
             y: Container.game.world.centerY,
             text: 'Ok',
-            click: null,
+            click: () => { console.log(this.inputElement.value) },
             initSpriteKey: 'sqbtninit',
             overSpriteKey: 'sqbtnover',
             pressSpriteKey: 'sqbtndown'
