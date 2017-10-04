@@ -3,8 +3,10 @@ import { TextButton } from "../../ui/impl/buttons/textbutton/TextButton";
 import { Container } from "../../utils/globals/IoC";
 import { NicknameInput } from "../scenes/ui/NicknameInput";
 import { ManagedText } from "../../ui/impl/text/ManagedText";
+import { Constants } from "../../utils/globals/Constants";
 
 export class MainMenuScene extends BaseScene {
+    protected loaderRes: { key: string; url: string; type?: string; }[];
     protected resources: IManagedResource[] = [
         this.newGame(),
         this.load(),
@@ -17,12 +19,12 @@ export class MainMenuScene extends BaseScene {
     title(): ManagedText {
         var fxdStyle = this.fontStyle;
         fxdStyle.font = `bold 42pt TheMinion`;
-        fxdStyle.fill = '#45ea3f';
+        fxdStyle.fill = Constants.color;
 
         return new ManagedText({
             fontStyle: fxdStyle,
             y: 165,
-            text: ' Mystical\nDungeon'
+            text: 'Mystical\nDungeon'
         });
     }
 
@@ -35,7 +37,7 @@ export class MainMenuScene extends BaseScene {
             events: {
                 over: function () {
                     var fxdStyle = closure.fontStyle;
-                    fxdStyle.fill = '#45cc5b';
+                    fxdStyle.fill = Constants.color;
                     this.setStyle(fxdStyle, true);
                 },
                 out: function () {
@@ -44,7 +46,7 @@ export class MainMenuScene extends BaseScene {
                 down: function () {
                     var fxdStyle = closure.fontStyle;
                     fxdStyle.font = `bold 20pt TheMinion`;
-                    fxdStyle.fill = '#45cc5b';
+                    fxdStyle.fill = Constants.color;
                     this.setStyle(fxdStyle, true);
                 },
                 up: function () {

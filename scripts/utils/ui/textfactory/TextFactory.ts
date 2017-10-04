@@ -5,7 +5,7 @@ import * as ioc from "../../globals/IoC";
 export class TextFactory {
     static new(options: ITextFactoryArgs): Phaser.Text {
         var text = ioc.Container.game.make.text(
-            ioc.Container.game.world.centerX,
+            options.x || ioc.Container.game.world.centerX,
             options.y || 0,
             options.text || "",
             options.fontStyle ||

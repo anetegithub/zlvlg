@@ -16,14 +16,14 @@ export class GlobalGame {
     game: Phaser.Game;
 
     run() {
-        this.game = new Phaser.Game(800, 600, Phaser.AUTO, 'content', { preload: this.preload, create: this.create });
+        this.game = new Phaser.Game(800, 600, Phaser.CANVAS, 'content', { preload: this.preload, create: this.create });
         this.game['args'] = this.args;
         this.game['inited'] = this.inited;
         Container.game = this.game;
     }
 
     preload() {
-        this.game.load.image('logo', 'images/environment/BG0.png');
+        this.game.load.image('logo', 'images/environment/BG1.png');
         this.game.add.plugin(PhaserInput.Plugin as any);
     }
 

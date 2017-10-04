@@ -1,4 +1,4 @@
-define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText"], function (require, exports, BaseScene_1, TextButton_1, IoC_1, NicknameInput_1, ManagedText_1) {
+define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants"], function (require, exports, BaseScene_1, TextButton_1, IoC_1, NicknameInput_1, ManagedText_1, Constants_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class MainMenuScene extends BaseScene_1.BaseScene {
@@ -15,11 +15,11 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
         title() {
             var fxdStyle = this.fontStyle;
             fxdStyle.font = `bold 42pt TheMinion`;
-            fxdStyle.fill = '#45ea3f';
+            fxdStyle.fill = Constants_1.Constants.color;
             return new ManagedText_1.ManagedText({
                 fontStyle: fxdStyle,
                 y: 165,
-                text: ' Mystical\nDungeon'
+                text: 'Mystical\nDungeon'
             });
         }
         newGame() {
@@ -31,7 +31,7 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
                 events: {
                     over: function () {
                         var fxdStyle = closure.fontStyle;
-                        fxdStyle.fill = '#45cc5b';
+                        fxdStyle.fill = Constants_1.Constants.color;
                         this.setStyle(fxdStyle, true);
                     },
                     out: function () {
@@ -40,7 +40,7 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
                     down: function () {
                         var fxdStyle = closure.fontStyle;
                         fxdStyle.font = `bold 20pt TheMinion`;
-                        fxdStyle.fill = '#45cc5b';
+                        fxdStyle.fill = Constants_1.Constants.color;
                         this.setStyle(fxdStyle, true);
                     },
                     up: function () {

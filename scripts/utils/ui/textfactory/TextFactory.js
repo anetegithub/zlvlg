@@ -3,7 +3,7 @@ define(["require", "exports", "../../globals/IoC"], function (require, exports, 
     Object.defineProperty(exports, "__esModule", { value: true });
     class TextFactory {
         static new(options) {
-            var text = ioc.Container.game.make.text(ioc.Container.game.world.centerX, options.y || 0, options.text || "", options.fontStyle ||
+            var text = ioc.Container.game.make.text(options.x || ioc.Container.game.world.centerX, options.y || 0, options.text || "", options.fontStyle ||
                 {
                     font: `bold 12pt TheMinion`,
                     fill: "#FFFFFF",
