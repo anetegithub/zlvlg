@@ -21,7 +21,7 @@ define(["require", "exports", "../../text/ManagedText", "../../../../utils/globa
             });
             game.add.existing(btn);
             new ManagedText_1.ManagedText({
-                text: 'ok',
+                text: this.args.text,
                 fontStyle: {
                     font: '18pt ' + Constants_1.Constants.fontFamily,
                     fill: '#ffffff'

@@ -1,9 +1,10 @@
-define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedResource", "../../../utils/globals/Constants", "../../../ui/impl/buttons/spritebutton/SpriteButton"], function (require, exports, BaseScene_1, ManagedText_1, IoC_1, ManagedResource_1, Constants_1, SpriteButton_1) {
+define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedResource", "../../../utils/globals/Constants", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../abstract/BaseBackScene", "../MainMenuScene"], function (require, exports, ManagedText_1, IoC_1, ManagedResource_1, Constants_1, SpriteButton_1, BaseBackScene_1, MainMenuScene_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class NicknameInput extends BaseScene_1.BaseScene {
+    class NicknameInput extends BaseBackScene_1.BaseBackScene {
         constructor() {
             super(...arguments);
+            this.backScene = MainMenuScene_1.MainMenuScene;
             this.loaderRes = [
                 { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
                 { key: 'sqbtnover', url: './images/ui/sqbtn/over.png' },
@@ -22,7 +23,7 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
                 text: 'Your Nickname:',
                 y: 200,
                 fontStyle: {
-                    font: 'bold 32pt TheMinion',
+                    font: 'bold 32pt ' + Constants_1.Constants.fontFamily,
                     fill: Constants_1.Constants.color,
                     align: 'center'
                 }
@@ -31,11 +32,11 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
         input() {
             return new ManagedResource_1.ManagedResource(game => {
                 this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, game.world.centerY, {
-                    font: '28px TheMinion',
+                    font: '28px ' + Constants_1.Constants.fontFamily,
                     fill: '#ffffff',
                     fontWeight: 'bold',
                     backgroundColor: '#000000',
-                    width: game.world.centerX - 145,
+                    width: game.world.centerX - 120,
                     padding: 8,
                     borderWidth: 2,
                     borderColor: Constants_1.Constants.color,
@@ -43,14 +44,14 @@ define(["require", "exports", "../../abstract/BaseScene", "../../../ui/impl/text
                     type: PhaserInput.InputType.text,
                     textAlign: 'center',
                     align: 'center',
-                    max: '20'
+                    max: '17'
                 });
                 game.add.existing(this.inputElement);
             });
         }
         okButton() {
             return new SpriteButton_1.SpriteButton({
-                x: (IoC_1.Container.game.world.centerX / 2) + 300,
+                x: (IoC_1.Container.game.world.centerX / 2) + 335,
                 y: IoC_1.Container.game.world.centerY,
                 text: 'Ok',
                 click: () => { console.log(this.inputElement.value); },

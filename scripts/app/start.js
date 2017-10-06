@@ -3,7 +3,7 @@ define(["require", "exports", "../ui/impl/ZombieHand", "./core/GlobalArgs", "./c
     Object.defineProperty(exports, "__esModule", { value: true });
     WebFont.load({
         custom: {
-            families: ['TheMinion'],
+            families: ['Ringbear'],
             urls: ['./styles/app.css']
         },
         active: () => {

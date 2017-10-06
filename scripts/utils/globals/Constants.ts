@@ -1,4 +1,4 @@
 export class Constants {
-    static color: string = '#24b7f5';
-    static fontFamily: string = 'TheMinion';
+    static color: string = '#babbb4';
+    static fontFamily: string = 'Ringbear';
 }

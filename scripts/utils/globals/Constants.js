@@ -3,7 +3,7 @@ define(["require", "exports"], function (require, exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
     class Constants {
     }
-    Constants.color = '#24b7f5';
-    Constants.fontFamily = 'TheMinion';
+    Constants.color = '#babbb4';
+    Constants.fontFamily = 'Ringbear';
     exports.Constants = Constants;
 });

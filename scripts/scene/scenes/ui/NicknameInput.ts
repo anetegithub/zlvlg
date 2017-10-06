@@ -5,8 +5,12 @@ import { ManagedResource } from "../../../app/core/impl/ManagedResource";
 import { Constants } from "../../../utils/globals/Constants";
 import { SpriteButton } from "../../../ui/impl/buttons/spritebutton/SpriteButton";
 import { } from "../../../../node_modules/@orange-games/phaser-input/build/phaser-input";
+import { BaseBackScene } from "../../abstract/BaseBackScene";
+import { MainMenuScene } from "../MainMenuScene";
 
-export class NicknameInput extends BaseScene {
+export class NicknameInput extends BaseBackScene {
+    backScene = MainMenuScene;
+
     protected loaderRes: { key: string; url: string; type?: string; }[] = [
         { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
         { key: 'sqbtnover', url: './images/ui/sqbtn/over.png' },
@@ -27,7 +31,7 @@ export class NicknameInput extends BaseScene {
             text: 'Your Nickname:',
             y: 200,
             fontStyle: {
-                font: 'bold 32pt TheMinion',
+                font: 'bold 32pt ' + Constants.fontFamily,
                 fill: Constants.color,
                 align: 'center'
             }
@@ -39,11 +43,11 @@ export class NicknameInput extends BaseScene {
     private input(): ManagedResource {
         return new ManagedResource(game => {
             this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, game.world.centerY, {
-                font: '28px TheMinion',
+                font: '28px ' + Constants.fontFamily,
                 fill: '#ffffff',
                 fontWeight: 'bold',
                 backgroundColor: '#000000',
-                width: game.world.centerX - 145,
+                width: game.world.centerX - 120,
                 padding: 8,
                 borderWidth: 2,
                 borderColor: Constants.color,
@@ -51,7 +55,7 @@ export class NicknameInput extends BaseScene {
                 type: PhaserInput.InputType.text,
                 textAlign: 'center',
                 align: 'center',
-                max: '20'
+                max: '17'
             });
             game.add.existing(this.inputElement);
         });
@@ -59,7 +63,7 @@ export class NicknameInput extends BaseScene {
 
     private okButton(): SpriteButton {
         return new SpriteButton({
-            x: (Container.game.world.centerX / 2) + 300,
+            x: (Container.game.world.centerX / 2) + 335,
             y: Container.game.world.centerY,
             text: 'Ok',
             click: () => { console.log(this.inputElement.value) },

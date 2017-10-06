@@ -27,8 +27,14 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
         }
         releaseManagedRes() {
             if (this.resources) {
-                this.resources.forEach(resource => resource.release(IoC_1.Container.game));
+                this.resources.forEach(this.releaseResource);
             }
+            if (this.virtualResources) {
+                this.virtualResources.forEach(this.releaseResource);
+            }
+        }
+        releaseResource(resource) {
+            resource.release(IoC_1.Container.game);
         }
     }
     exports.BaseScene = BaseScene;

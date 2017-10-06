@@ -35,10 +35,18 @@ export abstract class BaseScene implements IScene {
 
     private releaseManagedRes() {
         if (this.resources) {
-            this.resources.forEach(resource => resource.release(Container.game));
+            this.resources.forEach(this.releaseResource);
+        }
+        if (this.virtualResources) {
+            this.virtualResources.forEach(this.releaseResource);
         }
     }
 
+    private releaseResource(resource: IManagedResource) {
+        resource.release(Container.game);
+    }
+
+    virtualResources: IManagedResource[];
     protected abstract resources: IManagedResource[];
     protected abstract loaderRes: { key: string, url: string, type?: string }[];
 }

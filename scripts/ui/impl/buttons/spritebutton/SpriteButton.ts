@@ -30,7 +30,7 @@ export class SpriteButton implements IManagedResource {
         game.add.existing(btn);
 
         new ManagedText({
-            text: 'ok',
+            text: this.args.text,
             fontStyle: {
                 font: '18pt ' + Constants.fontFamily,
                 fill: '#ffffff'

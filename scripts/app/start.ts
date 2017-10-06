@@ -11,7 +11,7 @@ declare var WebFont: any;
 
 WebFont.load({
     custom: {
-        families: ['TheMinion'],
+        families: ['Ringbear'],
         urls: ['./styles/app.css']
     },
     active: () => {
