@@ -13,7 +13,6 @@ export class NicknameInput extends BaseBackScene {
 
     protected loaderRes: { key: string; url: string; type?: string; }[] = [
         { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
-        { key: 'sqbtnover', url: './images/ui/sqbtn/over.png' },
         { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
     ];
 
@@ -57,8 +56,19 @@ export class NicknameInput extends BaseBackScene {
                 align: 'center',
                 max: '17'
             });
+            this.inputElement.input.useHandCursor = false;
+
+            this.inputElement.events.onInputOver.add(() => this.setPointer('hand'));
+            this.inputElement.events.onInputOut.add(() => this.setPointer('cursor'));
+            this.inputElement.events.onInputUp.add(() => this.setPointer('cursor'));
+            this.inputElement.events.onInputDown.add(() => this.setPointer('cursor'));
+
             game.add.existing(this.inputElement);
         });
+    }
+
+    private setPointer(name: string) {
+        document.getElementById('content').style.cursor = `url("./images/ui/cursors/${name}.png"), auto`;
     }
 
     private okButton(): SpriteButton {
@@ -66,9 +76,10 @@ export class NicknameInput extends BaseBackScene {
             x: (Container.game.world.centerX / 2) + 335,
             y: Container.game.world.centerY,
             text: 'Ok',
-            click: () => { console.log(this.inputElement.value) },
+            events: {
+                up: () => { console.log(this.inputElement.value) }
+            },
             initSpriteKey: 'sqbtninit',
-            overSpriteKey: 'sqbtnover',
             pressSpriteKey: 'sqbtndown'
         });
     }

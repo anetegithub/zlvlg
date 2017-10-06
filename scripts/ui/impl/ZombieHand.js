@@ -4,7 +4,7 @@ define(["require", "exports", "../abstract/BaseCursor"], function (require, expo
     class ZombieHand extends BaseCursor_1.BaseCursor {
         constructor() {
             super(...arguments);
-            this.url = './images/environment/Objects/cursor.png';
+            this.url = './images/ui/cursors/cursor.png';
         }
     }
     exports.ZombieHand = ZombieHand;

@@ -16,9 +16,10 @@ export abstract class BaseBackScene extends BaseScene {
             x: 25,
             y: 25,
             text: '←',
-            click: () => { Container.sceneMgr.next(closure.backScene); },
+            events: {
+                up: () => { debugger; Container.sceneMgr.next(closure.backScene); }
+            },
             initSpriteKey: 'sqbtninit',
-            overSpriteKey: 'sqbtnover',
             pressSpriteKey: 'sqbtndown'
         });
     }

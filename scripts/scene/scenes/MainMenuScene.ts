@@ -19,7 +19,7 @@ export class MainMenuScene extends BaseScene {
     ];
 
     name: string = "MainMenu";
-    clear: boolean = false;
+    clear: boolean = true;
 
     splash(): ManagedResource {
         return new ManagedResource(game => {
@@ -50,6 +50,7 @@ export class MainMenuScene extends BaseScene {
                 over: function () {
                     var fxdStyle = closure.fontStyle;
                     fxdStyle.fill = Constants.color;
+
                     this.setStyle(fxdStyle, true);
                 },
                 out: function () {

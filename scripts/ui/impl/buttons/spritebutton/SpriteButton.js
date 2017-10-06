@@ -1,25 +1,30 @@
-define(["require", "exports", "../../text/ManagedText", "../../../../utils/globals/Constants"], function (require, exports, ManagedText_1, Constants_1) {
+define(["require", "exports", "../../text/ManagedText", "../../../../utils/globals/Constants", "../BaseButton"], function (require, exports, ManagedText_1, Constants_1, BaseButton_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class SpriteButton {
+    class SpriteButton extends BaseButton_1.BaseButton {
         constructor(args) {
-            this.args = args;
+            super(args);
         }
-        release(game) {
+        init(game) {
             var btn = new Phaser.Button(game, this.args.x, this.args.y, this.args.initSpriteKey);
             btn.onInputOver.add(() => {
-                btn.loadTexture(this.args.overSpriteKey);
+                btn.loadTexture(this.args.overSpriteKey || this.args.initSpriteKey);
             });
             btn.onInputDown.add(() => {
-                btn.loadTexture(this.args.pressSpriteKey);
+                btn.loadTexture(this.args.pressSpriteKey || this.args.initSpriteKey);
             });
             btn.onInputOut.add(() => {
                 btn.loadTexture(this.args.initSpriteKey);
             });
-            btn.onInputUp.add(() => {
-                this.args.click();
-            });
-            game.add.existing(btn);
+            if (this.args.events) {
+                if (this.args.events.up) {
+                    btn.onInputUp.add(this.args.events.up);
+                }
+            }
+            return btn;
+        }
+        release(game) {
+            super.release(game);
             new ManagedText_1.ManagedText({
                 text: this.args.text,
                 fontStyle: {

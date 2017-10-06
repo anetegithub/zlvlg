@@ -7,7 +7,6 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
             this.backScene = MainMenuScene_1.MainMenuScene;
             this.loaderRes = [
                 { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
-                { key: 'sqbtnover', url: './images/ui/sqbtn/over.png' },
                 { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
             ];
             this.name = 'NicknameInput';
@@ -46,17 +45,26 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
                     align: 'center',
                     max: '17'
                 });
+                this.inputElement.input.useHandCursor = false;
+                this.inputElement.events.onInputOver.add(() => this.setPointer('hand'));
+                this.inputElement.events.onInputOut.add(() => this.setPointer('cursor'));
+                this.inputElement.events.onInputUp.add(() => this.setPointer('cursor'));
+                this.inputElement.events.onInputDown.add(() => this.setPointer('cursor'));
                 game.add.existing(this.inputElement);
             });
+        }
+        setPointer(name) {
+            document.getElementById('content').style.cursor = `url("./images/ui/cursors/${name}.png"), auto`;
         }
         okButton() {
             return new SpriteButton_1.SpriteButton({
                 x: (IoC_1.Container.game.world.centerX / 2) + 335,
                 y: IoC_1.Container.game.world.centerY,
                 text: 'Ok',
-                click: () => { console.log(this.inputElement.value); },
+                events: {
+                    up: () => { console.log(this.inputElement.value); }
+                },
                 initSpriteKey: 'sqbtninit',
-                overSpriteKey: 'sqbtnover',
                 pressSpriteKey: 'sqbtndown'
             });
         }

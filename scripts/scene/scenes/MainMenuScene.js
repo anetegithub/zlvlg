@@ -14,7 +14,7 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
                 this.title()
             ];
             this.name = "MainMenu";
-            this.clear = false;
+            this.clear = true;
         }
         splash() {
             return new ManagedResource_1.ManagedResource(game => {

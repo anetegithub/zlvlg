@@ -2,32 +2,41 @@ import { SpriteButtonArgs } from "./SpriteButtonArgs";
 import { ManagedText } from "../../text/ManagedText";
 import { } from "../../../../app/core/interfaces/IManagedResource";
 import { Constants } from "../../../../utils/globals/Constants";
+import { BaseButton } from "../BaseButton";
 
-export class SpriteButton implements IManagedResource {
+export class SpriteButton extends BaseButton<Phaser.Button> {
     args: SpriteButtonArgs;
 
     constructor(args: SpriteButtonArgs) {
-        this.args = args;
+        super(args);
     }
-    release(game: Phaser.Game): void {
+
+    init(game: Phaser.Game): Phaser.Image {
         var btn = new Phaser.Button(game, this.args.x, this.args.y, this.args.initSpriteKey);
+
         btn.onInputOver.add(() => {
-            btn.loadTexture(this.args.overSpriteKey);
+            btn.loadTexture(this.args.overSpriteKey || this.args.initSpriteKey);
         });
 
         btn.onInputDown.add(() => {
-            btn.loadTexture(this.args.pressSpriteKey);
+            btn.loadTexture(this.args.pressSpriteKey || this.args.initSpriteKey);
         });
 
         btn.onInputOut.add(() => {
             btn.loadTexture(this.args.initSpriteKey);
         });
 
-        btn.onInputUp.add(() => {
-            this.args.click();
-        });
+        if (this.args.events) {
+            if (this.args.events.up) {
+                btn.onInputUp.add(this.args.events.up);
+            }
+        }
 
-        game.add.existing(btn);
+        return btn;
+    }
+
+    release(game: Phaser.Game): void {
+        super.release(game);
 
         new ManagedText({
             text: this.args.text,
@@ -39,5 +48,4 @@ export class SpriteButton implements IManagedResource {
             x: this.args.x + 25
         }).release(game);
     }
-
 }

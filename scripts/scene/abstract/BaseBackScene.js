@@ -14,9 +14,10 @@ define(["require", "exports", "./BaseScene", "../../ui/impl/buttons/spritebutton
                 x: 25,
                 y: 25,
                 text: '←',
-                click: () => { IoC_1.Container.sceneMgr.next(closure.backScene); },
+                events: {
+                    up: () => { debugger; IoC_1.Container.sceneMgr.next(closure.backScene); }
+                },
                 initSpriteKey: 'sqbtninit',
-                overSpriteKey: 'sqbtnover',
                 pressSpriteKey: 'sqbtndown'
             });
         }
