@@ -5,11 +5,20 @@ import { SpriteButton } from "../../ui/impl/buttons/spritebutton/SpriteButton";
 import { Container } from "../../utils/globals/IoC";
 
 export abstract class BaseBackScene extends BaseScene {
-    virtualResources = [
-        this.backBtn()
-    ];
+    constructor() {
+        super();
 
-    backBtn(): IManagedResource {
+        this.addComponents([
+            this.backBtn
+        ]);
+
+        this.load([
+            { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
+            { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
+        ])
+    }
+
+    get backBtn(): IManagedResource {
         var closure = this;
 
         return new SpriteButton({
@@ -17,7 +26,12 @@ export abstract class BaseBackScene extends BaseScene {
             y: 25,
             text: '←',
             events: {
-                up: () => { debugger; Container.sceneMgr.next(closure.backScene); }
+                up: () => {
+                    if (this.onBack) {
+                        this.onBack();
+                    }
+                    new closure.backScene().run();
+                }
             },
             initSpriteKey: 'sqbtninit',
             pressSpriteKey: 'sqbtndown'
@@ -25,4 +39,6 @@ export abstract class BaseBackScene extends BaseScene {
     }
 
     abstract backScene: new (...args) => IScene;
+
+    protected onBack: Function;
 }

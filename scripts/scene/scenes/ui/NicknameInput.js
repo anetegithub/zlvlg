@@ -3,21 +3,17 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
     Object.defineProperty(exports, "__esModule", { value: true });
     class NicknameInput extends BaseBackScene_1.BaseBackScene {
         constructor() {
-            super(...arguments);
+            super();
             this.backScene = MainMenuScene_1.MainMenuScene;
-            this.loaderRes = [
-                { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
-                { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
-            ];
             this.name = 'NicknameInput';
             this.clear = true;
-            this.resources = [
-                this.title(),
-                this.input(),
-                this.okButton()
-            ];
+            this.addComponents([
+                this.title,
+                this.input,
+                this.okButton
+            ]);
         }
-        title() {
+        get title() {
             return new ManagedText_1.ManagedText({
                 text: 'Your Nickname:',
                 y: 200,
@@ -28,9 +24,9 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
                 }
             });
         }
-        input() {
+        get input() {
             return new ManagedResource_1.ManagedResource(game => {
-                this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, game.world.centerY, {
+                this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, Constants_1.Constants.centerY, {
                     font: '28px ' + Constants_1.Constants.fontFamily,
                     fill: '#ffffff',
                     fontWeight: 'bold',
@@ -48,18 +44,16 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
                 this.inputElement.input.useHandCursor = false;
                 this.inputElement.events.onInputOver.add(() => this.setPointer('hand'));
                 this.inputElement.events.onInputOut.add(() => this.setPointer('cursor'));
-                this.inputElement.events.onInputUp.add(() => this.setPointer('cursor'));
-                this.inputElement.events.onInputDown.add(() => this.setPointer('cursor'));
                 game.add.existing(this.inputElement);
             });
         }
         setPointer(name) {
             document.getElementById('content').style.cursor = `url("./images/ui/cursors/${name}.png"), auto`;
         }
-        okButton() {
+        get okButton() {
             return new SpriteButton_1.SpriteButton({
                 x: (IoC_1.Container.game.world.centerX / 2) + 335,
-                y: IoC_1.Container.game.world.centerY,
+                y: Constants_1.Constants.centerY,
                 text: 'Ok',
                 events: {
                     up: () => { console.log(this.inputElement.value); }
@@ -70,7 +64,4 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
         }
     }
     exports.NicknameInput = NicknameInput;
-    IoC_1.Container.onInited(() => {
-        IoC_1.Container.sceneMgr.add(new NicknameInput());
-    });
 });

@@ -6,15 +6,19 @@ export abstract class BaseScene implements IScene {
     abstract name: string;
     abstract clear: boolean;
 
+    constructor() {
+        document.getElementById('content').style.cursor = `url("./images/ui/cursors/cursor.png"), auto`;
+    }
+
     run(): void {
         if (this.clear) {
             Container.game.world.removeAll(true, true);
         }
 
-        if (this.loaderRes) {
+        if (this.loades) {
             var loader = new Phaser.Loader(Container.game);
 
-            this.loaderRes.forEach(res => {
+            this.loades.forEach(res => {
                 if (res.type) {
                     loader[res.type](res.key, res.url);
                 } else {
@@ -37,16 +41,26 @@ export abstract class BaseScene implements IScene {
         if (this.resources) {
             this.resources.forEach(this.releaseResource);
         }
-        if (this.virtualResources) {
-            this.virtualResources.forEach(this.releaseResource);
-        }
     }
 
     private releaseResource(resource: IManagedResource) {
         resource.release(Container.game);
     }
 
-    virtualResources: IManagedResource[];
-    protected abstract resources: IManagedResource[];
-    protected abstract loaderRes: { key: string, url: string, type?: string }[];
+    protected addComponents(res: IManagedResource[]) {
+        if (!this.resources) {
+            this.resources = [];
+        }
+        this.resources.push(...res);
+    }
+
+    protected load(res: { key: string, url: string, type?: string }[]) {
+        if (!this.loades) {
+            this.loades = [];
+        }
+        this.loades.push(...res);
+    }
+
+    private resources: IManagedResource[];
+    private loades: { key: string, url: string, type?: string }[];
 }

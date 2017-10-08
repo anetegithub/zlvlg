@@ -9,7 +9,11 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
             this.args = args;
         }
         run() {
-            this.game = new Phaser.Game(800, 600, Phaser.CANVAS, 'content', { preload: this.preload, create: this.create });
+            this.game = new Phaser.Game(800, 900, Phaser.CANVAS, 'content', {
+                preload: this.preload,
+                create: this.create,
+                render: this.render
+            });
             this.game['args'] = this.args;
             this.game['inited'] = this.inited;
             IoC_1.Container.game = this.game;
@@ -29,6 +33,9 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
             if (initFunc) {
                 initFunc();
             }
+        }
+        render() {
+            IoC_1.Container.debug.forEach(debug => debug());
         }
     }
     exports.GlobalGame = GlobalGame;

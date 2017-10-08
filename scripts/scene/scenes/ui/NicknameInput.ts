@@ -11,21 +11,20 @@ import { MainMenuScene } from "../MainMenuScene";
 export class NicknameInput extends BaseBackScene {
     backScene = MainMenuScene;
 
-    protected loaderRes: { key: string; url: string; type?: string; }[] = [
-        { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
-        { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
-    ];
-
     name: string = 'NicknameInput';
     clear: boolean = true;
 
-    protected resources: IManagedResource[] = [
-        this.title(),
-        this.input(),
-        this.okButton()
-    ];
+    constructor() {
+        super();
 
-    private title(): ManagedText {
+        this.addComponents([
+            this.title,
+            this.input,
+            this.okButton
+        ]);
+    }
+
+    private get title(): ManagedText {
         return new ManagedText({
             text: 'Your Nickname:',
             y: 200,
@@ -39,9 +38,9 @@ export class NicknameInput extends BaseBackScene {
 
     inputElement: PhaserInput.InputField;
 
-    private input(): ManagedResource {
+    private get input(): ManagedResource {
         return new ManagedResource(game => {
-            this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, game.world.centerY, {
+            this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, Constants.centerY, {
                 font: '28px ' + Constants.fontFamily,
                 fill: '#ffffff',
                 fontWeight: 'bold',
@@ -60,8 +59,6 @@ export class NicknameInput extends BaseBackScene {
 
             this.inputElement.events.onInputOver.add(() => this.setPointer('hand'));
             this.inputElement.events.onInputOut.add(() => this.setPointer('cursor'));
-            this.inputElement.events.onInputUp.add(() => this.setPointer('cursor'));
-            this.inputElement.events.onInputDown.add(() => this.setPointer('cursor'));
 
             game.add.existing(this.inputElement);
         });
@@ -71,10 +68,10 @@ export class NicknameInput extends BaseBackScene {
         document.getElementById('content').style.cursor = `url("./images/ui/cursors/${name}.png"), auto`;
     }
 
-    private okButton(): SpriteButton {
+    private get okButton(): SpriteButton {
         return new SpriteButton({
             x: (Container.game.world.centerX / 2) + 335,
-            y: Container.game.world.centerY,
+            y: Constants.centerY,
             text: 'Ok',
             events: {
                 up: () => { console.log(this.inputElement.value) }
@@ -84,7 +81,3 @@ export class NicknameInput extends BaseBackScene {
         });
     }
 }
-
-Container.onInited(() => {
-    Container.sceneMgr.add(new NicknameInput());
-});

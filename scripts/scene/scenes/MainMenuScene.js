@@ -1,28 +1,29 @@
-define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedResource"], function (require, exports, BaseScene_1, TextButton_1, IoC_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedResource_1) {
+define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedResource", "./mapeditor/EditorMainWindow"], function (require, exports, BaseScene_1, TextButton_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedResource_1, EditorMainWindow_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class MainMenuScene extends BaseScene_1.BaseScene {
         constructor() {
-            super(...arguments);
-            this.loaderRes = [
-                { key: 'logo', url: './images/environment/splash.png' }
-            ];
-            this.resources = [
-                this.splash(),
-                this.newGame(),
-                this.load(),
-                this.title()
-            ];
+            super();
             this.name = "MainMenu";
             this.clear = true;
+            this.addComponents([
+                this.splash,
+                this.newGame,
+                this.loadSave,
+                this.title,
+                this.mapEditor
+            ]);
+            this.load([
+                { key: 'logo', url: './images/environment/splash.png' }
+            ]);
         }
-        splash() {
+        get splash() {
             return new ManagedResource_1.ManagedResource(game => {
-                var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
+                var logo = game.add.sprite(game.world.centerX, Constants_1.Constants.centerY, 'logo');
                 logo.anchor.setTo(0.5, 0.5);
             });
         }
-        title() {
+        get title() {
             var fxdStyle = this.fontStyle;
             fxdStyle.font = `bold 42pt ` + Constants_1.Constants.fontFamily;
             fxdStyle.fill = Constants_1.Constants.color;
@@ -32,40 +33,38 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
                 text: 'Mystical\nDungeon'
             });
         }
-        newGame() {
+        get newGame() {
             var closure = this;
             return new TextButton_1.TextButton({
                 fontStyle: this.fontStyle,
                 y: 365,
                 text: 'New Game',
                 events: {
-                    over: function () {
-                        var fxdStyle = closure.fontStyle;
-                        fxdStyle.fill = Constants_1.Constants.color;
-                        this.setStyle(fxdStyle, true);
-                    },
-                    out: function () {
-                        this.setStyle(closure.fontStyle, true);
-                    },
-                    down: function () {
-                        var fxdStyle = closure.fontStyle;
-                        fxdStyle.font = `bold 20pt  ` + Constants_1.Constants.fontFamily;
-                        fxdStyle.fill = Constants_1.Constants.color;
-                        this.setStyle(fxdStyle, true);
-                    },
                     up: function () {
-                        IoC_1.Container.sceneMgr.next(NicknameInput_1.NicknameInput);
+                        new NicknameInput_1.NicknameInput().run();
                     }
                 }
             });
         }
-        load() {
+        get loadSave() {
             var style = this.fontStyle;
             style.fill = '#929293';
             return new TextButton_1.TextButton({
                 fontStyle: style,
                 y: 415,
                 text: 'Load Game'
+            });
+        }
+        get mapEditor() {
+            return new TextButton_1.TextButton({
+                text: 'Map Editor',
+                y: 465,
+                fontStyle: this.fontStyle,
+                events: {
+                    up: function () {
+                        new EditorMainWindow_1.EditorMainWindow().run();
+                    }
+                }
             });
         }
         get fontStyle() {

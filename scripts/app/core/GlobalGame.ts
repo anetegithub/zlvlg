@@ -16,7 +16,12 @@ export class GlobalGame {
     game: Phaser.Game;
 
     run() {
-        this.game = new Phaser.Game(800, 600, Phaser.CANVAS, 'content', { preload: this.preload, create: this.create });
+        this.game = new Phaser.Game(800, 900, Phaser.CANVAS, 'content', {
+            preload: this.preload,
+            create: this.create,
+            render: this.render
+        });
+
         this.game['args'] = this.args;
         this.game['inited'] = this.inited;
         Container.game = this.game;
@@ -39,6 +44,10 @@ export class GlobalGame {
         if (initFunc) {
             initFunc();
         }
+    }
+
+    render() {
+        Container.debug.forEach(debug => debug());
     }
 
     inited: () => void;

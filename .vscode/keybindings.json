@@ -1,0 +1,7 @@
+[
+    {
+        "key": "ctrl+m ctrl+o",
+        "command": "editor.foldAll",
+        "when": "editorTextFocus"
+    }
+]
