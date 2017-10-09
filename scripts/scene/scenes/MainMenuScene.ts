@@ -4,31 +4,31 @@ import { Container } from "../../utils/globals/IoC";
 import { NicknameInput } from "../scenes/ui/NicknameInput";
 import { ManagedText } from "../../ui/impl/text/ManagedText";
 import { Constants } from "../../utils/globals/Constants";
-import { ManagedResource } from "../../app/core/impl/ManagedResource";
+import { ManagedComponent } from "../../app/core/impl/ManagedComponent";
 import { EditorMainWindow } from "./mapeditor/EditorMainWindow";
 
 export class MainMenuScene extends BaseScene {
     name: string = "MainMenu";
     clear: boolean = true;
 
-    constructor() {
-        super();
+    protected get resources(): ILoadedResource[] {
+        return [
+            { key: 'logo', url: './images/environment/splash.png' }
+        ]
+    }
 
-        this.addComponents([
+    protected get components(): IManagedComponent[] {
+        return [
             this.splash,
             this.newGame,
             this.loadSave,
             this.title,
             this.mapEditor
-        ]);
-
-        this.load([
-            { key: 'logo', url: './images/environment/splash.png' }
-        ]);
+        ];
     }
 
-    get splash(): ManagedResource {
-        return new ManagedResource(game => {
+    get splash(): ManagedComponent {
+        return new ManagedComponent(game => {
             var logo = game.add.sprite(game.world.centerX, Constants.centerY, 'logo');
             logo.anchor.setTo(0.5, 0.5);
         });

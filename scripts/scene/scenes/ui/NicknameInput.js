@@ -1,17 +1,20 @@
-define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedResource", "../../../utils/globals/Constants", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../abstract/BaseBackScene", "../MainMenuScene"], function (require, exports, ManagedText_1, IoC_1, ManagedResource_1, Constants_1, SpriteButton_1, BaseBackScene_1, MainMenuScene_1) {
+define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../abstract/BaseBackScene", "../MainMenuScene"], function (require, exports, ManagedText_1, IoC_1, ManagedComponent_1, Constants_1, SpriteButton_1, BaseBackScene_1, MainMenuScene_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class NicknameInput extends BaseBackScene_1.BaseBackScene {
         constructor() {
-            super();
+            super(...arguments);
             this.backScene = MainMenuScene_1.MainMenuScene;
             this.name = 'NicknameInput';
             this.clear = true;
-            this.addComponents([
+        }
+        get components() {
+            return [
+                ...super.components,
                 this.title,
                 this.input,
                 this.okButton
-            ]);
+            ];
         }
         get title() {
             return new ManagedText_1.ManagedText({
@@ -25,7 +28,7 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
             });
         }
         get input() {
-            return new ManagedResource_1.ManagedResource(game => {
+            return new ManagedComponent_1.ManagedComponent(game => {
                 this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, Constants_1.Constants.centerY, {
                     font: '28px ' + Constants_1.Constants.fontFamily,
                     fill: '#ffffff',

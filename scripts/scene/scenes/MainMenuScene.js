@@ -1,24 +1,28 @@
-define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedResource", "./mapeditor/EditorMainWindow"], function (require, exports, BaseScene_1, TextButton_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedResource_1, EditorMainWindow_1) {
+define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow"], function (require, exports, BaseScene_1, TextButton_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class MainMenuScene extends BaseScene_1.BaseScene {
         constructor() {
-            super();
+            super(...arguments);
             this.name = "MainMenu";
             this.clear = true;
-            this.addComponents([
+        }
+        get resources() {
+            return [
+                { key: 'logo', url: './images/environment/splash.png' }
+            ];
+        }
+        get components() {
+            return [
                 this.splash,
                 this.newGame,
                 this.loadSave,
                 this.title,
                 this.mapEditor
-            ]);
-            this.load([
-                { key: 'logo', url: './images/environment/splash.png' }
-            ]);
+            ];
         }
         get splash() {
-            return new ManagedResource_1.ManagedResource(game => {
+            return new ManagedComponent_1.ManagedComponent(game => {
                 var logo = game.add.sprite(game.world.centerX, Constants_1.Constants.centerY, 'logo');
                 logo.anchor.setTo(0.5, 0.5);
             });

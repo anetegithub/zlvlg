@@ -1,4 +1,4 @@
-export abstract class BaseButton<T extends PIXI.Sprite> implements IManagedResource {
+export abstract class BaseButton<T extends PIXI.Sprite> implements IManagedComponent {
     protected args: IButtonArgs<T>;
 
     constructor(args: IButtonArgs<T>) {

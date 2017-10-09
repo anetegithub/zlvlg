@@ -1,7 +1,7 @@
 import { BaseScene } from "../../abstract/BaseScene";
 import { ManagedText } from "../../../ui/impl/text/ManagedText";
 import { Container } from "../../../utils/globals/IoC";
-import { ManagedResource } from "../../../app/core/impl/ManagedResource";
+import { ManagedComponent } from "../../../app/core/impl/ManagedComponent";
 import { Constants } from "../../../utils/globals/Constants";
 import { SpriteButton } from "../../../ui/impl/buttons/spritebutton/SpriteButton";
 import { } from "../../../../node_modules/@orange-games/phaser-input/build/phaser-input";
@@ -14,14 +14,13 @@ export class NicknameInput extends BaseBackScene {
     name: string = 'NicknameInput';
     clear: boolean = true;
 
-    constructor() {
-        super();
-
-        this.addComponents([
+    get components(): IManagedComponent[] {
+        return [
+            ...super.components,
             this.title,
             this.input,
             this.okButton
-        ]);
+        ];
     }
 
     private get title(): ManagedText {
@@ -38,8 +37,8 @@ export class NicknameInput extends BaseBackScene {
 
     inputElement: PhaserInput.InputField;
 
-    private get input(): ManagedResource {
-        return new ManagedResource(game => {
+    private get input(): ManagedComponent {
+        return new ManagedComponent(game => {
             this.inputElement = new PhaserInput.InputField(game, (game.world.centerX / 2) + 15, Constants.centerY, {
                 font: '28px ' + Constants.fontFamily,
                 fill: '#ffffff',

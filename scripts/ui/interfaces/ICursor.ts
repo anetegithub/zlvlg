@@ -1,5 +1,5 @@
 import { } from "../../app/core/interfaces/IManagedResource";
 
-export interface ICursor extends IManagedResource {
+export interface ICursor extends IManagedComponent {
     url: string;
 }

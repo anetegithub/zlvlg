@@ -1,7 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class ManagedResource {
+    class ManagedComponent {
         constructor(release) {
             this.init = release;
         }
@@ -12,5 +12,5 @@ define(["require", "exports"], function (require, exports) {
             this.init(game);
         }
     }
-    exports.ManagedResource = ManagedResource;
+    exports.ManagedComponent = ManagedComponent;
 });

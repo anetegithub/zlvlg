@@ -1,6 +1,5 @@
 import { } from "../../../node_modules/phaser-ce/typescript/phaser";
 import { } from "../../../node_modules/@orange-games/phaser-input/build/phaser-input";
-import { } from "../../app/core/interfaces/IManagedResource";
 import { GlobalArgs } from "./GlobalArgs";
 import { Container } from "../../utils/globals/IoC";
 
@@ -35,7 +34,7 @@ export class GlobalGame {
         let args = this.game['args'] as GlobalArgs;
         for (var key in args) {
             if (args.hasOwnProperty(key)) {
-                var arg: IManagedResource = args[key];
+                var arg: IManagedComponent = args[key];
                 arg.release(this.game);
             }
         }

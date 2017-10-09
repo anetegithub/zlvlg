@@ -1,6 +1,4 @@
-import { } from "../interfaces/IManagedResource";
-
-export class ManagedResource implements IManagedResource {
+export class ManagedComponent implements IManagedComponent {
 
     constructor(release: (game: Phaser.Game) => void) {
         this.init = release;

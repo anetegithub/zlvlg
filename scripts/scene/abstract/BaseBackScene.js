@@ -2,15 +2,16 @@ define(["require", "exports", "./BaseScene", "../../ui/impl/buttons/spritebutton
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class BaseBackScene extends BaseScene_1.BaseScene {
-        constructor() {
-            super();
-            this.addComponents([
-                this.backBtn
-            ]);
-            this.load([
+        get resources() {
+            return [
                 { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
                 { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
-            ]);
+            ];
+        }
+        get components() {
+            return [
+                this.backBtn
+            ];
         }
         get backBtn() {
             var closure = this;

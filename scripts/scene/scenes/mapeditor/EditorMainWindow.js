@@ -1,22 +1,28 @@
-define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedResource"], function (require, exports, BaseBackScene_1, MainMenuScene_1, IoC_1, ManagedResource_1) {
+define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent"], function (require, exports, BaseBackScene_1, MainMenuScene_1, IoC_1, ManagedComponent_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class EditorMainWindow extends BaseBackScene_1.BaseBackScene {
         constructor() {
-            super();
+            super(...arguments);
             this.backScene = MainMenuScene_1.MainMenuScene;
             this.name = "EditorMainWindow";
             this.clear = true;
-            this.addComponents([
+        }
+        get components() {
+            return [
+                ...super.components,
                 this.tilemap,
                 ...this.lines
-            ]);
-            this.load([
+            ];
+        }
+        get resources() {
+            return [
+                ...super.resources,
                 { key: 'asset', url: './images/environment/assets/dungeon-bicubic.png' }
-            ]);
+            ];
         }
         get tilemap() {
-            return new ManagedResource_1.ManagedResource(game => {
+            return new ManagedComponent_1.ManagedComponent(game => {
                 var assetMap = new Phaser.Sprite(game, 0, 900 - 208, 'asset');
                 game.add.existing(assetMap);
             });

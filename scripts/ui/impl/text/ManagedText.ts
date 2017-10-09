@@ -2,7 +2,7 @@ import { } from "../../../app/core/interfaces/IManagedResource";
 import { } from "../../../utils/ui/textfactory/interfaces/ITextFactoryArgs";
 import { TextFactory } from "../../../utils/ui/textfactory/TextFactory";
 
-export class ManagedText implements IManagedResource {
+export class ManagedText implements IManagedComponent {
 
     constructor(params: ITextFactoryArgs) {
         this.textStyle = params;

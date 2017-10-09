@@ -15,10 +15,10 @@ export abstract class BaseScene implements IScene {
             Container.game.world.removeAll(true, true);
         }
 
-        if (this.loades) {
+        if (this.resources) {
             var loader = new Phaser.Loader(Container.game);
 
-            this.loades.forEach(res => {
+            this.resources.forEach(res => {
                 if (res.type) {
                     loader[res.type](res.key, res.url);
                 } else {
@@ -27,40 +27,26 @@ export abstract class BaseScene implements IScene {
             });
 
             loader.onLoadComplete.addOnce(() => {
-                this.releaseManagedRes();
+                this.releaseComponents();
             }, this);
 
             loader.start();
         }
         else {
-            this.releaseManagedRes();
+            this.releaseComponents();
         }
     }
 
-    private releaseManagedRes() {
-        if (this.resources) {
-            this.resources.forEach(this.releaseResource);
+    private releaseComponents() {
+        if (this.components) {
+            this.components.forEach(this.releaseComponent);
         }
     }
 
-    private releaseResource(resource: IManagedResource) {
+    private releaseComponent(resource: IManagedComponent) {
         resource.release(Container.game);
     }
 
-    protected addComponents(res: IManagedResource[]) {
-        if (!this.resources) {
-            this.resources = [];
-        }
-        this.resources.push(...res);
-    }
-
-    protected load(res: { key: string, url: string, type?: string }[]) {
-        if (!this.loades) {
-            this.loades = [];
-        }
-        this.loades.push(...res);
-    }
-
-    private resources: IManagedResource[];
-    private loades: { key: string, url: string, type?: string }[];
+    protected abstract get components(): IManagedComponent[];
+    protected abstract get resources(): ILoadedResource[];
 }

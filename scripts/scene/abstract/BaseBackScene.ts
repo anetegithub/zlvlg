@@ -1,24 +1,25 @@
 import { BaseScene } from "./BaseScene";
-import { ManagedResource } from "../../app/core/impl/ManagedResource";
+import { ManagedComponent } from "../../app/core/impl/ManagedComponent";
 import { Constants } from "../../utils/globals/Constants";
 import { SpriteButton } from "../../ui/impl/buttons/spritebutton/SpriteButton";
 import { Container } from "../../utils/globals/IoC";
 
 export abstract class BaseBackScene extends BaseScene {
-    constructor() {
-        super();
 
-        this.addComponents([
-            this.backBtn
-        ]);
-
-        this.load([
+    protected get resources(): ILoadedResource[] {
+        return [
             { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
             { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
-        ])
+        ]
     }
 
-    get backBtn(): IManagedResource {
+    protected get components(): IManagedComponent[] {
+        return [
+            this.backBtn
+        ];
+    }
+
+    get backBtn(): IManagedComponent {
         var closure = this;
 
         return new SpriteButton({

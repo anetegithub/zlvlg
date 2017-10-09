@@ -1,7 +1,7 @@
 import { BaseBackScene } from "../../abstract/BaseBackScene";
 import { MainMenuScene } from "../MainMenuScene";
 import { Container } from "../../../utils/globals/IoC";
-import { ManagedResource } from "../../../app/core/impl/ManagedResource";
+import { ManagedComponent } from "../../../app/core/impl/ManagedComponent";
 import { Constants } from "../../../utils/globals/Constants";
 
 export class EditorMainWindow extends BaseBackScene {
@@ -9,29 +9,32 @@ export class EditorMainWindow extends BaseBackScene {
     name: string = "EditorMainWindow";
     clear: boolean = true;
 
-    constructor() {
-        super();
-        this.addComponents([
+    protected get components(): IManagedComponent[] {
+        return [
+            ...super.components,
             this.tilemap,
             ...this.lines
-        ]);
-
-        this.load([
-            { key: 'asset', url: './images/environment/assets/dungeon-bicubic.png' }
-        ]);
+        ]
     }
 
-    get tilemap(): ManagedResource {
-        return new ManagedResource(game => {
+    protected get resources(): ILoadedResource[] {
+        return [
+            ...super.resources,
+            { key: 'asset', url: './images/environment/assets/dungeon-bicubic.png' }
+        ];
+    }
+
+    get tilemap(): ManagedComponent {
+        return new ManagedComponent(game => {
             var assetMap = new Phaser.Sprite(game, 0, 900 - 208, 'asset');
             game.add.existing(assetMap);
         });
     }
 
-    get lines(): ManagedResource[] {
+    get lines(): ManagedComponent[] {
         this.onBack = () => Container.debug = [];
 
-        let linesArr: ManagedResource[] = [];
+        let linesArr: ManagedComponent[] = [];
 
         let xStartFrom = (800 % 41.6) / 2;
         let yStartFrom = (600 % 41.6) / 2;

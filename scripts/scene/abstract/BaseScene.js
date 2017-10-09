@@ -9,9 +9,9 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
             if (this.clear) {
                 IoC_1.Container.game.world.removeAll(true, true);
             }
-            if (this.loades) {
+            if (this.resources) {
                 var loader = new Phaser.Loader(IoC_1.Container.game);
-                this.loades.forEach(res => {
+                this.resources.forEach(res => {
                     if (res.type) {
                         loader[res.type](res.key, res.url);
                     }
@@ -20,33 +20,21 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
                     }
                 });
                 loader.onLoadComplete.addOnce(() => {
-                    this.releaseManagedRes();
+                    this.releaseComponents();
                 }, this);
                 loader.start();
             }
             else {
-                this.releaseManagedRes();
+                this.releaseComponents();
             }
         }
-        releaseManagedRes() {
-            if (this.resources) {
-                this.resources.forEach(this.releaseResource);
+        releaseComponents() {
+            if (this.components) {
+                this.components.forEach(this.releaseComponent);
             }
         }
-        releaseResource(resource) {
+        releaseComponent(resource) {
             resource.release(IoC_1.Container.game);
-        }
-        addComponents(res) {
-            if (!this.resources) {
-                this.resources = [];
-            }
-            this.resources.push(...res);
-        }
-        load(res) {
-            if (!this.loades) {
-                this.loades = [];
-            }
-            this.loades.push(...res);
         }
     }
     exports.BaseScene = BaseScene;
