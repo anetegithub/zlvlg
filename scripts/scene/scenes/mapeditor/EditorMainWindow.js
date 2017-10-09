@@ -23,26 +23,26 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
         }
         get tilemap() {
             return new ManagedComponent_1.ManagedComponent(game => {
-                var assetMap = new Phaser.Sprite(game, 0, 900 - 208, 'asset');
+                var assetMap = new Phaser.Sprite(game, 0, 900 - 208 - 18, 'asset');
                 game.add.existing(assetMap);
             });
         }
         get lines() {
             this.onBack = () => IoC_1.Container.debug = [];
             let linesArr = [];
-            let xStartFrom = (800 % 41.6) / 2;
-            let yStartFrom = (600 % 41.6) / 2;
-            for (let index = 0; index < 600 / 41.6; index++) {
-                let y = yStartFrom + (index * 41.6);
-                let line = new Phaser.Line(xStartFrom, y, 600 - xStartFrom, y);
+            let xStartFrom = 0;
+            let yStartFrom = 18;
+            for (let i = 0; i < 900 / 48; i++) {
+                let y = (i * 48) + yStartFrom;
+                let line = new Phaser.Line(xStartFrom, y, 800 - xStartFrom, y);
                 IoC_1.Container.debug.push(() => {
                     IoC_1.Container.game.debug.geom(line, 'blue');
                 });
                 //draw horizontal line
             }
-            for (var index = 0; index < 800 / 41.6; index++) {
-                let x = xStartFrom + (index * 41.6);
-                let line = new Phaser.Line(x, yStartFrom, x, 800 - yStartFrom);
+            for (let i = 0; i < 800 / 48; i++) {
+                let x = (i * 48) + xStartFrom;
+                let line = new Phaser.Line(x, yStartFrom, x, 900 - yStartFrom);
                 IoC_1.Container.debug.push(() => {
                     IoC_1.Container.game.debug.geom(line, 'blue');
                 });

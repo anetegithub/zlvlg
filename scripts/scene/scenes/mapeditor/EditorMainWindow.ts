@@ -26,7 +26,7 @@ export class EditorMainWindow extends BaseBackScene {
 
     get tilemap(): ManagedComponent {
         return new ManagedComponent(game => {
-            var assetMap = new Phaser.Sprite(game, 0, 900 - 208, 'asset');
+            var assetMap = new Phaser.Sprite(game, 0, 900 - 208 - 18, 'asset');
             game.add.existing(assetMap);
         });
     }
@@ -36,21 +36,21 @@ export class EditorMainWindow extends BaseBackScene {
 
         let linesArr: ManagedComponent[] = [];
 
-        let xStartFrom = (800 % 41.6) / 2;
-        let yStartFrom = (600 % 41.6) / 2;
+        let xStartFrom = 0;
+        let yStartFrom = 18;
 
-        for (let index = 0; index < 600 / 41.6; index++) {
-            let y = yStartFrom + (index * 41.6);
-            let line = new Phaser.Line(xStartFrom, y, 600 - xStartFrom, y);
+        for (let i = 0; i < 900 / 48; i++) {
+            let y = (i * 48) + yStartFrom;
+            let line = new Phaser.Line(xStartFrom, y, 800 - xStartFrom, y);
             Container.debug.push(() => {
                 Container.game.debug.geom(line, 'blue');
             });
             //draw horizontal line
         }
 
-        for (var index = 0; index < 800 / 41.6; index++) {
-            let x = xStartFrom + (index * 41.6);
-            let line = new Phaser.Line(x, yStartFrom, x, 800 - yStartFrom);
+        for (let i = 0; i < 800 / 48; i++) {
+            let x = (i * 48) + xStartFrom;
+            let line = new Phaser.Line(x, yStartFrom, x, 900 - yStartFrom);
             Container.debug.push(() => {
                 Container.game.debug.geom(line, 'blue');
             });
