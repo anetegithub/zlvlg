@@ -15,11 +15,11 @@ export class GlobalGame {
     game: Phaser.Game;
 
     run() {
-        this.game = new Phaser.Game(800, 900, Phaser.CANVAS, 'content', {
+        this.game = new Phaser.Game(800, 896, Phaser.CANVAS, 'content', {
             preload: this.preload,
             create: this.create,
             render: this.render
-        });
+        }, true, false);
 
         this.game['args'] = this.args;
         this.game['inited'] = this.inited;

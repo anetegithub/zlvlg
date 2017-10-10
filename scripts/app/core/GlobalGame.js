@@ -9,11 +9,11 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
             this.args = args;
         }
         run() {
-            this.game = new Phaser.Game(800, 900, Phaser.CANVAS, 'content', {
+            this.game = new Phaser.Game(800, 896, Phaser.CANVAS, 'content', {
                 preload: this.preload,
                 create: this.create,
                 render: this.render
-            });
+            }, true, false);
             this.game['args'] = this.args;
             this.game['inited'] = this.inited;
             IoC_1.Container.game = this.game;
