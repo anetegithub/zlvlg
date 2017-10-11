@@ -1,5 +1,6 @@
 interface ILoadedResource {
     key: string,
     url: string,
-    type?: string
+    type?: string,
+    args?: any[]
 }

@@ -9,7 +9,13 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
         }
         get resources() {
             return [
-                { key: 'logo', url: './images/environment/splash.png' }
+                { key: 'logo', url: './images/environment/splash.png' },
+                {
+                    key: 'sprites', url: './images/environment/assets/calciumtrice simple.png', type: 'atlas', args: [
+                        './images/environment/assets/calciumtrice simple.json',
+                        Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY
+                    ]
+                }
             ];
         }
         get components() {
@@ -18,8 +24,20 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
                 this.newGame,
                 this.loadSave,
                 this.title,
-                this.mapEditor
+                this.mapEditor,
+                this.license
             ];
+        }
+        get license() {
+            return new ManagedComponent_1.ManagedComponent(game => {
+                var sprite = new Phaser.Sprite(game, 30, 550, 'sprites', 'license');
+                sprite.scale.x = 2;
+                sprite.scale.y = 2;
+                var bmp = game.make.bitmapData(sprite.width, sprite.height - 12);
+                bmp.fill(255, 255, 255);
+                bmp.addToWorld(30, 550 + 5);
+                game.add.existing(sprite);
+            });
         }
         get splash() {
             return new ManagedComponent_1.ManagedComponent(game => {

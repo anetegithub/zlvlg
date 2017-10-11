@@ -13,7 +13,8 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
                 var loader = new Phaser.Loader(IoC_1.Container.game);
                 this.resources.forEach(res => {
                     if (res.type) {
-                        loader[res.type](res.key, res.url);
+                        debugger;
+                        loader[res.type](res.key, res.url, ...res.args);
                     }
                     else {
                         loader.image(res.key, res.url);
