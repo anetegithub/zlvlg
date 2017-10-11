@@ -1,9 +1,10 @@
-define(["require", "exports", "./BaseScene", "../../ui/impl/buttons/spritebutton/SpriteButton"], function (require, exports, BaseScene_1, SpriteButton_1) {
+define(["require", "exports", "../../ui/impl/buttons/spritebutton/SpriteButton", "./SpriteMapScene"], function (require, exports, SpriteButton_1, SpriteMapScene_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class BaseBackScene extends BaseScene_1.BaseScene {
+    class BaseBackScene extends SpriteMapScene_1.SpriteMapScene {
         get resources() {
             return [
+                ...super.resources,
                 { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
                 { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
             ];
@@ -18,7 +19,7 @@ define(["require", "exports", "./BaseScene", "../../ui/impl/buttons/spritebutton
             return new SpriteButton_1.SpriteButton({
                 x: 25,
                 y: 25,
-                text: '←',
+                text: '<',
                 events: {
                     up: () => {
                         if (this.onBack) {

@@ -3,6 +3,8 @@ import { MainMenuScene } from "../MainMenuScene";
 import { Container } from "../../../utils/globals/IoC";
 import { ManagedComponent } from "../../../app/core/impl/ManagedComponent";
 import { Constants } from "../../../utils/globals/Constants";
+import { SpriteMap } from "../../../utils/graphics/SpriteMap";
+import { SpriteMapScene } from "../../abstract/SpriteMapScene";
 
 export class EditorMainWindow extends BaseBackScene {
     backScene: new (...args: any[]) => IScene = MainMenuScene;
@@ -12,8 +14,7 @@ export class EditorMainWindow extends BaseBackScene {
     protected get components(): IManagedComponent[] {
         return [
             ...super.components,
-            this.tilemap,
-            ...this.lines
+            this.lines
         ]
     }
 
@@ -27,40 +28,34 @@ export class EditorMainWindow extends BaseBackScene {
     get tilemap(): ManagedComponent {
         return new ManagedComponent(game => {
             var assetMap = new Phaser.Sprite(game, 0, 0, 'asset');
-            //assetMap.scale.setTo(assetMap.width * 2, assetMap.height * 2);
-            debugger;
             assetMap.scale.x = 2;
             assetMap.scale.y = 2;
             game.add.existing(assetMap);
         });
     }
 
-    get lines(): ManagedComponent[] {
-        this.onBack = () => Container.debug = [];
+    get lines(): ManagedComponent {
+        return new ManagedComponent(game => {
+            var tileMap = SpriteMap.create(game.cache.getJSON('spritesmap'));
 
-        let linesArr: ManagedComponent[] = [];
+            let i = 0;
+            let x = 0;
+            let y = 600;
+            tileMap.walls().forEach(tile => {
+                if (i == Math.round(tileMap.walls().length / 2)) {
+                    i = 0;
+                    y += 64;
+                }
 
-        let xStartFrom = 0;
-        let yStartFrom = 0;
+                x = i * 32;
 
-        for (let i = 0; i < 896 / 32; i++) {
-            let y = (i * 32) + yStartFrom;
-            let line = new Phaser.Line(xStartFrom, y, 800 - xStartFrom, y);
-            Container.debug.push(() => {
-                Container.game.debug.geom(line, 'blue');
+                debugger;
+                let sprite = new Phaser.Sprite(game, x, y, "sprites", tile.filename);
+                sprite.scale.x = 2;
+                sprite.scale.y = 2;
+                game.add.existing(sprite);
+                i++;
             });
-            //draw horizontal line
-        }
-
-        for (let i = 0; i < 800 / 32; i++) {
-            let x = (i * 32) + xStartFrom;
-            let line = new Phaser.Line(x, yStartFrom, x, 896 - yStartFrom);
-            Container.debug.push(() => {
-                Container.game.debug.geom(line, 'blue');
-            });
-            //draw vertical line
-        }
-
-        return linesArr;
+        });
     }
 }

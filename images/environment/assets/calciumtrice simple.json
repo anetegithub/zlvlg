@@ -1,7 +1,7 @@
 {
     "frames": [
         {
-            "filename": "sprite8",
+            "filename": "|sprite8",
             "frame": {
                 "x": 0,
                 "y": 16,
@@ -22,7 +22,7 @@
             }
         },
         {
-            "filename": "sprite10",
+            "filename": "|sprite10",
             "frame": {
                 "x": 32,
                 "y": 16,
@@ -43,7 +43,7 @@
             }
         },
         {
-            "filename": "sprite11",
+            "filename": "|sprite11",
             "frame": {
                 "x": 48,
                 "y": 16,
@@ -64,7 +64,7 @@
             }
         },
         {
-            "filename": "sprite12",
+            "filename": "|sprite12",
             "frame": {
                 "x": 64,
                 "y": 16,
@@ -85,7 +85,7 @@
             }
         },
         {
-            "filename": "sprite13",
+            "filename": "|sprite13",
             "frame": {
                 "x": 80,
                 "y": 16,
@@ -106,7 +106,7 @@
             }
         },
         {
-            "filename": "sprite14",
+            "filename": "|sprite14",
             "frame": {
                 "x": 96,
                 "y": 16,
@@ -127,7 +127,7 @@
             }
         },
         {
-            "filename": "sprite15",
+            "filename": "|sprite15",
             "frame": {
                 "x": 112,
                 "y": 16,
@@ -148,7 +148,7 @@
             }
         },
         {
-            "filename": "sprite16",
+            "filename": "|sprite16",
             "frame": {
                 "x": 128,
                 "y": 16,
@@ -169,7 +169,7 @@
             }
         },
         {
-            "filename": "sprite19",
+            "filename": "|sprite19",
             "frame": {
                 "x": 16,
                 "y": 16,
@@ -1702,7 +1702,7 @@
             }
         },
         {
-            "filename": "doorLeft",
+            "filename": "|doorLeft",
             "frame": {
                 "x": 0,
                 "y": 128,
@@ -1723,7 +1723,7 @@
             }
         },
         {
-            "filename": "doorRight",
+            "filename": "|doorRight",
             "frame": {
                 "x": 16,
                 "y": 128,
@@ -1744,7 +1744,7 @@
             }
         },
         {
-            "filename": "doorRight2",
+            "filename": "|doorRight2",
             "frame": {
                 "x": 32,
                 "y": 128,
@@ -1765,7 +1765,7 @@
             }
         },
         {
-            "filename": "doorRight1",
+            "filename": "|doorRight1",
             "frame": {
                 "x": 48,
                 "y": 128,
@@ -1786,7 +1786,7 @@
             }
         },
         {
-            "filename": "sprite122",
+            "filename": "|sprite122",
             "frame": {
                 "x": 64,
                 "y": 128,
@@ -1807,7 +1807,7 @@
             }
         },
         {
-            "filename": "sprite123",
+            "filename": "|sprite123",
             "frame": {
                 "x": 80,
                 "y": 128,
@@ -2038,7 +2038,7 @@
             }
         },
         {
-            "filename": "flagRed1",
+            "filename": "|flagRed1",
             "frame": {
                 "x": 288,
                 "y": 128,
@@ -2059,7 +2059,7 @@
             }
         },
         {
-            "filename": "flagRed2",
+            "filename": "|flagRed2",
             "frame": {
                 "x": 304,
                 "y": 128,
@@ -2080,7 +2080,7 @@
             }
         },
         {
-            "filename": "flagBlue1",
+            "filename": "|flagBlue1",
             "frame": {
                 "x": 320,
                 "y": 128,
@@ -2101,7 +2101,7 @@
             }
         },
         {
-            "filename": "flagBlue2",
+            "filename": "|flagBlue2",
             "frame": {
                 "x": 336,
                 "y": 128,
@@ -2122,7 +2122,7 @@
             }
         },
         {
-            "filename": "flagBlack1",
+            "filename": "|flagBlack1",
             "frame": {
                 "x": 352,
                 "y": 128,
@@ -2143,7 +2143,7 @@
             }
         },
         {
-            "filename": "flagBlack2",
+            "filename": "|flagBlack2",
             "frame": {
                 "x": 368,
                 "y": 128,
@@ -2164,7 +2164,7 @@
             }
         },
         {
-            "filename": "flagRedLeft",
+            "filename": "|flagRedLeft",
             "frame": {
                 "x": 384,
                 "y": 128,
@@ -2185,7 +2185,7 @@
             }
         },
         {
-            "filename": "flagRedRight",
+            "filename": "|flagRedRight",
             "frame": {
                 "x": 400,
                 "y": 128,
@@ -2206,7 +2206,7 @@
             }
         },
         {
-            "filename": "flagBlueLeft",
+            "filename": "|flagBlueLeft",
             "frame": {
                 "x": 416,
                 "y": 128,
@@ -2227,7 +2227,7 @@
             }
         },
         {
-            "filename": "flagBlueRight",
+            "filename": "|flagBlueRight",
             "frame": {
                 "x": 432,
                 "y": 128,
@@ -2248,7 +2248,7 @@
             }
         },
         {
-            "filename": "flagBlackLeft",
+            "filename": "|flagBlackLeft",
             "frame": {
                 "x": 448,
                 "y": 128,
@@ -2269,7 +2269,7 @@
             }
         },
         {
-            "filename": "flagBlackRight",
+            "filename": "|flagBlackRight",
             "frame": {
                 "x": 464,
                 "y": 128,
@@ -2794,7 +2794,7 @@
             }
         },
         {
-            "filename": "sprite214",
+            "filename": "|sprite214",
             "frame": {
                 "x": 224,
                 "y": 192,
@@ -2815,7 +2815,7 @@
             }
         },
         {
-            "filename": "sprite215",
+            "filename": "|sprite215",
             "frame": {
                 "x": 240,
                 "y": 192,
@@ -2836,7 +2836,7 @@
             }
         },
         {
-            "filename": "sprite216",
+            "filename": "|sprite216",
             "frame": {
                 "x": 256,
                 "y": 192,
@@ -2899,7 +2899,7 @@
             }
         },
         {
-            "filename": "sprite222",
+            "filename": "|sprite222",
             "frame": {
                 "x": 208,
                 "y": 192,
@@ -3235,7 +3235,7 @@
             }
         },
         {
-            "filename": "altarHuman",
+            "filename": "|altarHuman",
             "frame": {
                 "x": 304,
                 "y": 256,
@@ -3256,7 +3256,7 @@
             }
         },
         {
-            "filename": "altarSnake",
+            "filename": "|altarSnake",
             "frame": {
                 "x": 320,
                 "y": 256,
@@ -3277,7 +3277,7 @@
             }
         },
         {
-            "filename": "altarTotem",
+            "filename": "|altarTotem",
             "frame": {
                 "x": 336,
                 "y": 256,
@@ -3298,7 +3298,7 @@
             }
         },
         {
-            "filename": "altarEmptySmall",
+            "filename": "|altarEmptySmall",
             "frame": {
                 "x": 352,
                 "y": 256,
@@ -3319,7 +3319,7 @@
             }
         },
         {
-            "filename": "altarCow",
+            "filename": "|altarCow",
             "frame": {
                 "x": 384,
                 "y": 256,
@@ -3340,7 +3340,7 @@
             }
         },
         {
-            "filename": "altarEmptyLarge",
+            "filename": "|altarEmptyLarge",
             "frame": {
                 "x": 416,
                 "y": 256,

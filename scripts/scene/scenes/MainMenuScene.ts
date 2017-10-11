@@ -6,20 +6,16 @@ import { ManagedText } from "../../ui/impl/text/ManagedText";
 import { Constants } from "../../utils/globals/Constants";
 import { ManagedComponent } from "../../app/core/impl/ManagedComponent";
 import { EditorMainWindow } from "./mapeditor/EditorMainWindow";
+import { SpriteMapScene } from "../abstract/SpriteMapScene";
 
-export class MainMenuScene extends BaseScene {
+export class MainMenuScene extends SpriteMapScene {
     name: string = "MainMenu";
     clear: boolean = true;
 
     protected get resources(): ILoadedResource[] {
         return [
+            ...super.resources,
             { key: 'logo', url: './images/environment/splash.png' },
-            {
-                key: 'sprites', url: './images/environment/assets/calciumtrice simple.png', type: 'atlas', args: [
-                    './images/environment/assets/calciumtrice simple.json',
-                    Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY
-                ]
-            }
         ]
     }
 

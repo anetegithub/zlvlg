@@ -1,7 +1,7 @@
-define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/textbutton/TextButton", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow"], function (require, exports, BaseScene_1, TextButton_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1) {
+define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow", "../abstract/SpriteMapScene"], function (require, exports, TextButton_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1, SpriteMapScene_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class MainMenuScene extends BaseScene_1.BaseScene {
+    class MainMenuScene extends SpriteMapScene_1.SpriteMapScene {
         constructor() {
             super(...arguments);
             this.name = "MainMenu";
@@ -9,13 +9,8 @@ define(["require", "exports", "../abstract/BaseScene", "../../ui/impl/buttons/te
         }
         get resources() {
             return [
+                ...super.resources,
                 { key: 'logo', url: './images/environment/splash.png' },
-                {
-                    key: 'sprites', url: './images/environment/assets/calciumtrice simple.png', type: 'atlas', args: [
-                        './images/environment/assets/calciumtrice simple.json',
-                        Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY
-                    ]
-                }
             ];
         }
         get components() {

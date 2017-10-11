@@ -20,8 +20,7 @@ export abstract class BaseScene implements IScene {
 
             this.resources.forEach(res => {
                 if (res.type) {
-                    debugger;
-                    loader[res.type](res.key, res.url, ...res.args);
+                    loader[res.type](res.key, res.url, ...(res.args || []));
                 } else {
                     loader.image(res.key, res.url);
                 }
