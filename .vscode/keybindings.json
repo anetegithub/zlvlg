@@ -1,7 +1,7 @@
 [
     {
-        "key": "ctrl+m ctrl+o",
-        "command": "editor.foldAll",
-        "when": "editorTextFocus"
+        "key": "f5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Mystic Dungeon Debugger Test"
     }
 ]

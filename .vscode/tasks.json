@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "Mystic Dungeon Debugger Test",
+            "type": "shell",
+            "windows": {
+                "command": "%0\\..\\debug.cmd"
+            },
+            "group": "test"
+        }
+    ]
+}
