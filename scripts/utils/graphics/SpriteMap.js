@@ -8,7 +8,10 @@ define(["require", "exports"], function (require, exports) {
             return spMap;
         }
         walls() {
-            return this.frames.filter(x => x.filename.includes("|"));
+            return this.frames.filter(x => x.filename.includes("|") && x.frame.w != 32);
+        }
+        floors() {
+            return this.frames.filter(x => x.filename.includes("-"));
         }
     }
     exports.SpriteMap = SpriteMap;

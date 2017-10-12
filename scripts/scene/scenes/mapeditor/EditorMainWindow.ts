@@ -14,7 +14,8 @@ export class EditorMainWindow extends BaseBackScene {
     protected get components(): IManagedComponent[] {
         return [
             ...super.components,
-            this.lines
+            ...this.getSection("walls", 9),
+            ...this.getSection("floors", 15, { w: 300, h: 0 }),
         ]
     }
 
@@ -34,28 +35,50 @@ export class EditorMainWindow extends BaseBackScene {
         });
     }
 
-    get lines(): ManagedComponent {
-        return new ManagedComponent(game => {
-            var tileMap = SpriteMap.create(game.cache.getJSON('spritesmap'));
+    private getSection(section: keyof SpriteMap, inRow: number, offset?: Point): ManagedComponent[] {
+        var blocks: ManagedComponent[] = [];
 
-            let i = 0;
-            let x = 0;
-            let y = 600;
-            tileMap.walls().forEach(tile => {
-                if (i == Math.round(tileMap.walls().length / 2)) {
-                    i = 0;
-                    y += 64;
-                }
+        var tileMap = SpriteMap.create(Container.game.cache.getJSON('spritesmap'));
+        let i = 0;
+        let x = 0;
+        let y = 600;
 
-                x = i * 32;
 
-                debugger;
-                let sprite = new Phaser.Sprite(game, x, y, "sprites", tile.filename);
+        let offsetX = 0;
+        let offsetY = 0;
+
+        if (offset) {
+            offsetY += offset.h || 0;
+            offsetX += offset.w || 0;
+        }
+
+        (tileMap[section] as Function)().forEach(tile => {
+            if (i == inRow) {
+                i = 0;
+                y += tile.frame.h * 2;
+            }
+
+            x = i * (tile.frame.w * 2);
+
+            let xx = x + offsetX;
+            let yy = y + offsetY;
+
+            blocks.push(new ManagedComponent(game => {
+                let sprite = new Phaser.Sprite(game, xx, yy, "sprites", tile.filename);
                 sprite.scale.x = 2;
                 sprite.scale.y = 2;
                 game.add.existing(sprite);
-                i++;
-            });
+            }));
+
+            i++;
         });
+
+        return blocks;
+    }
+
+    get floor(): ManagedComponent[] {
+        var blocks: ManagedComponent[] = [];
+
+        return blocks;
     }
 }

@@ -1,4 +1,4 @@
-define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene", "../../../app/core/impl/ManagedComponent", "../../../utils/graphics/SpriteMap"], function (require, exports, BaseBackScene_1, MainMenuScene_1, ManagedComponent_1, SpriteMap_1) {
+define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../utils/graphics/SpriteMap"], function (require, exports, BaseBackScene_1, MainMenuScene_1, IoC_1, ManagedComponent_1, SpriteMap_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class EditorMainWindow extends BaseBackScene_1.BaseBackScene {
@@ -11,7 +11,8 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
         get components() {
             return [
                 ...super.components,
-                this.lines
+                ...this.getSection("walls", 9),
+                ...this.getSection("floors", 15, { w: 300, h: 0 }),
             ];
         }
         get resources() {
@@ -28,26 +29,39 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 game.add.existing(assetMap);
             });
         }
-        get lines() {
-            return new ManagedComponent_1.ManagedComponent(game => {
-                var tileMap = SpriteMap_1.SpriteMap.create(game.cache.getJSON('spritesmap'));
-                let i = 0;
-                let x = 0;
-                let y = 600;
-                tileMap.walls().forEach(tile => {
-                    if (i == Math.round(tileMap.walls().length / 2)) {
-                        i = 0;
-                        y += 64;
-                    }
-                    x = i * 32;
-                    debugger;
-                    let sprite = new Phaser.Sprite(game, x, y, "sprites", tile.filename);
+        getSection(section, inRow, offset) {
+            var blocks = [];
+            var tileMap = SpriteMap_1.SpriteMap.create(IoC_1.Container.game.cache.getJSON('spritesmap'));
+            let i = 0;
+            let x = 0;
+            let y = 600;
+            let offsetX = 0;
+            let offsetY = 0;
+            if (offset) {
+                offsetY += offset.h || 0;
+                offsetX += offset.w || 0;
+            }
+            tileMap[section]().forEach(tile => {
+                if (i == inRow) {
+                    i = 0;
+                    y += tile.frame.h * 2;
+                }
+                x = i * (tile.frame.w * 2);
+                let xx = x + offsetX;
+                let yy = y + offsetY;
+                blocks.push(new ManagedComponent_1.ManagedComponent(game => {
+                    let sprite = new Phaser.Sprite(game, xx, yy, "sprites", tile.filename);
                     sprite.scale.x = 2;
                     sprite.scale.y = 2;
                     game.add.existing(sprite);
-                    i++;
-                });
+                }));
+                i++;
             });
+            return blocks;
+        }
+        get floor() {
+            var blocks = [];
+            return blocks;
         }
     }
     exports.EditorMainWindow = EditorMainWindow;

@@ -8,7 +8,10 @@ export class SpriteMap {
     frames: SpriteTile[];
 
     walls(): SpriteTile[] {
-        return this.frames.filter(x => x.filename.includes("|"));
+        return this.frames.filter(x => x.filename.includes("|") && x.frame.w != 32);
+    }
+
+    floors(): SpriteTile[] {
+        return this.frames.filter(x => x.filename.includes("-"));
     }
 }
-
