@@ -4,9 +4,7 @@ define(["require", "exports", "../../ui/impl/buttons/spritebutton/SpriteButton",
     class BaseBackScene extends SpriteMapScene_1.SpriteMapScene {
         get resources() {
             return [
-                ...super.resources,
-                { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
-                { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
+                ...super.resources
             ];
         }
         get components() {
@@ -17,8 +15,8 @@ define(["require", "exports", "../../ui/impl/buttons/spritebutton/SpriteButton",
         get backBtn() {
             var closure = this;
             return new SpriteButton_1.SpriteButton({
-                x: 25,
-                y: 25,
+                x: 16,
+                y: 16,
                 text: '<',
                 events: {
                     up: () => {
@@ -28,8 +26,8 @@ define(["require", "exports", "../../ui/impl/buttons/spritebutton/SpriteButton",
                         new closure.backScene().run();
                     }
                 },
-                initSpriteKey: 'sqbtninit',
-                pressSpriteKey: 'sqbtndown'
+                initFrame: 'buttonSquare_blue',
+                pressedFrame: 'buttonSquare_blue_pressed'
             });
         }
     }

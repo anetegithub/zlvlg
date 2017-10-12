@@ -1,4 +1,4 @@
-define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../utils/graphics/SpriteMap"], function (require, exports, BaseBackScene_1, MainMenuScene_1, IoC_1, ManagedComponent_1, SpriteMap_1) {
+define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../utils/graphics/SpriteMap", "../../../ui/impl/buttons/spritebutton/SpriteButton"], function (require, exports, BaseBackScene_1, MainMenuScene_1, IoC_1, ManagedComponent_1, SpriteMap_1, SpriteButton_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class EditorMainWindow extends BaseBackScene_1.BaseBackScene {
@@ -11,8 +11,9 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
         get components() {
             return [
                 ...super.components,
-                ...this.getSection("walls", 9),
-                ...this.getSection("floors", 15, { w: 300, h: 0 }),
+                this.walls
+                //...this.getSection("walls", 29),
+                //...this.getSection("floors", 15, { w: 300, h: 0 }),
             ];
         }
         get resources() {
@@ -34,19 +35,21 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
             var tileMap = SpriteMap_1.SpriteMap.create(IoC_1.Container.game.cache.getJSON('spritesmap'));
             let i = 0;
             let x = 0;
-            let y = 600;
+            let y = 650;
             let offsetX = 0;
             let offsetY = 0;
             if (offset) {
                 offsetY += offset.h || 0;
                 offsetX += offset.w || 0;
             }
+            let step = 0;
             tileMap[section]().forEach(tile => {
                 if (i == inRow) {
                     i = 0;
+                    x = 0;
                     y += tile.frame.h * 2;
                 }
-                x = i * (tile.frame.w * 2);
+                x += (tile.frame.w * 2);
                 let xx = x + offsetX;
                 let yy = y + offsetY;
                 blocks.push(new ManagedComponent_1.ManagedComponent(game => {
@@ -58,6 +61,15 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 i++;
             });
             return blocks;
+        }
+        get walls() {
+            return new SpriteButton_1.SpriteButton({
+                x: 16,
+                y: 600,
+                initFrame: 'buttonLong_blue',
+                pressedFrame: 'buttonLong_blue_pressed',
+                text: 'Walls'
+            });
         }
         get floor() {
             var blocks = [];

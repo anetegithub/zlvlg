@@ -61,8 +61,8 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
                 events: {
                     up: () => { console.log(this.inputElement.value); }
                 },
-                initSpriteKey: 'sqbtninit',
-                pressSpriteKey: 'sqbtndown'
+                initFrame: 'buttonSquare_blue',
+                pressedFrame: 'buttonSquare_blue_pressed'
             });
         }
     }

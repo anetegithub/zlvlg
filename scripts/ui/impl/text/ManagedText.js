@@ -7,7 +7,7 @@ define(["require", "exports", "../../../utils/ui/textfactory/TextFactory"], func
         }
         release(game) {
             this.textStyle.autoinit = true;
-            var text = TextFactory_1.TextFactory.new(this.textStyle);
+            this.text = TextFactory_1.TextFactory.new(this.textStyle);
         }
     }
     exports.ManagedText = ManagedText;

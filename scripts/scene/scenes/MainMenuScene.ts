@@ -7,6 +7,7 @@ import { Constants } from "../../utils/globals/Constants";
 import { ManagedComponent } from "../../app/core/impl/ManagedComponent";
 import { EditorMainWindow } from "./mapeditor/EditorMainWindow";
 import { SpriteMapScene } from "../abstract/SpriteMapScene";
+import { SpriteButton } from "../../ui/impl/buttons/spritebutton/SpriteButton";
 
 export class MainMenuScene extends SpriteMapScene {
     name: string = "MainMenu";
@@ -63,8 +64,7 @@ export class MainMenuScene extends SpriteMapScene {
         });
     }
 
-    get newGame(): TextButton {
-        var closure = this;
+    get newGame(): IManagedComponent {
         return new TextButton({
             fontStyle: this.fontStyle,
             y: 365,

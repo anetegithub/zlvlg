@@ -9,9 +9,10 @@ export class ManagedText implements IManagedComponent {
     }
 
     textStyle: ITextFactoryArgs;
+    text: Phaser.Text;
 
     release(game: Phaser.Game): void {
         this.textStyle.autoinit = true;
-        var text = TextFactory.new(this.textStyle);
+        this.text = TextFactory.new(this.textStyle);
     }
 }

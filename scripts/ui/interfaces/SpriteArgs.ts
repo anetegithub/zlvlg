@@ -1,5 +1,5 @@
 interface SpriteArgs {
-    initSpriteKey: string;
+    initFrame: string;
     overSpriteKey?: string;
-    pressSpriteKey: string;
+    pressedFrame: string;
 }

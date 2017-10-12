@@ -51,7 +51,6 @@ define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "..
             });
         }
         get newGame() {
-            var closure = this;
             return new TextButton_1.TextButton({
                 fontStyle: this.fontStyle,
                 y: 365,

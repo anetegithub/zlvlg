@@ -9,9 +9,7 @@ export abstract class BaseBackScene extends SpriteMapScene {
 
     protected get resources(): ILoadedResource[] {
         return [
-            ...super.resources,
-            { key: 'sqbtninit', url: './images/ui/sqbtn/init.png' },
-            { key: 'sqbtndown', url: './images/ui/sqbtn/down.png' },
+            ...super.resources
         ]
     }
 
@@ -25,8 +23,8 @@ export abstract class BaseBackScene extends SpriteMapScene {
         var closure = this;
 
         return new SpriteButton({
-            x: 25,
-            y: 25,
+            x: 16,
+            y: 16,
             text: '<',
             events: {
                 up: () => {
@@ -36,8 +34,8 @@ export abstract class BaseBackScene extends SpriteMapScene {
                     new closure.backScene().run();
                 }
             },
-            initSpriteKey: 'sqbtninit',
-            pressSpriteKey: 'sqbtndown'
+            initFrame: 'buttonSquare_blue',
+            pressedFrame: 'buttonSquare_blue_pressed'
         });
     }
 

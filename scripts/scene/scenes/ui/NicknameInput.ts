@@ -75,8 +75,8 @@ export class NicknameInput extends BaseBackScene {
             events: {
                 up: () => { console.log(this.inputElement.value) }
             },
-            initSpriteKey: 'sqbtninit',
-            pressSpriteKey: 'sqbtndown'
+            initFrame: 'buttonSquare_blue',
+            pressedFrame: 'buttonSquare_blue_pressed'
         });
     }
 }
