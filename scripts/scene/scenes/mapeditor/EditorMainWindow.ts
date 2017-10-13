@@ -6,6 +6,7 @@ import { Constants } from "../../../utils/globals/Constants";
 import { SpriteMap } from "../../../utils/graphics/SpriteMap";
 import { SpriteMapScene } from "../../abstract/SpriteMapScene";
 import { SpriteButton } from "../../../ui/impl/buttons/spritebutton/SpriteButton";
+import { StringExtensions } from "../../../utils/globals/StringExtensions";
 
 export class EditorMainWindow extends BaseBackScene {
     backScene: new (...args: any[]) => IScene = MainMenuScene;
@@ -15,30 +16,12 @@ export class EditorMainWindow extends BaseBackScene {
     protected get components(): IManagedComponent[] {
         return [
             ...super.components,
-            this.walls
-            //...this.getSection("walls", 29),
-            //...this.getSection("floors", 15, { w: 300, h: 0 }),
+            ...this.buttons
         ]
     }
 
-    protected get resources(): ILoadedResource[] {
-        return [
-            ...super.resources,
-            { key: 'asset', url: './images/environment/assets/calciumtrice simple.png' }
-        ];
-    }
-
-    get tilemap(): ManagedComponent {
-        return new ManagedComponent(game => {
-            var assetMap = new Phaser.Sprite(game, 0, 0, 'asset');
-            assetMap.scale.x = 2;
-            assetMap.scale.y = 2;
-            game.add.existing(assetMap);
-        });
-    }
-
-    private getSection(section: keyof SpriteMap, inRow: number, offset?: Point): ManagedComponent[] {
-        var blocks: ManagedComponent[] = [];
+    private getSection(section: string, inRow: number, offset?: Point): Phaser.Sprite[] {
+        var blocks: Phaser.Sprite[] = [];
 
         var tileMap = SpriteMap.create(Container.game.cache.getJSON('spritesmap'));
         let i = 0;
@@ -55,25 +38,28 @@ export class EditorMainWindow extends BaseBackScene {
         }
 
         let step: number = 0;
+        let asideMap: number[] = [];
 
         (tileMap[section] as () => SpriteTile[])().forEach(tile => {
-            if (i == inRow) {
+            if (i == 17) {
                 i = 0;
                 x = 0;
-                y += tile.frame.h * 2;
             }
 
-            x += (tile.frame.w * 2);
+            debugger;
+            y = 650 + (asideMap[i] || 0);
+            asideMap[i] = (asideMap[i] || 0) + (tile.frame.h * 2);
 
             let xx = x + offsetX;
             let yy = y + offsetY;
 
-            blocks.push(new ManagedComponent(game => {
-                let sprite = new Phaser.Sprite(game, xx, yy, "sprites", tile.filename);
-                sprite.scale.x = 2;
-                sprite.scale.y = 2;
-                game.add.existing(sprite);
-            }));
+            x += (tile.frame.w * 2);
+
+            let sprite = new Phaser.Sprite(Container.game, xx, yy, "sprites", tile.filename);
+            sprite.scale.x = 2;
+            sprite.scale.y = 2;
+
+            blocks.push(sprite);
 
             i++;
         });
@@ -81,13 +67,52 @@ export class EditorMainWindow extends BaseBackScene {
         return blocks;
     }
 
+    private static prevGroup: Phaser.Group;
+
     private get walls(): ManagedComponent {
+        return this.spriteSection("walls", 16);
+    }
+
+    private get floors(): ManagedComponent {
+        return this.spriteSection("floors", 206);
+    }
+
+
+    private get buttons(): ManagedComponent[] {
+        type SpriteMapKey = keyof SpriteMap;
+        let keys: SpriteMapKey[] = [
+            "walls",
+            "floors",
+            "decorations",
+            "items"
+        ];
+        return keys.map((section, index) => this.spriteSection(section, (index * 190) + 16));
+    }
+
+    private spriteSection(section: string, xOffset: number): ManagedComponent {
+        let spriteGroup = new Phaser.Group(Container.game);
+
+        this.getSection(section, 29, { h: 0, w: 16 })
+            .forEach(sprite => spriteGroup.add(sprite));
+
+        spriteGroup.visible = false;
+        Container.game.add.existing(spriteGroup);
+
         return new SpriteButton({
-            x: 16,
+            x: xOffset,
             y: 600,
             initFrame: 'buttonLong_blue',
             pressedFrame: 'buttonLong_blue_pressed',
-            text: 'Walls'
+            text: StringExtensions.capitalize(section),
+            events: {
+                up: function () {
+                    if (EditorMainWindow.prevGroup) {
+                        EditorMainWindow.prevGroup.visible = false;
+                    }
+                    spriteGroup.visible = true;
+                    EditorMainWindow.prevGroup = spriteGroup;
+                }
+            }
         });
     }
 

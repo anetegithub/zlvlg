@@ -8,10 +8,20 @@ define(["require", "exports"], function (require, exports) {
             return spMap;
         }
         walls() {
-            return this.frames.filter(x => x.filename.includes("|") && x.frame.w != 32);
+            return this.filterByIncludes('|');
         }
         floors() {
-            return this.frames.filter(x => x.filename.includes("-"));
+            return this.filterByIncludes('-');
+        }
+        decorations() {
+            return this.filterByIncludes('@');
+        }
+        items() {
+            return this.filterByIncludes('^')
+                .concat(this.filterByIncludes('='));
+        }
+        filterByIncludes(char) {
+            return this.frames.filter(x => x.filename.includes(char));
         }
     }
     exports.SpriteMap = SpriteMap;

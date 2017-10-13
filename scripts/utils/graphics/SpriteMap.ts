@@ -8,10 +8,23 @@ export class SpriteMap {
     frames: SpriteTile[];
 
     walls(): SpriteTile[] {
-        return this.frames.filter(x => x.filename.includes("|") && x.frame.w != 32);
+        return this.filterByIncludes('|');
     }
 
     floors(): SpriteTile[] {
-        return this.frames.filter(x => x.filename.includes("-"));
+        return this.filterByIncludes('-');
+    }
+
+    decorations(): SpriteTile[] {
+        return this.filterByIncludes('@');
+    }
+
+    items(): SpriteTile[] {
+        return this.filterByIncludes('^')
+            .concat(this.filterByIncludes('='));
+    }
+
+    private filterByIncludes(char: string) {
+        return this.frames.filter(x => x.filename.includes(char));
     }
 }
