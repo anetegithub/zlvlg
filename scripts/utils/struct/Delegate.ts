@@ -1,0 +1,1 @@
+export type Delegate<T> = (this: T) => void;
