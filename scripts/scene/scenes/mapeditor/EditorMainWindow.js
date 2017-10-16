@@ -14,45 +14,6 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 ...this.buttons
             ];
         }
-        getSection(section, inRow, offset) {
-            var blocks = [];
-            var tileMap = SpriteMap_1.SpriteMap.create(IoC_1.Container.game.cache.getJSON('spritesmap'));
-            let i = 0;
-            let x = 0;
-            let y = 650;
-            let offsetX = 0;
-            let offsetY = 0;
-            if (offset) {
-                offsetY += offset.h || 0;
-                offsetX += offset.w || 0;
-            }
-            let step = 0;
-            let asideMap = [];
-            tileMap[section]().forEach(tile => {
-                if (i == 17) {
-                    i = 0;
-                    x = 0;
-                }
-                debugger;
-                y = 650 + (asideMap[i] || 0);
-                asideMap[i] = (asideMap[i] || 0) + (tile.frame.h * 2);
-                let xx = x + offsetX;
-                let yy = y + offsetY;
-                x += (tile.frame.w * 2);
-                let sprite = new Phaser.Sprite(IoC_1.Container.game, xx, yy, "sprites", tile.filename);
-                sprite.scale.x = 2;
-                sprite.scale.y = 2;
-                blocks.push(sprite);
-                i++;
-            });
-            return blocks;
-        }
-        get walls() {
-            return this.spriteSection("walls", 16);
-        }
-        get floors() {
-            return this.spriteSection("floors", 206);
-        }
         get buttons() {
             let keys = [
                 "walls",
@@ -85,8 +46,37 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 }
             });
         }
-        get floor() {
+        getSection(section, inRow, offset) {
             var blocks = [];
+            var tileMap = SpriteMap_1.SpriteMap.create(IoC_1.Container.game.cache.getJSON('spritesmap'));
+            let i = 0;
+            let x = 0;
+            let y = 650;
+            let offsetX = 0;
+            let offsetY = 0;
+            if (offset) {
+                offsetY += offset.h || 0;
+                offsetX += offset.w || 0;
+            }
+            let step = 0;
+            let asideMap = [];
+            tileMap[section]().forEach(tile => {
+                if (i == 17) {
+                    i = 0;
+                    x = 0;
+                }
+                debugger;
+                y = 650 + (asideMap[i] || 0);
+                asideMap[i] = (asideMap[i] || 0) + (tile.frame.h * 2);
+                let xx = x + offsetX;
+                let yy = y + offsetY;
+                x += (tile.frame.w * 2);
+                let sprite = new Phaser.Sprite(IoC_1.Container.game, xx, yy, "sprites", tile.filename);
+                sprite.scale.x = 2;
+                sprite.scale.y = 2;
+                blocks.push(sprite);
+                i++;
+            });
             return blocks;
         }
     }

@@ -20,6 +20,45 @@ export class EditorMainWindow extends BaseBackScene {
         ]
     }
 
+    private get buttons(): ManagedComponent[] {
+        type SpriteMapKey = keyof SpriteMap;
+        let keys: SpriteMapKey[] = [
+            "walls",
+            "floors",
+            "decorations",
+            "items"
+        ];
+        return keys.map((section, index) => this.spriteSection(section, (index * 190) + 16));
+    }
+
+    private static prevGroup: Phaser.Group;
+    private spriteSection(section: string, xOffset: number): ManagedComponent {
+        let spriteGroup = new Phaser.Group(Container.game);
+
+        this.getSection(section, 29, { h: 0, w: 16 })
+            .forEach(sprite => spriteGroup.add(sprite));
+
+        spriteGroup.visible = false;
+        Container.game.add.existing(spriteGroup);
+
+        return new SpriteButton({
+            x: xOffset,
+            y: 600,
+            initFrame: 'buttonLong_blue',
+            pressedFrame: 'buttonLong_blue_pressed',
+            text: StringExtensions.capitalize(section),
+            events: {
+                up: function () {
+                    if (EditorMainWindow.prevGroup) {
+                        EditorMainWindow.prevGroup.visible = false;
+                    }
+                    spriteGroup.visible = true;
+                    EditorMainWindow.prevGroup = spriteGroup;
+                }
+            }
+        });
+    }
+
     private getSection(section: string, inRow: number, offset?: Point): Phaser.Sprite[] {
         var blocks: Phaser.Sprite[] = [];
 
@@ -63,61 +102,6 @@ export class EditorMainWindow extends BaseBackScene {
 
             i++;
         });
-
-        return blocks;
-    }
-
-    private static prevGroup: Phaser.Group;
-
-    private get walls(): ManagedComponent {
-        return this.spriteSection("walls", 16);
-    }
-
-    private get floors(): ManagedComponent {
-        return this.spriteSection("floors", 206);
-    }
-
-
-    private get buttons(): ManagedComponent[] {
-        type SpriteMapKey = keyof SpriteMap;
-        let keys: SpriteMapKey[] = [
-            "walls",
-            "floors",
-            "decorations",
-            "items"
-        ];
-        return keys.map((section, index) => this.spriteSection(section, (index * 190) + 16));
-    }
-
-    private spriteSection(section: string, xOffset: number): ManagedComponent {
-        let spriteGroup = new Phaser.Group(Container.game);
-
-        this.getSection(section, 29, { h: 0, w: 16 })
-            .forEach(sprite => spriteGroup.add(sprite));
-
-        spriteGroup.visible = false;
-        Container.game.add.existing(spriteGroup);
-
-        return new SpriteButton({
-            x: xOffset,
-            y: 600,
-            initFrame: 'buttonLong_blue',
-            pressedFrame: 'buttonLong_blue_pressed',
-            text: StringExtensions.capitalize(section),
-            events: {
-                up: function () {
-                    if (EditorMainWindow.prevGroup) {
-                        EditorMainWindow.prevGroup.visible = false;
-                    }
-                    spriteGroup.visible = true;
-                    EditorMainWindow.prevGroup = spriteGroup;
-                }
-            }
-        });
-    }
-
-    get floor(): ManagedComponent[] {
-        var blocks: ManagedComponent[] = [];
 
         return blocks;
     }
