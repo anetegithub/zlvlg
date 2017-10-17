@@ -39,16 +39,15 @@ export class MainMenuScene extends SpriteMapScene {
 
             var bmp = game.make.bitmapData(sprite.width, sprite.height - 12);
             bmp.fill(255, 255, 255);
-
             bmp.addToWorld(30, 550 + 5);
+
             game.add.existing(sprite);
         });
     }
 
     get splash(): ManagedComponent {
         return new ManagedComponent(game => {
-            var logo = game.add.sprite(game.world.centerX, Constants.centerY, 'logo');
-            logo.anchor.setTo(0.5, 0.5);
+            var logo = game.add.sprite(0, 0, 'logo');
         });
     }
 

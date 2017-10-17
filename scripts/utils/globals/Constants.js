@@ -11,5 +11,7 @@ define(["require", "exports", "./IoC"], function (require, exports, IoC_1) {
     }
     Constants.color = '#1eb79b';
     Constants.fontFamily = 'Ringbear';
+    Constants.gameWidth = 800;
+    Constants.gameHeight = 784;
     exports.Constants = Constants;
 });

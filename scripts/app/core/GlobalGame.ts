@@ -2,6 +2,7 @@ import { } from "../../../node_modules/phaser-ce/typescript/phaser";
 import { } from "../../../node_modules/@orange-games/phaser-input/build/phaser-input";
 import { GlobalArgs } from "./GlobalArgs";
 import { Container } from "../../utils/globals/IoC";
+import { Constants } from "../../utils/globals/Constants";
 
 /**
  * Initialize container
@@ -15,7 +16,7 @@ export class GlobalGame {
     game: Phaser.Game;
 
     run() {
-        this.game = new Phaser.Game(800, 896, Phaser.CANVAS, 'content', {
+        this.game = new Phaser.Game(Constants.gameWidth, Constants.gameHeight, Phaser.CANVAS, 'content', {
             preload: this.preload,
             create: this.create,
             render: this.render

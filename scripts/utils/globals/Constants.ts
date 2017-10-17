@@ -9,4 +9,7 @@ export class Constants {
     static get centerY(): number {
         return Container.game.world.centerY - (300 / 2);
     }
+
+    static gameWidth: number = 800;
+    static gameHeight: number = 784;
 }

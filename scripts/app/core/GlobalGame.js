@@ -1,4 +1,4 @@
-define(["require", "exports", "../../utils/globals/IoC"], function (require, exports, IoC_1) {
+define(["require", "exports", "../../utils/globals/IoC", "../../utils/globals/Constants"], function (require, exports, IoC_1, Constants_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -9,7 +9,7 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
             this.args = args;
         }
         run() {
-            this.game = new Phaser.Game(800, 896, Phaser.CANVAS, 'content', {
+            this.game = new Phaser.Game(Constants_1.Constants.gameWidth, Constants_1.Constants.gameHeight, Phaser.CANVAS, 'content', {
                 preload: this.preload,
                 create: this.create,
                 render: this.render

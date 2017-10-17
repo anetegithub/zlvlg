@@ -37,11 +37,22 @@ export class SectionBuilder {
         let sprite = new Phaser.Sprite(Container.game, x, y, "sprites", tile.filename);
         sprite.scale.x = 2;
         sprite.scale.y = 2;
+        sprite.inputEnabled = true;
+        sprite.events.onInputUp.add(() => {
+            console.log(tile.filename);
+        });
         blocks.push(sprite);
+
+        let graph = new Phaser.Graphics(Container.game, x, y);
+        graph.lineStyle(1, 0xd3d3d3, 1);
+        graph.drawRect(x, y, sprite.width, sprite.height);
+        let border = new Phaser.Sprite(Container.game, x, y, graph.generateTexture());
+        blocks.push(border);
+
     }
 
     private static checkRowOverflow(rowSwitcher: number, currentX: number) {
-        if (rowSwitcher == 17) {
+        if (rowSwitcher == 23) {
             rowSwitcher = 0;
             currentX = 0;
         }

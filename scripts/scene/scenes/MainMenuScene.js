@@ -36,8 +36,7 @@ define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "..
         }
         get splash() {
             return new ManagedComponent_1.ManagedComponent(game => {
-                var logo = game.add.sprite(game.world.centerX, Constants_1.Constants.centerY, 'logo');
-                logo.anchor.setTo(0.5, 0.5);
+                var logo = game.add.sprite(0, 0, 'logo');
             });
         }
         get title() {
