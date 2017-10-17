@@ -22,6 +22,8 @@ export class GlobalGame {
             render: this.render
         }, true, false);
 
+
+
         this.game['args'] = this.args;
         this.game['inited'] = this.inited;
         Container.game = this.game;
@@ -47,7 +49,20 @@ export class GlobalGame {
     }
 
     render() {
+        //https://phaser.io/examples/v2/input/pointer-lock
         Container.debug.forEach(debug => debug());
+        let x = (this.game.input.mouse.event || { movementX: 0 }).movementX;
+        let y = (this.game.input.mouse.event || { movementY: 0 }).movementY;
+
+        if (!Container._cursor) {
+            Container._cursor = new Phaser.Sprite(this.game,
+                x,
+                y,
+                "uifullmap",
+                "cursorSword_silver");
+        }
+        Container._cursor.x += 300;
+        Container._cursor.y += 300;
     }
 
     inited: () => void;

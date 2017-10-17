@@ -7,7 +7,7 @@ export abstract class BaseScene implements IScene {
     abstract clear: boolean;
 
     constructor() {
-        document.getElementById('content').style.cursor = `url("./images/ui/cursors/cursor.png"), auto`;
+        //document.getElementById('content').style.cursor = `url("./images/ui/cursors/cursor.png"), auto`;
     }
 
     run(): void {

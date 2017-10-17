@@ -9,6 +9,9 @@ define(["require", "exports"], function (require, exports) {
             this.initActions.forEach(action => action());
             this.initActions = [];
         }
+        static cursor(key, frame) {
+            this._cursor.loadTexture(key, frame);
+        }
     }
     Container.debug = [];
     Container.initActions = [];

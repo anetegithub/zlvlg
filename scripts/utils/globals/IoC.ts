@@ -13,4 +13,9 @@ export class Container {
         this.initActions.forEach(action => action());
         this.initActions = [];
     }
+
+    static _cursor: Phaser.Sprite;
+    static cursor(key: string, frame: string) {
+        this._cursor.loadTexture(key, frame);
+    }
 }
