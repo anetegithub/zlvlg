@@ -16,7 +16,7 @@ export class GlobalGame {
     game: Phaser.Game;
 
     run() {
-        this.game = new Phaser.Game(Constants.gameWidth, Constants.gameHeight, Phaser.CANVAS, 'content', {
+        this.game = new Phaser.Game(Constants.windowWidth, Constants.windowHeight, Phaser.CANVAS, 'content', {
             preload: this.preload,
             create: this.create,
             render: this.render
@@ -49,20 +49,7 @@ export class GlobalGame {
     }
 
     render() {
-        //https://phaser.io/examples/v2/input/pointer-lock
         Container.debug.forEach(debug => debug());
-        let x = (this.game.input.mouse.event || { movementX: 0 }).movementX;
-        let y = (this.game.input.mouse.event || { movementY: 0 }).movementY;
-
-        if (!Container._cursor) {
-            Container._cursor = new Phaser.Sprite(this.game,
-                x,
-                y,
-                "uifullmap",
-                "cursorSword_silver");
-        }
-        Container._cursor.x += 300;
-        Container._cursor.y += 300;
     }
 
     inited: () => void;

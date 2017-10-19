@@ -23,8 +23,8 @@ export abstract class BaseBackScene extends SpriteMapScene {
         var closure = this;
 
         return new SpriteButton({
-            x: 16,
-            y: 16,
+            x: Constants.gameWindowOffset.y,
+            y: Constants.gameWindowOffset.y,
             text: '<',
             events: {
                 up: () => {

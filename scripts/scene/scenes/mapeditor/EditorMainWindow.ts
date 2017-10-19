@@ -17,7 +17,9 @@ export class EditorMainWindow extends BaseBackScene {
     protected get components(): IManagedComponent[] {
         return [
             ...super.components,
-            ...this.buttons
+            ...this.buttons,
+            this.previewPanel,
+            this.mapGrid
         ]
     }
 
@@ -57,5 +59,42 @@ export class EditorMainWindow extends BaseBackScene {
                 }
             }
         });
+    }
+
+    private get previewPanel(): IManagedComponent {
+        return new ManagedComponent(game => {
+            let sprite = new Phaser.Sprite(game, Constants.windowWidth - 100 - Constants.gameWindowOffset.x, Constants.gameWindowOffset.y, "uifull", 'panel_blue');
+            game.add.existing(sprite);
+        });
+    }
+
+    private get mapGrid(): IManagedComponent {
+        var grid: IManagedComponent;
+
+
+        let group = new Phaser.Group(Container.game);
+        group.visible = false;
+
+        for (let xCoordinate = Constants.mapOffset.x; xCoordinate <= Constants.mapWidth; xCoordinate += 32) {
+            let graph = new Phaser.Graphics(Container.game, xCoordinate, Constants.mapOffset.y);
+            graph.lineStyle(1, 0xd3d3d3, 1);
+            graph.moveTo(xCoordinate, Constants.mapOffset.y);
+            graph.lineTo(xCoordinate, Constants.mapHeight);
+            let line = new Phaser.Sprite(Container.game, xCoordinate, Constants.mapOffset.y, graph.generateTexture());
+            group.add(line);
+        }
+
+        for (let yCoordinate = Constants.mapOffset.y; yCoordinate <= Constants.mapHeight; yCoordinate += 32) {
+            let graph = new Phaser.Graphics(Container.game, Constants.mapOffset.x, yCoordinate);
+            graph.lineStyle(1, 0xd3d3d3, 1);
+            graph.moveTo(Constants.mapOffset.x, yCoordinate);
+            graph.lineTo(Constants.mapWidth - Constants.mapOffset.x, yCoordinate);
+            let line = new Phaser.Sprite(Container.game, Constants.mapOffset.x, yCoordinate, graph.generateTexture());
+            group.add(line);
+        }
+
+        grid = new ManagedComponent(game => game.add.existing(group));
+
+        return grid;
     }
 }

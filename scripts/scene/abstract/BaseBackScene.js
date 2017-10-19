@@ -1,4 +1,4 @@
-define(["require", "exports", "../../ui/impl/buttons/spritebutton/SpriteButton", "./SpriteMapScene"], function (require, exports, SpriteButton_1, SpriteMapScene_1) {
+define(["require", "exports", "../../utils/globals/Constants", "../../ui/impl/buttons/spritebutton/SpriteButton", "./SpriteMapScene"], function (require, exports, Constants_1, SpriteButton_1, SpriteMapScene_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class BaseBackScene extends SpriteMapScene_1.SpriteMapScene {
@@ -15,8 +15,8 @@ define(["require", "exports", "../../ui/impl/buttons/spritebutton/SpriteButton",
         get backBtn() {
             var closure = this;
             return new SpriteButton_1.SpriteButton({
-                x: 16,
-                y: 16,
+                x: Constants_1.Constants.gameWindowOffset.y,
+                y: Constants_1.Constants.gameWindowOffset.y,
                 text: '<',
                 events: {
                     up: () => {

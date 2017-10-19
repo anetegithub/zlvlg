@@ -1,5 +1,6 @@
 import { SpriteMap } from "../../utils/graphics/SpriteMap";
 import { Container } from "../../utils/globals/IoC";
+import { EventApplier } from "../../utils/ui/EventApplier";
 
 export class SectionBuilder {
     public static getSection(section: keyof SpriteMap): Phaser.Sprite[] {
@@ -41,6 +42,7 @@ export class SectionBuilder {
         sprite.events.onInputUp.add(() => {
             console.log(tile.filename);
         });
+        EventApplier.applyMouse(sprite);
         blocks.push(sprite);
 
         let graph = new Phaser.Graphics(Container.game, x, y);
@@ -48,7 +50,6 @@ export class SectionBuilder {
         graph.drawRect(x, y, sprite.width, sprite.height);
         let border = new Phaser.Sprite(Container.game, x, y, graph.generateTexture());
         blocks.push(border);
-
     }
 
     private static checkRowOverflow(rowSwitcher: number, currentX: number) {

@@ -3,7 +3,7 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
     Object.defineProperty(exports, "__esModule", { value: true });
     class BaseScene {
         constructor() {
-            //document.getElementById('content').style.cursor = `url("./images/ui/cursors/cursor.png"), auto`;
+            document.getElementById('content').style.cursor = `url("./images/ui/cursors/cursor.png"), auto`;
         }
         run() {
             if (this.clear) {

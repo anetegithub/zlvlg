@@ -9,7 +9,7 @@ define(["require", "exports", "../../utils/globals/IoC", "../../utils/globals/Co
             this.args = args;
         }
         run() {
-            this.game = new Phaser.Game(Constants_1.Constants.gameWidth, Constants_1.Constants.gameHeight, Phaser.CANVAS, 'content', {
+            this.game = new Phaser.Game(Constants_1.Constants.windowWidth, Constants_1.Constants.windowHeight, Phaser.CANVAS, 'content', {
                 preload: this.preload,
                 create: this.create,
                 render: this.render
@@ -35,15 +35,7 @@ define(["require", "exports", "../../utils/globals/IoC", "../../utils/globals/Co
             }
         }
         render() {
-            //https://phaser.io/examples/v2/input/pointer-lock
             IoC_1.Container.debug.forEach(debug => debug());
-            let x = (this.game.input.mouse.event || { movementX: 0 }).movementX;
-            let y = (this.game.input.mouse.event || { movementY: 0 }).movementY;
-            if (!IoC_1.Container._cursor) {
-                IoC_1.Container._cursor = new Phaser.Sprite(this.game, x, y, "uifullmap", "cursorSword_silver");
-            }
-            IoC_1.Container._cursor.x += 300;
-            IoC_1.Container._cursor.y += 300;
         }
     }
     exports.GlobalGame = GlobalGame;

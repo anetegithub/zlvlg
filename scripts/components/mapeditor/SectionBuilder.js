@@ -1,4 +1,4 @@
-define(["require", "exports", "../../utils/graphics/SpriteMap", "../../utils/globals/IoC"], function (require, exports, SpriteMap_1, IoC_1) {
+define(["require", "exports", "../../utils/graphics/SpriteMap", "../../utils/globals/IoC", "../../utils/ui/EventApplier"], function (require, exports, SpriteMap_1, IoC_1, EventApplier_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class SectionBuilder {
@@ -31,6 +31,7 @@ define(["require", "exports", "../../utils/graphics/SpriteMap", "../../utils/glo
             sprite.events.onInputUp.add(() => {
                 console.log(tile.filename);
             });
+            EventApplier_1.EventApplier.applyMouse(sprite);
             blocks.push(sprite);
             let graph = new Phaser.Graphics(IoC_1.Container.game, x, y);
             graph.lineStyle(1, 0xd3d3d3, 1);
