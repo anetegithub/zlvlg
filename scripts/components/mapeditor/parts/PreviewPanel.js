@@ -2,14 +2,12 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class PreviewPanel extends Phaser.Group {
-        get xCoord() {
-            return Constants_1.Constants.windowWidth - 100 - Constants_1.Constants.gameWindowOffset.x;
-        }
-        get yCoord() {
-            return Constants_1.Constants.gameWindowOffset.y;
-        }
         constructor() {
             super(IoC_1.Container.game);
+            this.events = {
+                onCancel: new Phaser.Signal(),
+                onPreview: new Phaser.Signal()
+            };
             var back = new Phaser.Sprite(IoC_1.Container.game, Constants_1.Constants.windowWidth - 100 - Constants_1.Constants.gameWindowOffset.x, Constants_1.Constants.gameWindowOffset.y, "uifull", 'panel_blue');
             this.add(back);
             this.preview = new Phaser.Sprite(IoC_1.Container.game, 0, 0);
@@ -26,11 +24,18 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             this.cancel.visible = true;
             this.preview.bringToTop();
             this.cancel.bringToTop();
+            this.events.onPreview.dispatch();
+        }
+        get xCoord() {
+            return Constants_1.Constants.windowWidth - 100 - Constants_1.Constants.gameWindowOffset.x;
+        }
+        get yCoord() {
+            return Constants_1.Constants.gameWindowOffset.y;
         }
         makeCancel() {
             this.cancel = new SpriteButton_1.SpriteButton({
-                initFrame: 'iconCross_beige',
-                pressedFrame: 'iconCross_beige',
+                initFrame: 'iconCross_grey',
+                pressedFrame: 'iconCross_grey',
                 x: Constants_1.Constants.windowWidth - 37,
                 y: this.yCoord + 5
             }).init(IoC_1.Container.game);
@@ -38,6 +43,7 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             this.cancel.events.onInputDown.add(x => {
                 this.preview.visible = false;
                 this.cancel.visible = false;
+                this.events.onCancel.dispatch();
             });
             this.cancel.visible = false;
             IoC_1.Container.game.add.existing(this.cancel);

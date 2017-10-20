@@ -12,6 +12,12 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
         get previewPanel() {
             if (!this._previewPanel) {
                 this._previewPanel = new PreviewPanel_1.PreviewPanel();
+                this._previewPanel.events.onPreview.add(() => {
+                    this.mapGrid.visible = true;
+                });
+                this._previewPanel.events.onCancel.add(() => {
+                    this.mapGrid.visible = false;
+                });
             }
             return this._previewPanel;
         }
@@ -22,9 +28,9 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
             return this._mapGrid;
         }
         bindActions(sprite) {
-            debugger;
-            let previewPanel = this.previewPanel;
-            sprite.events.onInputDown.add(x => this.previewPanel.setPreview(sprite));
+            sprite.events.onInputDown.add(x => {
+                this.previewPanel.setPreview(sprite);
+            });
         }
     }
     exports.MapEditor = MapEditor;

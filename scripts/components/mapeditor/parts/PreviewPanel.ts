@@ -6,17 +6,17 @@ import { EventApplier } from "../../../utils/ui/EventApplier";
 export class PreviewPanel extends Phaser.Group {
     private preview: Phaser.Sprite;
     private cancel: Phaser.Image;
-
-    private get xCoord() {
-        return Constants.windowWidth - 100 - Constants.gameWindowOffset.x;
-    }
-
-    private get yCoord() {
-        return Constants.gameWindowOffset.y;
-    }
+    public events: {
+        onCancel: Phaser.Signal,
+        onPreview: Phaser.Signal
+    } = {
+        onCancel: new Phaser.Signal(),
+        onPreview: new Phaser.Signal()
+    };
 
     constructor() {
         super(Container.game);
+
         var back = new Phaser.Sprite(Container.game, Constants.windowWidth - 100 - Constants.gameWindowOffset.x, Constants.gameWindowOffset.y, "uifull", 'panel_blue');
         this.add(back);
 
@@ -38,12 +38,22 @@ export class PreviewPanel extends Phaser.Group {
 
         this.preview.bringToTop();
         this.cancel.bringToTop();
+
+        this.events.onPreview.dispatch();
+    }
+
+    private get xCoord() {
+        return Constants.windowWidth - 100 - Constants.gameWindowOffset.x;
+    }
+
+    private get yCoord() {
+        return Constants.gameWindowOffset.y;
     }
 
     private makeCancel() {
         this.cancel = new SpriteButton({
-            initFrame: 'iconCross_beige',
-            pressedFrame: 'iconCross_beige',
+            initFrame: 'iconCross_grey',
+            pressedFrame: 'iconCross_grey',
             x: Constants.windowWidth - 37,
             y: this.yCoord + 5
         }).init(Container.game);
@@ -52,6 +62,7 @@ export class PreviewPanel extends Phaser.Group {
         this.cancel.events.onInputDown.add(x => {
             this.preview.visible = false;
             this.cancel.visible = false;
+            this.events.onCancel.dispatch();
         })
 
         this.cancel.visible = false;

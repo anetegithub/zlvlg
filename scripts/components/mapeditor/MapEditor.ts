@@ -6,7 +6,6 @@ import { SpriteMap } from "../../utils/graphics/SpriteMap";
 import { SectionBuilder } from "./parts/SectionBuilder";
 
 export class MapEditor {
-
     spriteSections(section: keyof SpriteMap): Phaser.Group {
         let group = new Phaser.Group(Container.game);
         var sprites = SectionBuilder.getSection(section);
@@ -19,6 +18,12 @@ export class MapEditor {
     get previewPanel(): PreviewPanel {
         if (!this._previewPanel) {
             this._previewPanel = new PreviewPanel();
+            this._previewPanel.events.onPreview.add(() => {
+                this.mapGrid.visible = true;
+            });
+            this._previewPanel.events.onCancel.add(() => {
+                this.mapGrid.visible = false;
+            })
         }
         return this._previewPanel;
     }
@@ -33,8 +38,8 @@ export class MapEditor {
     }
 
     private bindActions(sprite: Phaser.Sprite) {
-        debugger;
-        let previewPanel = this.previewPanel;
-        sprite.events.onInputDown.add(x => this.previewPanel.setPreview(sprite));
+        sprite.events.onInputDown.add(x => {
+            this.previewPanel.setPreview(sprite);
+        });
     }
 }
