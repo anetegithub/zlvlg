@@ -1,4 +1,4 @@
-define(["require", "exports", "../../utils/graphics/SpriteMap", "../../utils/globals/IoC", "../../utils/ui/EventApplier"], function (require, exports, SpriteMap_1, IoC_1, EventApplier_1) {
+define(["require", "exports", "../../../utils/graphics/SpriteMap", "../../../utils/globals/IoC", "../../../utils/ui/EventApplier"], function (require, exports, SpriteMap_1, IoC_1, EventApplier_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class SectionBuilder {

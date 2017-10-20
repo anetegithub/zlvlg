@@ -1,12 +1,14 @@
-export class EventApplier {
-    static applyMouse(sprite: Phaser.Sprite) {
-        sprite.inputEnabled = true;
-        sprite.input.useHandCursor = false;
+import { InputHandler } from "phaser-ce";
 
-        sprite.events.onInputOver.add(() => EventApplier.setPointer('point'));
-        sprite.events.onInputOut.add(() => EventApplier.setPointer('cursor'));
-        sprite.events.onInputUp.add(() => EventApplier.setPointer('cursor'));
-        sprite.events.onInputDown.add(() => EventApplier.setPointer('cursor'));
+export class EventApplier {
+    static applyMouse(object: { events: Phaser.Events, inputEnabled: boolean, input: InputHandler }) {
+        object.inputEnabled = true;
+        object.input.useHandCursor = false;
+
+        object.events.onInputOver.add(() => EventApplier.setPointer('point'));
+        object.events.onInputOut.add(() => EventApplier.setPointer('cursor'));
+        object.events.onInputUp.add(() => EventApplier.setPointer('cursor'));
+        object.events.onInputDown.add(() => EventApplier.setPointer('cursor'));
     }
 
     private static setPointer(name: string) {

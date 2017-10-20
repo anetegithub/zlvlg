@@ -1,6 +1,6 @@
-import { SpriteMap } from "../../utils/graphics/SpriteMap";
-import { Container } from "../../utils/globals/IoC";
-import { EventApplier } from "../../utils/ui/EventApplier";
+import { SpriteMap } from "../../../utils/graphics/SpriteMap";
+import { Container } from "../../../utils/globals/IoC";
+import { EventApplier } from "../../../utils/ui/EventApplier";
 
 export class SectionBuilder {
     public static getSection(section: keyof SpriteMap): Phaser.Sprite[] {
