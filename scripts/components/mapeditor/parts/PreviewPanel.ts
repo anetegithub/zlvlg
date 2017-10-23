@@ -5,7 +5,8 @@ import { EventApplier } from "../../../utils/ui/EventApplier";
 
 export class PreviewPanel extends Phaser.Group {
     private preview: Phaser.Sprite;
-    private cancel: Phaser.Image;
+    private cancelText: Phaser.Text;
+
     public events: {
         onCancel: Phaser.Signal,
         onPreview: Phaser.Signal
@@ -17,8 +18,13 @@ export class PreviewPanel extends Phaser.Group {
     constructor() {
         super(Container.game);
 
-        var back = new Phaser.Sprite(Container.game, Constants.windowWidth - 100 - Constants.gameWindowOffset.x, Constants.gameWindowOffset.y, "uifull", 'panel_blue');
-        this.add(back);
+        this.cancelText = new Phaser.Text(Container.game, 64, 16, "Click mouse right button for cancel", {
+            font: `bold 24pt  ` + Constants.fontFamily,
+            fill: "#FFFFFF",
+            align: 'center'
+        });
+        this.cancelText.visible = false;
+        Container.game.add.existing(this.cancelText);
 
         this.preview = new Phaser.Sprite(Container.game, 0, 0);
         this.preview.scale.x = 2;
@@ -30,16 +36,18 @@ export class PreviewPanel extends Phaser.Group {
 
     setPreview(sprite: Phaser.Sprite) {
         this.preview.loadTexture(sprite.key, sprite.frame);
-        this.preview.x = this.xCoord + (100 - this.preview.width) / 2;
-        this.preview.y = this.yCoord + (100 - this.preview.height) / 2;
-
         this.preview.visible = true;
-        this.cancel.visible = true;
-
         this.preview.bringToTop();
-        this.cancel.bringToTop();
 
         this.events.onPreview.dispatch();
+        Container.game.input.addMoveCallback(this.cursorPreview, this);
+        Container.game.input.mousePointer.rightButton.onDown.add(this.makeCancel, this);
+    }
+
+    private cursorPreview(pointer, x, y, click) {
+        this.cancelText.visible = true;
+        this.preview.x = Container.game.input.mouse.event.layerX;
+        this.preview.y = Container.game.input.mouse.event.layerY;
     }
 
     private get xCoord() {
@@ -51,21 +59,9 @@ export class PreviewPanel extends Phaser.Group {
     }
 
     private makeCancel() {
-        this.cancel = new SpriteButton({
-            initFrame: 'iconCross_grey',
-            pressedFrame: 'iconCross_grey',
-            x: Constants.windowWidth - 37,
-            y: this.yCoord + 5
-        }).init(Container.game);
-
-        EventApplier.applyMouse(this.cancel);
-        this.cancel.events.onInputDown.add(x => {
-            this.preview.visible = false;
-            this.cancel.visible = false;
-            this.events.onCancel.dispatch();
-        })
-
-        this.cancel.visible = false;
-        Container.game.add.existing(this.cancel);
+        Container.game.input.deleteMoveCallback(this.cursorPreview, this);
+        this.preview.visible = false;
+        this.cancelText.visible = false;
+        this.events.onCancel.dispatch();
     }
 }

@@ -22,8 +22,6 @@ export class GlobalGame {
             render: this.render
         }, true, false);
 
-
-
         this.game['args'] = this.args;
         this.game['inited'] = this.inited;
         Container.game = this.game;
@@ -46,6 +44,8 @@ export class GlobalGame {
         if (initFunc) {
             initFunc();
         }
+
+        this.game.canvas.oncontextmenu = function (e) { e.preventDefault(); }
     }
 
     render() {

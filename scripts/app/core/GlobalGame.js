@@ -33,6 +33,7 @@ define(["require", "exports", "../../utils/globals/IoC", "../../utils/globals/Co
             if (initFunc) {
                 initFunc();
             }
+            this.game.canvas.oncontextmenu = function (e) { e.preventDefault(); };
         }
         render() {
             IoC_1.Container.debug.forEach(debug => debug());

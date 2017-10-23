@@ -14,8 +14,7 @@ export class Container {
         this.initActions = [];
     }
 
-    static _cursor: Phaser.Sprite;
-    static cursor(key: string, frame: string) {
-        this._cursor.loadTexture(key, frame);
+    static setCursor(key: keyof { cursor, hand, point }) {
+        document.getElementById('content').style.cursor = `url("./images/ui/cursors/${key}.png"), auto`;
     }
 }
