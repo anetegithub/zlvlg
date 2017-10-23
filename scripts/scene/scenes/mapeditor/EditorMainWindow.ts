@@ -71,6 +71,6 @@ export class EditorMainWindow extends BaseBackScene {
     }
 
     private get mapGrid(): IManagedComponent {
-        return new ManagedComponent(game => game.add.existing(this.editor.mapGrid));
+        return new ManagedComponent(game => game.add.existing(this.editor.mapGrid.sprite));
     }
 }

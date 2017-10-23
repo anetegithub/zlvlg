@@ -19,10 +19,10 @@ export class MapEditor {
         if (!this._previewPanel) {
             this._previewPanel = new PreviewPanel();
             this._previewPanel.events.onPreview.add(() => {
-                this.mapGrid.visible = true;
+                this.mapGrid.sprite.visible = true;
             });
             this._previewPanel.events.onCancel.add(() => {
-                this.mapGrid.visible = false;
+                this.mapGrid.sprite.visible = false;
             })
         }
         return this._previewPanel;
@@ -32,6 +32,9 @@ export class MapEditor {
     get mapGrid(): MapGrid {
         if (!this._mapGrid) {
             this._mapGrid = new MapGrid();
+            this._mapGrid.sprite.events.onInputDown.add(() => {
+                this.mapGrid.setSprite(this.previewPanel.PreviewSprite);
+            })
         }
 
         return this._mapGrid;

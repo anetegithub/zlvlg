@@ -18,6 +18,7 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             this.preview = new Phaser.Sprite(IoC_1.Container.game, 0, 0);
             this.preview.scale.x = 2;
             this.preview.scale.y = 2;
+            this.preview.inputEnabled = false;
             IoC_1.Container.game.add.existing(this.preview);
             this.makeCancel();
         }
@@ -26,8 +27,13 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             this.preview.visible = true;
             this.preview.bringToTop();
             this.events.onPreview.dispatch();
+            IoC_1.Container.game.input.deleteMoveCallback(this.cursorPreview, this);
+            IoC_1.Container.game.input.mousePointer.rightButton.onDown.remove(this.makeCancel, this);
             IoC_1.Container.game.input.addMoveCallback(this.cursorPreview, this);
             IoC_1.Container.game.input.mousePointer.rightButton.onDown.add(this.makeCancel, this);
+        }
+        get PreviewSprite() {
+            return new Phaser.Sprite(IoC_1.Container.game, 0, 0, this.preview.generateTexture());
         }
         cursorPreview(pointer, x, y, click) {
             this.cancelText.visible = true;

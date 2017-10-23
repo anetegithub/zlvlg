@@ -13,10 +13,10 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
             if (!this._previewPanel) {
                 this._previewPanel = new PreviewPanel_1.PreviewPanel();
                 this._previewPanel.events.onPreview.add(() => {
-                    this.mapGrid.visible = true;
+                    this.mapGrid.sprite.visible = true;
                 });
                 this._previewPanel.events.onCancel.add(() => {
-                    this.mapGrid.visible = false;
+                    this.mapGrid.sprite.visible = false;
                 });
             }
             return this._previewPanel;
@@ -24,6 +24,9 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
         get mapGrid() {
             if (!this._mapGrid) {
                 this._mapGrid = new MapGrid_1.MapGrid();
+                this._mapGrid.sprite.events.onInputDown.add(() => {
+                    this.mapGrid.setSprite(this.previewPanel.PreviewSprite);
+                });
             }
             return this._mapGrid;
         }

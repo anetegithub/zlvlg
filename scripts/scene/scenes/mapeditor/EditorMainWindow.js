@@ -51,7 +51,7 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
             return new ManagedComponent_1.ManagedComponent(game => game.add.existing(this.editor.previewPanel));
         }
         get mapGrid() {
-            return new ManagedComponent_1.ManagedComponent(game => game.add.existing(this.editor.mapGrid));
+            return new ManagedComponent_1.ManagedComponent(game => game.add.existing(this.editor.mapGrid.sprite));
         }
     }
     exports.EditorMainWindow = EditorMainWindow;

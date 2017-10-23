@@ -29,6 +29,7 @@ export class PreviewPanel extends Phaser.Group {
         this.preview = new Phaser.Sprite(Container.game, 0, 0);
         this.preview.scale.x = 2;
         this.preview.scale.y = 2;
+        this.preview.inputEnabled = false;
         Container.game.add.existing(this.preview);
 
         this.makeCancel();
@@ -40,8 +41,17 @@ export class PreviewPanel extends Phaser.Group {
         this.preview.bringToTop();
 
         this.events.onPreview.dispatch();
+
+
+        Container.game.input.deleteMoveCallback(this.cursorPreview, this);
+        Container.game.input.mousePointer.rightButton.onDown.remove(this.makeCancel, this);
+
         Container.game.input.addMoveCallback(this.cursorPreview, this);
         Container.game.input.mousePointer.rightButton.onDown.add(this.makeCancel, this);
+    }
+
+    public get PreviewSprite() {
+        return new Phaser.Sprite(Container.game, 0, 0, this.preview.generateTexture());
     }
 
     private cursorPreview(pointer, x, y, click) {
