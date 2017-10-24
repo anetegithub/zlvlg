@@ -46,24 +46,40 @@ export class MapGrid {
     map: Map;
 
     setSprite(sprite: Phaser.Sprite) {
-        let x = this.getPoint(Container.game.input.mouse.event.layerX);
-        let y = this.getPoint(Container.game.input.mouse.event.layerY)
+        let x = this.getPointX(Container.game.input.mouse.event.layerX);
+        let y = this.getPointY(Container.game.input.mouse.event.layerY)
 
         console.log(Container.game.input.mouse.event.layerX);
         console.log(Math.floor(Container.game.input.mouse.event.layerX / 32));
 
-        let spriteInMap = new Phaser.Sprite(Container.game, x - Constants.mapOffset.x, y, sprite.generateTexture());
+        let spriteInMap = new Phaser.Sprite(Container.game, x - Constants.mapOffset.x + 1, y + 9, sprite.generateTexture());
         spriteInMap.scale.x = 2;
         spriteInMap.scale.y = 2;
         Container.game.add.existing(spriteInMap);
     }
 
-    private getPoint(num: number) {
-        let decimal = Math.ceil(((num < 1.0) ? num : (num % Math.floor(num))) * 10000);
-        if (decimal > 0.5)
-            return Math.floor(num / 32) * 32;
-        else
-            return Math.round(num / 32) * 32;
+    private getPointX(num: number) {
+        let decimalNum = num / 32;
+        let numParts = this.getDecimalPair(decimalNum);
+        return (numParts.int + (numParts.decimal > 0.5 ? 1 : 0)) * 32;
+    }
+    private getPointY(num: number) {
+        let decimalNum = num / 32;
+        let numParts = this.getDecimalPair(decimalNum);
+        if (numParts.decimal < 0.2) {
+            numParts.int -= 1;
+        }
+        return numParts.int * 32;
+    }
 
+    private getDecimalPair(num: number): {
+        int: number,
+        decimal: number
+    } {
+        let parts = num.toString().split('.');
+        return {
+            int: parseInt(parts[0]),
+            decimal: parseFloat(`0.${parts[1]}`)
+        };
     }
 }

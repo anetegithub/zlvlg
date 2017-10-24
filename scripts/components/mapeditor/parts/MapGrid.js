@@ -37,21 +37,34 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             group.destroy(true);
         }
         setSprite(sprite) {
-            let x = this.getPoint(IoC_1.Container.game.input.mouse.event.layerX);
-            let y = this.getPoint(IoC_1.Container.game.input.mouse.event.layerY);
+            let x = this.getPointX(IoC_1.Container.game.input.mouse.event.layerX);
+            let y = this.getPointY(IoC_1.Container.game.input.mouse.event.layerY);
             console.log(IoC_1.Container.game.input.mouse.event.layerX);
             console.log(Math.floor(IoC_1.Container.game.input.mouse.event.layerX / 32));
-            let spriteInMap = new Phaser.Sprite(IoC_1.Container.game, x - Constants_1.Constants.mapOffset.x, y, sprite.generateTexture());
+            let spriteInMap = new Phaser.Sprite(IoC_1.Container.game, x - Constants_1.Constants.mapOffset.x + 1, y + 9, sprite.generateTexture());
             spriteInMap.scale.x = 2;
             spriteInMap.scale.y = 2;
             IoC_1.Container.game.add.existing(spriteInMap);
         }
-        getPoint(num) {
-            let decimal = Math.ceil(((num < 1.0) ? num : (num % Math.floor(num))) * 10000);
-            if (decimal > 0.5)
-                return Math.floor(num / 32) * 32;
-            else
-                return Math.round(num / 32) * 32;
+        getPointX(num) {
+            let decimalNum = num / 32;
+            let numParts = this.getDecimalPair(decimalNum);
+            return (numParts.int + (numParts.decimal > 0.5 ? 1 : 0)) * 32;
+        }
+        getPointY(num) {
+            let decimalNum = num / 32;
+            let numParts = this.getDecimalPair(decimalNum);
+            if (numParts.decimal < 0.2) {
+                numParts.int -= 1;
+            }
+            return numParts.int * 32;
+        }
+        getDecimalPair(num) {
+            let parts = num.toString().split('.');
+            return {
+                int: parseInt(parts[0]),
+                decimal: parseFloat(`0.${parts[1]}`)
+            };
         }
     }
     exports.MapGrid = MapGrid;
