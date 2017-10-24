@@ -16,11 +16,12 @@ export class SpriteButton extends BaseButton<Phaser.Button> {
 
     private btn: Phaser.Button;
     init(game: Phaser.Game): Phaser.Image {
-        this.btn = new Phaser.Button(game, this.args.x, this.args.y, 'uifull', this.args.events.up, this.btn,
-            this.args.initFrame,
-            this.args.initFrame,
-            this.args.pressedFrame);
-
+        if (!this.btn) {
+            this.btn = new Phaser.Button(game, this.args.x, this.args.y, 'uifull', this.args.events.up, this.btn,
+                this.args.initFrame,
+                this.args.initFrame,
+                this.args.pressedFrame);
+        }
         return this.btn;
     }
 

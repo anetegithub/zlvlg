@@ -8,7 +8,9 @@ define(["require", "exports", "../../../../utils/globals/Constants", "../BaseBut
             this.args.events.up = args.events.up || function () { };
         }
         init(game) {
-            this.btn = new Phaser.Button(game, this.args.x, this.args.y, 'uifull', this.args.events.up, this.btn, this.args.initFrame, this.args.initFrame, this.args.pressedFrame);
+            if (!this.btn) {
+                this.btn = new Phaser.Button(game, this.args.x, this.args.y, 'uifull', this.args.events.up, this.btn, this.args.initFrame, this.args.initFrame, this.args.pressedFrame);
+            }
             return this.btn;
         }
         release(game) {

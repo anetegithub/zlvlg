@@ -1,4 +1,4 @@
-define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../utils/globals/StringExtensions", "../../../components/mapeditor/MapEditor"], function (require, exports, BaseBackScene_1, MainMenuScene_1, IoC_1, ManagedComponent_1, SpriteButton_1, StringExtensions_1, MapEditor_1) {
+define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../utils/globals/StringExtensions", "../../../components/mapeditor/MapEditor"], function (require, exports, BaseBackScene_1, MainMenuScene_1, IoC_1, ManagedComponent_1, Constants_1, SpriteButton_1, StringExtensions_1, MapEditor_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class EditorMainWindow extends BaseBackScene_1.BaseBackScene {
@@ -14,7 +14,8 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 ...super.components,
                 ...this.buttons,
                 this.previewPanel,
-                this.mapGrid
+                this.mapGrid,
+                this.download
             ];
         }
         get buttons() {
@@ -45,6 +46,19 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                         EditorMainWindow.prevGroup = spriteGroup;
                     }
                 }
+            });
+        }
+        get download() {
+            return new SpriteButton_1.SpriteButton({
+                x: Constants_1.Constants.mapWidth - 60,
+                y: Constants_1.Constants.gameWindowOffset.y,
+                text: '↓',
+                events: {
+                    up: () => {
+                    }
+                },
+                initFrame: 'buttonSquare_blue',
+                pressedFrame: 'buttonSquare_blue_pressed'
             });
         }
         get previewPanel() {

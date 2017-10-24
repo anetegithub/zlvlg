@@ -42,7 +42,6 @@ export class PreviewPanel extends Phaser.Group {
 
         this.events.onPreview.dispatch();
 
-
         Container.game.input.deleteMoveCallback(this.cursorPreview, this);
         Container.game.input.mousePointer.rightButton.onDown.remove(this.makeCancel, this);
 
