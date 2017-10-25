@@ -4,6 +4,7 @@ import { MapGrid } from "./parts/MapGrid";
 import { PreviewPanel } from "./parts/PreviewPanel";
 import { SpriteMap } from "../../utils/graphics/SpriteMap";
 import { SectionBuilder } from "./parts/SectionBuilder";
+import { Map } from "./parts/Map";
 
 export class MapEditor {
     spriteSections(section: keyof SpriteMap): Phaser.Group {
@@ -12,6 +13,11 @@ export class MapEditor {
         sprites.forEach(x => this.bindActions(x));
         sprites.forEach(x => group.add(x));
         return group;
+    }
+
+    private map: Map = new Map(Container.game);
+    export() {
+        this.map.export();
     }
 
     private _previewPanel: PreviewPanel;
@@ -33,7 +39,7 @@ export class MapEditor {
         if (!this._mapGrid) {
             this._mapGrid = new MapGrid();
             this._mapGrid.sprite.events.onInputDown.add(() => {
-                this.mapGrid.setSprite(this.previewPanel.PreviewSprite);
+                this.map.setSprite(this.previewPanel.PreviewSprite);
             })
         }
 

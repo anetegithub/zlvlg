@@ -36,36 +36,6 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             this.sprite.visible = false;
             group.destroy(true);
         }
-        setSprite(sprite) {
-            let x = this.getPointX(IoC_1.Container.game.input.mouse.event.layerX);
-            let y = this.getPointY(IoC_1.Container.game.input.mouse.event.layerY);
-            console.log(IoC_1.Container.game.input.mouse.event.layerX);
-            console.log(Math.floor(IoC_1.Container.game.input.mouse.event.layerX / 32));
-            let spriteInMap = new Phaser.Sprite(IoC_1.Container.game, x - Constants_1.Constants.mapOffset.x + 1, y + 9, sprite.generateTexture());
-            spriteInMap.scale.x = 2;
-            spriteInMap.scale.y = 2;
-            IoC_1.Container.game.add.existing(spriteInMap);
-        }
-        getPointX(num) {
-            let decimalNum = num / 32;
-            let numParts = this.getDecimalPair(decimalNum);
-            return (numParts.int + (numParts.decimal > 0.5 ? 1 : 0)) * 32;
-        }
-        getPointY(num) {
-            let decimalNum = num / 32;
-            let numParts = this.getDecimalPair(decimalNum);
-            if (numParts.decimal < 0.2) {
-                numParts.int -= 1;
-            }
-            return numParts.int * 32;
-        }
-        getDecimalPair(num) {
-            let parts = num.toString().split('.');
-            return {
-                int: parseInt(parts[0]),
-                decimal: parseFloat(`0.${parts[1]}`)
-            };
-        }
     }
     exports.MapGrid = MapGrid;
 });

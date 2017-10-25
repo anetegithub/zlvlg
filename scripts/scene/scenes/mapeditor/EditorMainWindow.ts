@@ -73,7 +73,8 @@ export class EditorMainWindow extends BaseBackScene {
             y: Constants.gameWindowOffset.y,
             text: '↓',
             events: {
-                up: () => {
+                down: () => {
+                    this.editor.export();
                 }
             },
             initFrame: 'buttonSquare_blue',

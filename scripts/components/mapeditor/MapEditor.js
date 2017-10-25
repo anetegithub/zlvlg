@@ -1,13 +1,19 @@
-define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./parts/PreviewPanel", "./parts/SectionBuilder"], function (require, exports, IoC_1, MapGrid_1, PreviewPanel_1, SectionBuilder_1) {
+define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./parts/PreviewPanel", "./parts/SectionBuilder", "./parts/Map"], function (require, exports, IoC_1, MapGrid_1, PreviewPanel_1, SectionBuilder_1, Map_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class MapEditor {
+        constructor() {
+            this.map = new Map_1.Map(IoC_1.Container.game);
+        }
         spriteSections(section) {
             let group = new Phaser.Group(IoC_1.Container.game);
             var sprites = SectionBuilder_1.SectionBuilder.getSection(section);
             sprites.forEach(x => this.bindActions(x));
             sprites.forEach(x => group.add(x));
             return group;
+        }
+        export() {
+            this.map.export();
         }
         get previewPanel() {
             if (!this._previewPanel) {
@@ -25,7 +31,7 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
             if (!this._mapGrid) {
                 this._mapGrid = new MapGrid_1.MapGrid();
                 this._mapGrid.sprite.events.onInputDown.add(() => {
-                    this.mapGrid.setSprite(this.previewPanel.PreviewSprite);
+                    this.map.setSprite(this.previewPanel.PreviewSprite);
                 });
             }
             return this._mapGrid;

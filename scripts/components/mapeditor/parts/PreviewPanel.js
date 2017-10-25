@@ -33,7 +33,10 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             IoC_1.Container.game.input.mousePointer.rightButton.onDown.add(this.makeCancel, this);
         }
         get PreviewSprite() {
-            return new Phaser.Sprite(IoC_1.Container.game, 0, 0, this.preview.generateTexture());
+            return {
+                sprite: new Phaser.Sprite(IoC_1.Container.game, 0, 0, this.preview.generateTexture()),
+                frame: this.preview.frame
+            };
         }
         cursorPreview(pointer, x, y, click) {
             this.cancelText.visible = true;

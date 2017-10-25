@@ -54,7 +54,8 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 y: Constants_1.Constants.gameWindowOffset.y,
                 text: '↓',
                 events: {
-                    up: () => {
+                    down: () => {
+                        this.editor.export();
                     }
                 },
                 initFrame: 'buttonSquare_blue',
