@@ -25,6 +25,10 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             IoC_1.Container.game.add.existing(spriteInMap);
             this.sprites.push({
                 tile: value.frame,
+                pos: {
+                    x: x,
+                    y: y
+                }
             });
         }
         isCompatible(x, y) {

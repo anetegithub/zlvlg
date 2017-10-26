@@ -3,7 +3,13 @@ import { Constants } from "../../../utils/globals/Constants";
 import { Block } from "../../../map/struct/Block";
 
 export class Map extends Phaser.Group {
-    sprites: any[] = [];
+    sprites: {
+        tile: string | number,
+        pos: {
+            x: number,
+            y: number
+        }
+    }[] = [];
 
     export() {
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.sprites));
@@ -28,6 +34,10 @@ export class Map extends Phaser.Group {
 
         this.sprites.push({
             tile: value.frame,
+            pos: {
+                x: x,
+                y: y
+            }
         });
     }
 
