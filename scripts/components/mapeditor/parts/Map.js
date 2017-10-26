@@ -16,10 +16,7 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
         setSprite(value) {
             let x = this.getPointX(value.pointer.x || IoC_1.Container.game.input.mouse.event.layerX);
             let y = this.getPointY(value.pointer.y || IoC_1.Container.game.input.mouse.event.layerY);
-            if (x > Constants_1.Constants.mapWidth - 32 || y > Constants_1.Constants.mapHeight - 16) {
-                return;
-            }
-            if (x < Constants_1.Constants.mapOffset.x || y < Constants_1.Constants.mapOffset.y - 32) {
+            if (!this.isCompatible(x, y)) {
                 return;
             }
             let spriteInMap = new Phaser.Sprite(IoC_1.Container.game, x - Constants_1.Constants.mapOffset.x + 1, y + 9, value.sprite.generateTexture());
@@ -29,6 +26,15 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             this.sprites.push({
                 tile: value.frame,
             });
+        }
+        isCompatible(x, y) {
+            if (x > Constants_1.Constants.mapWidth - 32 || y > Constants_1.Constants.mapHeight - 16) {
+                return false;
+            }
+            if (x < Constants_1.Constants.mapOffset.x || y < Constants_1.Constants.mapOffset.y - 32) {
+                return false;
+            }
+            return true;
         }
         getPointX(num) {
             let decimalNum = num / 32;

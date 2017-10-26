@@ -17,10 +17,7 @@ export class Map extends Phaser.Group {
         let x = this.getPointX(value.pointer.x || Container.game.input.mouse.event.layerX);
         let y = this.getPointY(value.pointer.y || Container.game.input.mouse.event.layerY);
 
-        if (x > Constants.mapWidth - 32 || y > Constants.mapHeight - 16) {
-            return;
-        }
-        if (x < Constants.mapOffset.x || y < Constants.mapOffset.y - 32) {
+        if (!this.isCompatible(x, y)) {
             return;
         }
 
@@ -32,6 +29,18 @@ export class Map extends Phaser.Group {
         this.sprites.push({
             tile: value.frame,
         });
+    }
+
+    private isCompatible(x: number, y: number): boolean {
+        if (x > Constants.mapWidth - 32 || y > Constants.mapHeight - 16) {
+            return false;
+        }
+
+        if (x < Constants.mapOffset.x || y < Constants.mapOffset.y - 32) {
+            return false;
+        }
+
+        return true;
     }
 
     private getPointX(num: number) {
