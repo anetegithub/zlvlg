@@ -17,6 +17,13 @@ export class Map extends Phaser.Group {
         let x = this.getPointX(value.pointer.x || Container.game.input.mouse.event.layerX);
         let y = this.getPointY(value.pointer.y || Container.game.input.mouse.event.layerY);
 
+        if (x > Constants.mapWidth - 32 || y > Constants.mapHeight - 16) {
+            return;
+        }
+        if (x < Constants.mapOffset.x || y < Constants.mapOffset.y - 32) {
+            return;
+        }
+
         let spriteInMap = new Phaser.Sprite(Container.game, x - Constants.mapOffset.x + 1, y + 9, value.sprite.generateTexture());
         spriteInMap.scale.x = 2;
         spriteInMap.scale.y = 2;
