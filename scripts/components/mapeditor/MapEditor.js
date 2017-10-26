@@ -30,8 +30,16 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
         get mapGrid() {
             if (!this._mapGrid) {
                 this._mapGrid = new MapGrid_1.MapGrid();
-                this._mapGrid.sprite.events.onInputDown.add(() => {
-                    this.map.setSprite(this.previewPanel.PreviewSprite);
+                let eventRef = this._mapGrid.sprite.events;
+                let spriteSeting = (pointer) => {
+                    this.map.setSprite(Object.assign({ pointer: pointer || { x: 0, y: 0 } }, this.previewPanel.PreviewSprite));
+                };
+                eventRef.onInputDown.add(() => {
+                    spriteSeting();
+                    IoC_1.Container.game.input.addMoveCallback(spriteSeting, null);
+                });
+                eventRef.onInputUp.add(x => {
+                    IoC_1.Container.game.input.deleteMoveCallback(spriteSeting, null);
                 });
             }
             return this._mapGrid;

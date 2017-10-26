@@ -14,10 +14,8 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             dlAnchorElem.click();
         }
         setSprite(value) {
-            let x = this.getPointX(IoC_1.Container.game.input.mouse.event.layerX);
-            let y = this.getPointY(IoC_1.Container.game.input.mouse.event.layerY);
-            console.log(IoC_1.Container.game.input.mouse.event.layerX);
-            console.log(Math.floor(IoC_1.Container.game.input.mouse.event.layerX / 32));
+            let x = this.getPointX(value.pointer.x || IoC_1.Container.game.input.mouse.event.layerX);
+            let y = this.getPointY(value.pointer.y || IoC_1.Container.game.input.mouse.event.layerY);
             let spriteInMap = new Phaser.Sprite(IoC_1.Container.game, x - Constants_1.Constants.mapOffset.x + 1, y + 9, value.sprite.generateTexture());
             spriteInMap.scale.x = 2;
             spriteInMap.scale.y = 2;

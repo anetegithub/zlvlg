@@ -38,9 +38,17 @@ export class MapEditor {
     get mapGrid(): MapGrid {
         if (!this._mapGrid) {
             this._mapGrid = new MapGrid();
-            this._mapGrid.sprite.events.onInputDown.add(() => {
-                this.map.setSprite(this.previewPanel.PreviewSprite);
-            })
+            let eventRef = this._mapGrid.sprite.events;
+            let spriteSeting = (pointer?) => {
+                this.map.setSprite({ pointer: pointer || { x: 0, y: 0 }, ...this.previewPanel.PreviewSprite });
+            }
+            eventRef.onInputDown.add(() => {
+                spriteSeting();
+                Container.game.input.addMoveCallback(spriteSeting, null);
+            });
+            eventRef.onInputUp.add(x => {
+                Container.game.input.deleteMoveCallback(spriteSeting, null);
+            });
         }
 
         return this._mapGrid;

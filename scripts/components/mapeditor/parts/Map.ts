@@ -13,12 +13,9 @@ export class Map extends Phaser.Group {
         dlAnchorElem.click();
     }
 
-    setSprite(value: { sprite: Phaser.Sprite, frame: string | number }) {
-        let x = this.getPointX(Container.game.input.mouse.event.layerX);
-        let y = this.getPointY(Container.game.input.mouse.event.layerY)
-
-        console.log(Container.game.input.mouse.event.layerX);
-        console.log(Math.floor(Container.game.input.mouse.event.layerX / 32));
+    setSprite(value: { pointer: Phaser.Point, sprite: Phaser.Sprite, frame: string | number }) {
+        let x = this.getPointX(value.pointer.x || Container.game.input.mouse.event.layerX);
+        let y = this.getPointY(value.pointer.y || Container.game.input.mouse.event.layerY);
 
         let spriteInMap = new Phaser.Sprite(Container.game, x - Constants.mapOffset.x + 1, y + 9, value.sprite.generateTexture());
         spriteInMap.scale.x = 2;
