@@ -8,7 +8,8 @@ export class Map extends Phaser.Group {
         pos: {
             x: number,
             y: number
-        }
+        },
+        sprite: Phaser.Sprite
     }[] = [];
 
     export() {
@@ -27,9 +28,18 @@ export class Map extends Phaser.Group {
             return;
         }
 
+        if (value.frame == 242) {
+            let existed = this.sprites.find(block => block.pos.x == x && block.pos.y == y);
+            if (existed != null) {
+                this.sprites = this.sprites.splice(this.sprites.indexOf(existed), 1);
+            }
+            return;
+        }
+
         let spriteInMap = new Phaser.Sprite(Container.game, x - Constants.mapOffset.x + 1, y + 9, value.sprite.generateTexture());
         spriteInMap.scale.x = 2;
         spriteInMap.scale.y = 2;
+        spriteInMap.events.onDragStart.add(function (sprite) { sprite.destroy(); });
         Container.game.add.existing(spriteInMap);
 
         this.sprites.push({
@@ -37,7 +47,8 @@ export class Map extends Phaser.Group {
             pos: {
                 x: x,
                 y: y
-            }
+            },
+            sprite: spriteInMap
         });
     }
 

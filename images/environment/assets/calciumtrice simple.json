@@ -5083,6 +5083,27 @@
             }
         },
         {
+            "filename": "^clear",
+            "frame": {
+                "x": 272,
+                "y": 464,
+                "w": 16,
+                "h": 16
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 16,
+                "h": 16
+            },
+            "sourceSize": {
+                "w": 16,
+                "h": 16
+            }
+        },
+        {
             "filename": "license",
             "frame": {
                 "x": 0,
