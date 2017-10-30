@@ -13,6 +13,7 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
             return [
                 ...super.components,
                 ...this.buttons,
+                this.removeBtn,
                 this.previewPanel,
                 this.mapGrid,
                 this.download
@@ -30,7 +31,20 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 "enemy",
                 "people"
             ];
-            return keys.map((section, index) => this.spriteSection(section, (index * 45) + 16));
+            return keys.map((section, index) => this.spriteSection(section, (index * 45) + 102.5));
+        }
+        get removeBtn() {
+            return new SpriteButton_1.SpriteButton({
+                x: 507.5,
+                y: 600,
+                initFrame: 'buttonLong_blue',
+                pressedFrame: 'buttonLong_blue_pressed',
+                text: StringExtensions_1.StringExtensions.capitalize('delete'),
+                events: {
+                    up: function () {
+                    }
+                }
+            });
         }
         spriteSection(section, xOffset) {
             let spriteGroup = this.editor.spriteSections(section);

@@ -26,6 +26,7 @@ export class EditorMainWindow extends BaseBackScene {
         return [
             ...super.components,
             ...this.buttons,
+            this.removeBtn,
             this.previewPanel,
             this.mapGrid,
             this.download
@@ -45,7 +46,22 @@ export class EditorMainWindow extends BaseBackScene {
             "enemy",
             "people"
         ];
-        return keys.map((section, index) => this.spriteSection(section, (index * 45) + 16));
+        return keys.map((section, index) => this.spriteSection(section, (index * 45) + 102.5));
+    }
+
+    private get removeBtn(): SpriteButton {
+        return new SpriteButton({
+            x: 507.5,
+            y: 600,
+            initFrame: 'buttonLong_blue',
+            pressedFrame: 'buttonLong_blue_pressed',
+            text: StringExtensions.capitalize('delete'),
+            events: {
+                up: function () {
+
+                }
+            }
+        })
     }
 
     private static prevGroup: Phaser.Group;
