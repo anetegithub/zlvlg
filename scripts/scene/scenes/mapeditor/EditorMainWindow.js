@@ -41,7 +41,8 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 pressedFrame: 'buttonLong_blue_pressed',
                 text: StringExtensions_1.StringExtensions.capitalize('delete'),
                 events: {
-                    up: function () {
+                    up: () => {
+                        this.editor.setDelete();
                     }
                 }
             });

@@ -20,6 +20,14 @@ export class MapEditor {
         this.map.export();
     }
 
+    private removing: boolean = false;
+    private removingSprite = new Phaser.Sprite(Container.game, 0, 0, 'uifull', 'iconCross_blue');
+    setDelete() {
+        this.removing = true;
+        this.previewPanel.setPreview(this.removingSprite);
+        this.previewPanel.events.onCancel.addOnce(() => { this.removing = false; });
+    }
+
     private _previewPanel: PreviewPanel;
     get previewPanel(): PreviewPanel {
         if (!this._previewPanel) {
@@ -34,13 +42,19 @@ export class MapEditor {
         return this._previewPanel;
     }
 
+
+
     private _mapGrid: MapGrid;
     get mapGrid(): MapGrid {
         if (!this._mapGrid) {
             this._mapGrid = new MapGrid();
             let eventRef = this._mapGrid.sprite.events;
             let spriteSeting = (pointer?) => {
-                this.map.setSprite({ pointer: pointer || { x: 0, y: 0 }, ...this.previewPanel.PreviewSprite });
+                if (!this.removing) {
+                    this.map.setSprite({ pointer: pointer || { x: 0, y: 0 }, ...this.previewPanel.PreviewSprite });
+                } else {
+                    this.map.setDelete(this.removingSprite);
+                }
             }
             eventRef.onInputDown.add(() => {
                 spriteSeting();
@@ -56,6 +70,7 @@ export class MapEditor {
 
     private bindActions(sprite: Phaser.Sprite) {
         sprite.events.onInputDown.add(x => {
+            this.removing = false;
             this.previewPanel.setPreview(sprite);
         });
     }

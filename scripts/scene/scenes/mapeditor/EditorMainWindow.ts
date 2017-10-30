@@ -57,8 +57,8 @@ export class EditorMainWindow extends BaseBackScene {
             pressedFrame: 'buttonLong_blue_pressed',
             text: StringExtensions.capitalize('delete'),
             events: {
-                up: function () {
-
+                up: () => {
+                    this.editor.setDelete();
                 }
             }
         })

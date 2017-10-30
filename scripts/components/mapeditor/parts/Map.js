@@ -19,18 +19,10 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             if (!this.isCompatible(x, y)) {
                 return;
             }
-            if (value.frame == 242) {
-                let existed = this.sprites.find(block => block.pos.x == x && block.pos.y == y);
-                if (existed != null) {
-                    this.sprites = this.sprites.splice(this.sprites.indexOf(existed), 1);
-                }
-                return;
-            }
             let spriteInMap = new Phaser.Sprite(IoC_1.Container.game, x - Constants_1.Constants.mapOffset.x + 1, y + 9, value.sprite.generateTexture());
             spriteInMap.scale.x = 2;
             spriteInMap.scale.y = 2;
-            spriteInMap.events.onDragStart.add(function (sprite) { sprite.destroy(); });
-            IoC_1.Container.game.add.existing(spriteInMap);
+            spriteInMap = IoC_1.Container.game.add.existing(spriteInMap);
             this.sprites.push({
                 tile: value.frame,
                 pos: {
@@ -39,6 +31,19 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
                 },
                 sprite: spriteInMap
             });
+        }
+        setDelete(value) {
+            let x = this.getPointX(IoC_1.Container.game.input.mouse.event.layerX);
+            let y = this.getPointY(IoC_1.Container.game.input.mouse.event.layerY);
+            if (!this.isCompatible(x, y)) {
+                return;
+            }
+            let existed = this.sprites.find(block => block.pos.x == x && block.pos.y == y);
+            if (existed != null) {
+                existed.sprite.alpha = 0;
+                existed.sprite.visible = false;
+                this.sprites = this.sprites.splice(this.sprites.indexOf(existed), 1);
+            }
         }
         isCompatible(x, y) {
             if (x > Constants_1.Constants.mapWidth - 32 || y > Constants_1.Constants.mapHeight - 16) {

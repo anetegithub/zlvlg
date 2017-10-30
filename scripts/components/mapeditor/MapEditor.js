@@ -4,6 +4,8 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
     class MapEditor {
         constructor() {
             this.map = new Map_1.Map(IoC_1.Container.game);
+            this.removing = false;
+            this.removingSprite = new Phaser.Sprite(IoC_1.Container.game, 0, 0, 'uifull', 'iconCross_blue');
         }
         spriteSections(section) {
             let group = new Phaser.Group(IoC_1.Container.game);
@@ -14,6 +16,11 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
         }
         export() {
             this.map.export();
+        }
+        setDelete() {
+            this.removing = true;
+            this.previewPanel.setPreview(this.removingSprite);
+            this.previewPanel.events.onCancel.addOnce(() => { this.removing = false; });
         }
         get previewPanel() {
             if (!this._previewPanel) {
@@ -32,7 +39,12 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
                 this._mapGrid = new MapGrid_1.MapGrid();
                 let eventRef = this._mapGrid.sprite.events;
                 let spriteSeting = (pointer) => {
-                    this.map.setSprite(Object.assign({ pointer: pointer || { x: 0, y: 0 } }, this.previewPanel.PreviewSprite));
+                    if (!this.removing) {
+                        this.map.setSprite(Object.assign({ pointer: pointer || { x: 0, y: 0 } }, this.previewPanel.PreviewSprite));
+                    }
+                    else {
+                        this.map.setDelete(this.removingSprite);
+                    }
                 };
                 eventRef.onInputDown.add(() => {
                     spriteSeting();
@@ -46,6 +58,7 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
         }
         bindActions(sprite) {
             sprite.events.onInputDown.add(x => {
+                this.removing = false;
                 this.previewPanel.setPreview(sprite);
             });
         }
