@@ -5,26 +5,26 @@ export class SpriteMap {
         return spMap;
     }
 
-    frames: SpriteTile[];
+    private frames: SpriteTile[];
 
-    walls(): SpriteTile[] {
-        return this.filterByIncludes('|');
-    }
-
-    floors(): SpriteTile[] {
-        return this.filterByIncludes('-');
-    }
-
-    decorations(): SpriteTile[] {
-        return this.filterByIncludes('@');
-    }
-
-    items(): SpriteTile[] {
-        return this.filterByIncludes('^')
-            .concat(this.filterByIncludes('='));
+    getSpriteSection(section: keyof SpriteTypes) {
+        return this.filterByIncludes(new SpriteTypes()[section]);
     }
 
     private filterByIncludes(char: string) {
         return this.frames.filter(x => x.filename.includes(char));
     }
 }
+
+export class SpriteTypes {
+    walls = '#';
+    floors = '_';
+    enemy = '^';
+    decore = '*';
+    floorobjects = '&';
+    matery = '=';
+    items = '.';
+    weapons = 'W';
+    people = '@';
+}
+

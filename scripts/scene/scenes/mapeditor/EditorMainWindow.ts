@@ -3,7 +3,7 @@ import { MainMenuScene } from "../MainMenuScene";
 import { Container } from "../../../utils/globals/IoC";
 import { ManagedComponent } from "../../../app/core/impl/ManagedComponent";
 import { Constants } from "../../../utils/globals/Constants";
-import { SpriteMap } from "../../../utils/graphics/SpriteMap";
+import { SpriteMap, SpriteTypes } from "../../../utils/graphics/SpriteMap";
 import { SpriteMapScene } from "../../abstract/SpriteMapScene";
 import { SpriteButton } from "../../../ui/impl/buttons/spritebutton/SpriteButton";
 import { StringExtensions } from "../../../utils/globals/StringExtensions";
@@ -33,18 +33,23 @@ export class EditorMainWindow extends BaseBackScene {
     }
 
     private get buttons(): ManagedComponent[] {
-        type SpriteMapKey = keyof SpriteMap;
+        type SpriteMapKey = keyof SpriteTypes;
         let keys: SpriteMapKey[] = [
-            "walls",
             "floors",
-            "decorations",
-            "items"
+            "walls",
+            "matery",
+            "decore",
+            "floorobjects",
+            "items",
+            "weapons",
+            "enemy",
+            "people"
         ];
-        return keys.map((section, index) => this.spriteSection(section, (index * 190) + 16));
+        return keys.map((section, index) => this.spriteSection(section, (index * 45) + 16));
     }
 
     private static prevGroup: Phaser.Group;
-    private spriteSection(section: keyof SpriteMap, xOffset: number): ManagedComponent {
+    private spriteSection(section: keyof SpriteTypes, xOffset: number): ManagedComponent {
         let spriteGroup = this.editor.spriteSections(section);
         spriteGroup.visible = false;
         Container.game.add.existing(spriteGroup);
@@ -52,9 +57,9 @@ export class EditorMainWindow extends BaseBackScene {
         return new SpriteButton({
             x: xOffset,
             y: 600,
-            initFrame: 'buttonLong_blue',
-            pressedFrame: 'buttonLong_blue_pressed',
-            text: StringExtensions.capitalize(section),
+            initFrame: 'buttonSquare_blue',
+            pressedFrame: 'buttonSquare_blue_pressed',
+            text: StringExtensions.capitalize(section[0]),
             events: {
                 up: function () {
                     if (EditorMainWindow.prevGroup) {

@@ -5,7 +5,7 @@ define(["require", "exports", "./BaseScene"], function (require, exports, BaseSc
         get resources() {
             return [
                 {
-                    key: 'sprites', url: './images/environment/assets/calciumtrice simple.png', type: 'atlas', args: [
+                    key: 'sprites', url: './images/environment/assets/fullset.png', type: 'atlas', args: [
                         SpriteMapScene.jsonAtlasUrl,
                         Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY
                     ],
@@ -21,7 +21,7 @@ define(["require", "exports", "./BaseScene"], function (require, exports, BaseSc
             ];
         }
     }
-    SpriteMapScene.jsonAtlasUrl = './images/environment/assets/calciumtrice simple.json';
+    SpriteMapScene.jsonAtlasUrl = './images/environment/assets/fullset.json';
     SpriteMapScene.jsonAtlasUi = './images/ui/assets/uipack_rpg_sheet.json';
     exports.SpriteMapScene = SpriteMapScene;
 });

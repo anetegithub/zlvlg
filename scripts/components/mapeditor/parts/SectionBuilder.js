@@ -10,7 +10,7 @@ define(["require", "exports", "../../../utils/graphics/SpriteMap", "../../../uti
         }
         static fillBlocks(tileMap, section, blocks) {
             let rowSwitcher = 0, currentX = 0, asideMap = [];
-            tileMap[section]().forEach(tile => {
+            tileMap.getSpriteSection(section).forEach(tile => {
                 ({ rowSwitcher, currentX } = this.checkRowOverflow(rowSwitcher, currentX));
                 this.addSprite(currentX, asideMap, rowSwitcher, tile, blocks);
                 ({ rowSwitcher, currentX } = this.updateState(asideMap, rowSwitcher, tile, currentX));
@@ -33,11 +33,11 @@ define(["require", "exports", "../../../utils/graphics/SpriteMap", "../../../uti
             });
             EventApplier_1.EventApplier.applyMouse(sprite);
             blocks.push(sprite);
-            let graph = new Phaser.Graphics(IoC_1.Container.game, x, y);
-            graph.lineStyle(1, 0xd3d3d3, 1);
-            graph.drawRect(x, y, sprite.width, sprite.height);
-            let border = new Phaser.Sprite(IoC_1.Container.game, x, y, graph.generateTexture());
-            blocks.push(border);
+            // let graph = new Phaser.Graphics(Container.game, x, y);
+            // graph.lineStyle(1, 0xd3d3d3, 1);
+            // graph.drawRect(x, y, sprite.width, sprite.height);
+            // let border = new Phaser.Sprite(Container.game, x, y, graph.generateTexture());
+            // blocks.push(border);
         }
         static checkRowOverflow(rowSwitcher, currentX) {
             if (rowSwitcher == 23) {

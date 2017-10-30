@@ -20,12 +20,17 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
         }
         get buttons() {
             let keys = [
-                "walls",
                 "floors",
-                "decorations",
-                "items"
+                "walls",
+                "matery",
+                "decore",
+                "floorobjects",
+                "items",
+                "weapons",
+                "enemy",
+                "people"
             ];
-            return keys.map((section, index) => this.spriteSection(section, (index * 190) + 16));
+            return keys.map((section, index) => this.spriteSection(section, (index * 45) + 16));
         }
         spriteSection(section, xOffset) {
             let spriteGroup = this.editor.spriteSections(section);
@@ -34,9 +39,9 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
             return new SpriteButton_1.SpriteButton({
                 x: xOffset,
                 y: 600,
-                initFrame: 'buttonLong_blue',
-                pressedFrame: 'buttonLong_blue_pressed',
-                text: StringExtensions_1.StringExtensions.capitalize(section),
+                initFrame: 'buttonSquare_blue',
+                pressedFrame: 'buttonSquare_blue_pressed',
+                text: StringExtensions_1.StringExtensions.capitalize(section[0]),
                 events: {
                     up: function () {
                         if (EditorMainWindow.prevGroup) {

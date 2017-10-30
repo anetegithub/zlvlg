@@ -1,13 +1,13 @@
 import { BaseScene } from "./BaseScene";
 
 export abstract class SpriteMapScene extends BaseScene {
-    private static jsonAtlasUrl = './images/environment/assets/calciumtrice simple.json';
+    private static jsonAtlasUrl = './images/environment/assets/fullset.json';
     private static jsonAtlasUi = './images/ui/assets/uipack_rpg_sheet.json';
 
     protected get resources(): ILoadedResource[] {
         return [
             {
-                key: 'sprites', url: './images/environment/assets/calciumtrice simple.png', type: 'atlas', args: [
+                key: 'sprites', url: './images/environment/assets/fullset.png', type: 'atlas', args: [
                     SpriteMapScene.jsonAtlasUrl,
                     Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY
                 ],

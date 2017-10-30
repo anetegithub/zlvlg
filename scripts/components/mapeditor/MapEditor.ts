@@ -2,12 +2,12 @@ import { Container } from "../../utils/globals/IoC";
 import { Constants } from "../../utils/globals/Constants";
 import { MapGrid } from "./parts/MapGrid";
 import { PreviewPanel } from "./parts/PreviewPanel";
-import { SpriteMap } from "../../utils/graphics/SpriteMap";
+import { SpriteMap, SpriteTypes } from "../../utils/graphics/SpriteMap";
 import { SectionBuilder } from "./parts/SectionBuilder";
 import { Map } from "./parts/Map";
 
 export class MapEditor {
-    spriteSections(section: keyof SpriteMap): Phaser.Group {
+    spriteSections(section: keyof SpriteTypes): Phaser.Group {
         let group = new Phaser.Group(Container.game);
         var sprites = SectionBuilder.getSection(section);
         sprites.forEach(x => this.bindActions(x));

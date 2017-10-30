@@ -1,9 +1,9 @@
-import { SpriteMap } from "../../../utils/graphics/SpriteMap";
+import { SpriteMap, SpriteTypes } from "../../../utils/graphics/SpriteMap";
 import { Container } from "../../../utils/globals/IoC";
 import { EventApplier } from "../../../utils/ui/EventApplier";
 
 export class SectionBuilder {
-    public static getSection(section: keyof SpriteMap): Phaser.Sprite[] {
+    public static getSection(section: keyof SpriteTypes): Phaser.Sprite[] {
         var blocks: Phaser.Sprite[] = [];
 
         var tileMap = SpriteMap.create(Container.game.cache.getJSON('spritesmap'));
@@ -12,12 +12,12 @@ export class SectionBuilder {
         return blocks;
     }
 
-    private static fillBlocks(tileMap: SpriteMap, section: keyof SpriteMap, blocks: Phaser.Sprite[]) {
+    private static fillBlocks(tileMap: SpriteMap, section: keyof SpriteTypes, blocks: Phaser.Sprite[]) {
         let rowSwitcher = 0,
             currentX = 0,
             asideMap: number[] = [];
 
-        (tileMap[section] as () => SpriteTile[])().forEach(tile => {
+        tileMap.getSpriteSection(section).forEach(tile => {
             ({ rowSwitcher, currentX } = this.checkRowOverflow(rowSwitcher, currentX));
             this.addSprite(currentX, asideMap, rowSwitcher, tile, blocks);
             ({ rowSwitcher, currentX } = this.updateState(asideMap, rowSwitcher, tile, currentX));
@@ -45,11 +45,11 @@ export class SectionBuilder {
         EventApplier.applyMouse(sprite);
         blocks.push(sprite);
 
-        let graph = new Phaser.Graphics(Container.game, x, y);
-        graph.lineStyle(1, 0xd3d3d3, 1);
-        graph.drawRect(x, y, sprite.width, sprite.height);
-        let border = new Phaser.Sprite(Container.game, x, y, graph.generateTexture());
-        blocks.push(border);
+        // let graph = new Phaser.Graphics(Container.game, x, y);
+        // graph.lineStyle(1, 0xd3d3d3, 1);
+        // graph.drawRect(x, y, sprite.width, sprite.height);
+        // let border = new Phaser.Sprite(Container.game, x, y, graph.generateTexture());
+        // blocks.push(border);
     }
 
     private static checkRowOverflow(rowSwitcher: number, currentX: number) {
