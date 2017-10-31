@@ -22,7 +22,7 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
         setSprite(value) {
             let x = this.getPointX(value.pointer.x || IoC_1.Container.game.input.mouse.event.layerX);
             let y = this.getPointY(value.pointer.y || IoC_1.Container.game.input.mouse.event.layerY);
-            if (!this.isCompatible(x, y) || this.isDublicate(x, y, value.frame)) {
+            if (!this.isCompatible(x, y, { h: value.sprite.height, w: value.sprite.width }) || this.isDublicate(x, y, value.frame)) {
                 return;
             }
             let spriteInMap = new Phaser.Sprite(IoC_1.Container.game, x - Constants_1.Constants.mapOffset.x + 1, y + 9, value.sprite.generateTexture());
@@ -33,7 +33,8 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
                 tile: value.frame,
                 pos: {
                     x: x,
-                    y: y
+                    y: y,
+                    z: this.setZIndex(x, y)
                 },
                 sprite: spriteInMap
             });
@@ -44,7 +45,9 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             if (!this.isCompatible(x, y)) {
                 return;
             }
-            let existed = this.sprites.filter(block => block.pos.x == x && block.pos.y == y);
+            let existed = this.sprites.filter(block => block.pos.x == x && block.pos.y == y)
+                .sort(x => x.pos.z);
+            existed = existed.filter(x => x.pos.z == Math.max.apply(Math, existed.map(ex => ex.pos.z)));
             if (existed.length > 0) {
                 existed.forEach(key => {
                     key.sprite.alpha = 0;
@@ -55,17 +58,31 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
                 });
             }
         }
+        setZIndex(x, y) {
+            return this.sprites.filter(block => block.pos.x == x && block.pos.y == y).length;
+        }
         isDublicate(x, y, frame) {
             return this.sprites.filter(block => block.pos.x == x && block.pos.y == y && block.tile == frame).length > 0;
         }
-        isCompatible(x, y) {
+        isCompatible(x, y, size) {
             if (x > Constants_1.Constants.mapWidth - 32 || y > Constants_1.Constants.mapHeight - 16) {
                 return false;
             }
             if (x < Constants_1.Constants.mapOffset.x || y < Constants_1.Constants.mapOffset.y - 32) {
                 return false;
             }
-            return true;
+            if (size) {
+                if (size.h > 16) {
+                    y += (size.h - 16) * 2;
+                }
+                if (size.w > 16) {
+                    x += (size.w - 16) * 2;
+                }
+                return true && this.isCompatible(x, y);
+            }
+            else {
+                return true;
+            }
         }
         getPointX(num) {
             let decimalNum = num / 32;

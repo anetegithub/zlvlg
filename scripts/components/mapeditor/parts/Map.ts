@@ -7,7 +7,8 @@ export class Map extends Phaser.Group {
         tile: string | number,
         pos: {
             x: number,
-            y: number
+            y: number,
+            z: number
         },
         sprite: Phaser.Sprite
     }[] = [];
@@ -30,7 +31,7 @@ export class Map extends Phaser.Group {
         let x = this.getPointX(value.pointer.x || Container.game.input.mouse.event.layerX);
         let y = this.getPointY(value.pointer.y || Container.game.input.mouse.event.layerY);
 
-        if (!this.isCompatible(x, y) || this.isDublicate(x, y, value.frame)) {
+        if (!this.isCompatible(x, y, { h: value.sprite.height, w: value.sprite.width }) || this.isDublicate(x, y, value.frame)) {
             return;
         }
 
@@ -43,7 +44,8 @@ export class Map extends Phaser.Group {
             tile: value.frame,
             pos: {
                 x: x,
-                y: y
+                y: y,
+                z: this.setZIndex(x, y)
             },
             sprite: spriteInMap
         });
@@ -57,7 +59,10 @@ export class Map extends Phaser.Group {
             return;
         }
 
-        let existed = this.sprites.filter(block => block.pos.x == x && block.pos.y == y);
+        let existed = this.sprites.filter(block => block.pos.x == x && block.pos.y == y)
+            .sort(x => x.pos.z);
+        existed = existed.filter(x => x.pos.z == Math.max.apply(Math, existed.map(ex => ex.pos.z)));
+
         if (existed.length > 0) {
             existed.forEach(key => {
                 key.sprite.alpha = 0;
@@ -69,11 +74,16 @@ export class Map extends Phaser.Group {
         }
     }
 
+    private setZIndex(x, y: number): number {
+        return this.sprites.filter(block => block.pos.x == x && block.pos.y == y).length;
+    }
+
     private isDublicate(x: number, y: number, frame: string | number) {
         return this.sprites.filter(block => block.pos.x == x && block.pos.y == y && block.tile == frame).length > 0;
     }
 
-    private isCompatible(x: number, y: number): boolean {
+    private isCompatible(x: number, y: number, size?: { h: number, w: number }): boolean {
+
         if (x > Constants.mapWidth - 32 || y > Constants.mapHeight - 16) {
             return false;
         }
@@ -82,7 +92,18 @@ export class Map extends Phaser.Group {
             return false;
         }
 
-        return true;
+        if (size) {
+            if (size.h > 16) {
+                y += (size.h - 16) * 2;
+            }
+            if (size.w > 16) {
+                x += (size.w - 16) * 2;
+            }
+
+            return true && this.isCompatible(x, y);
+        } else {
+            return true;
+        }
     }
 
     private getPointX(num: number) {
