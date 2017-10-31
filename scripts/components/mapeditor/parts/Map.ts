@@ -99,7 +99,6 @@ export class Map extends Phaser.Group {
             if (size.w > 16) {
                 x += (size.w - 16) * 2;
             }
-
             return true && this.isCompatible(x, y);
         } else {
             return true;
