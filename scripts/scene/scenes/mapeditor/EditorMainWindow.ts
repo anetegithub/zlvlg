@@ -29,7 +29,8 @@ export class EditorMainWindow extends BaseBackScene {
             this.removeBtn,
             this.previewPanel,
             this.mapGrid,
-            this.download
+            this.download,
+            this.upload
         ]
     }
 
@@ -85,6 +86,21 @@ export class EditorMainWindow extends BaseBackScene {
                     EditorMainWindow.prevGroup = spriteGroup;
                 }
             }
+        });
+    }
+
+    private get upload(): IManagedComponent {
+        return new SpriteButton({
+            x: Constants.mapWidth - 120,
+            y: Constants.gameWindowOffset.y,
+            text: '↑',
+            events: {
+                down: () => {
+                    this.editor.import();
+                }
+            },
+            initFrame: 'buttonSquare_blue',
+            pressedFrame: 'buttonSquare_blue_pressed'
         });
     }
 

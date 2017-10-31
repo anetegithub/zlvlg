@@ -19,6 +19,25 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
             dlAnchorElem.setAttribute("download", "scene.json");
             dlAnchorElem.click();
         }
+        import() {
+            let thisMap = this;
+            let fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.onchange = function () {
+                var files = fileInput.files;
+                console.log(files);
+                if (files.length <= 0) {
+                    return false;
+                }
+                var fr = new FileReader();
+                fr.onload = function (e) {
+                    var result = JSON.parse(e.target.result);
+                    thisMap.restoreMap(result);
+                };
+                fr.readAsText(files.item(0));
+            };
+            fileInput.click();
+        }
         setSprite(value) {
             let x = this.getPointX(value.pointer.x || IoC_1.Container.game.input.mouse.event.layerX);
             let y = this.getPointY(value.pointer.y || IoC_1.Container.game.input.mouse.event.layerY);
@@ -57,6 +76,17 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
                     return existed.indexOf(item) === -1;
                 });
             }
+        }
+        restoreMap(value) {
+            let sortedByZ = value.sort(x => x.pos.z);
+            sortedByZ.forEach(block => {
+                let spriteInMap = new Phaser.Sprite(IoC_1.Container.game, block.pos.x - Constants_1.Constants.mapOffset.x + 1, block.pos.y + 9, 'sprites', block.tile);
+                spriteInMap.scale.x = 2;
+                spriteInMap.scale.y = 2;
+                spriteInMap = IoC_1.Container.game.add.existing(spriteInMap);
+                block.sprite = spriteInMap;
+            });
+            this.sprites = sortedByZ;
         }
         setZIndex(x, y) {
             return this.sprites.filter(block => block.pos.x == x && block.pos.y == y).length;

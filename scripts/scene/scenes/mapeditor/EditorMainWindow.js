@@ -16,7 +16,8 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                 this.removeBtn,
                 this.previewPanel,
                 this.mapGrid,
-                this.download
+                this.download,
+                this.upload
             ];
         }
         get buttons() {
@@ -66,6 +67,20 @@ define(["require", "exports", "../../abstract/BaseBackScene", "../MainMenuScene"
                         EditorMainWindow.prevGroup = spriteGroup;
                     }
                 }
+            });
+        }
+        get upload() {
+            return new SpriteButton_1.SpriteButton({
+                x: Constants_1.Constants.mapWidth - 120,
+                y: Constants_1.Constants.gameWindowOffset.y,
+                text: '↑',
+                events: {
+                    down: () => {
+                        this.editor.import();
+                    }
+                },
+                initFrame: 'buttonSquare_blue',
+                pressedFrame: 'buttonSquare_blue_pressed'
             });
         }
         get download() {

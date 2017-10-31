@@ -27,6 +27,31 @@ export class Map extends Phaser.Group {
         dlAnchorElem.click();
     }
 
+    import() {
+        let thisMap = this;
+
+        let fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.onchange = function () {
+            var files = fileInput.files;
+
+            console.log(files);
+            if (files.length <= 0) {
+                return false;
+            }
+
+            var fr = new FileReader();
+
+            fr.onload = function (e: ProgressEvent) {
+                var result = JSON.parse((e.target as FileReader).result);
+                thisMap.restoreMap(result as any);
+            }
+
+            fr.readAsText(files.item(0));
+        };
+        fileInput.click();
+    }
+
     setSprite(value: { pointer: Phaser.Point, sprite: Phaser.Sprite, frame: string | number }) {
         let x = this.getPointX(value.pointer.x || Container.game.input.mouse.event.layerX);
         let y = this.getPointY(value.pointer.y || Container.game.input.mouse.event.layerY);
@@ -72,6 +97,26 @@ export class Map extends Phaser.Group {
                 return existed.indexOf(item) === -1;
             });
         }
+    }
+
+    private restoreMap(value: [{
+        tile: string | number,
+        pos: {
+            x: number,
+            y: number,
+            z: number
+        },
+        sprite: Phaser.Sprite
+    }]) {
+        let sortedByZ = value.sort(x => x.pos.z);
+        sortedByZ.forEach(block => {
+            let spriteInMap = new Phaser.Sprite(Container.game, block.pos.x - Constants.mapOffset.x + 1, block.pos.y + 9, 'sprites', block.tile);
+            spriteInMap.scale.x = 2;
+            spriteInMap.scale.y = 2;
+            spriteInMap = Container.game.add.existing(spriteInMap);
+            block.sprite = spriteInMap;
+        });
+        this.sprites = sortedByZ;
     }
 
     private setZIndex(x, y: number): number {

@@ -8,7 +8,7 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
                 onCancel: new Phaser.Signal(),
                 onPreview: new Phaser.Signal()
             };
-            this.cancelText = new Phaser.Text(IoC_1.Container.game, 64, 16, "Click mouse right button for cancel", {
+            this.cancelText = new Phaser.Text(IoC_1.Container.game, 64, 16, "Mouse right click for cancel", {
                 font: `bold 24pt  ` + Constants_1.Constants.fontFamily,
                 fill: "#FFFFFF",
                 align: 'center'

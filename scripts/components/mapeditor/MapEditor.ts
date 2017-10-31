@@ -20,6 +20,10 @@ export class MapEditor {
         this.map.export();
     }
 
+    import() {
+        this.map.import();
+    }
+
     private removing: boolean = false;
     private removingSprite = new Phaser.Sprite(Container.game, 0, 0, 'uifull', 'iconCross_blue');
     setDelete() {

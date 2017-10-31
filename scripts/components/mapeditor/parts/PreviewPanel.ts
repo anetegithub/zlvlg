@@ -18,7 +18,7 @@ export class PreviewPanel extends Phaser.Group {
     constructor() {
         super(Container.game);
 
-        this.cancelText = new Phaser.Text(Container.game, 64, 16, "Click mouse right button for cancel", {
+        this.cancelText = new Phaser.Text(Container.game, 64, 16, "Mouse right click for cancel", {
             font: `bold 24pt  ` + Constants.fontFamily,
             fill: "#FFFFFF",
             align: 'center'

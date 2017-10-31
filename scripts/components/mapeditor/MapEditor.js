@@ -17,6 +17,9 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
         export() {
             this.map.export();
         }
+        import() {
+            this.map.import();
+        }
         setDelete() {
             this.removing = true;
             this.previewPanel.setPreview(this.removingSprite);
