@@ -53,7 +53,7 @@ export class MapEditor {
                 if (!this.removing) {
                     this.map.setSprite({ pointer: pointer || { x: 0, y: 0 }, ...this.previewPanel.PreviewSprite });
                 } else {
-                    this.map.setDelete(this.removingSprite);
+                    this.map.setDelete(pointer || { x: 0, y: 0 }, this.removingSprite);
                 }
             }
             eventRef.onInputDown.add(() => {

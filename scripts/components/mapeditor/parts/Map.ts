@@ -13,7 +13,13 @@ export class Map extends Phaser.Group {
     }[] = [];
 
     export() {
-        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.sprites));
+        let map = this.sprites.map(val => {
+            return {
+                pos: val.pos,
+                tile: val.tile
+            }
+        });
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(map));
         var dlAnchorElem = document.createElement('a');
         dlAnchorElem.setAttribute("href", dataStr);
         dlAnchorElem.setAttribute("download", "scene.json");
@@ -24,7 +30,7 @@ export class Map extends Phaser.Group {
         let x = this.getPointX(value.pointer.x || Container.game.input.mouse.event.layerX);
         let y = this.getPointY(value.pointer.y || Container.game.input.mouse.event.layerY);
 
-        if (!this.isCompatible(x, y)) {
+        if (!this.isCompatible(x, y) || this.isDublicate(x, y, value.frame)) {
             return;
         }
 
@@ -43,20 +49,28 @@ export class Map extends Phaser.Group {
         });
     }
 
-    setDelete(value: Phaser.Sprite) {
-        let x = this.getPointX(Container.game.input.mouse.event.layerX);
-        let y = this.getPointY(Container.game.input.mouse.event.layerY);
+    setDelete(pointer: Phaser.Point, value: Phaser.Sprite) {
+        let x = this.getPointX(pointer.x || Container.game.input.mouse.event.layerX);
+        let y = this.getPointY(pointer.y || Container.game.input.mouse.event.layerY);
 
         if (!this.isCompatible(x, y)) {
             return;
         }
 
-        let existed = this.sprites.find(block => block.pos.x == x && block.pos.y == y);
-        if (existed != null) {
-            existed.sprite.alpha = 0;
-            existed.sprite.visible = false;
-            this.sprites = this.sprites.splice(this.sprites.indexOf(existed), 1);
+        let existed = this.sprites.filter(block => block.pos.x == x && block.pos.y == y);
+        if (existed.length > 0) {
+            existed.forEach(key => {
+                key.sprite.alpha = 0;
+                key.sprite.visible = false;
+            });
+            this.sprites = this.sprites.filter(function (item) {
+                return existed.indexOf(item) === -1;
+            });
         }
+    }
+
+    private isDublicate(x: number, y: number, frame: string | number) {
+        return this.sprites.filter(block => block.pos.x == x && block.pos.y == y && block.tile == frame).length > 0;
     }
 
     private isCompatible(x: number, y: number): boolean {
@@ -76,6 +90,7 @@ export class Map extends Phaser.Group {
         let numParts = this.getDecimalPair(decimalNum);
         return (numParts.int + (numParts.decimal > 0.5 ? 1 : 0)) * 32;
     }
+
     private getPointY(num: number) {
         let decimalNum = num / 32;
         let numParts = this.getDecimalPair(decimalNum);

@@ -43,7 +43,7 @@ define(["require", "exports", "../../utils/globals/IoC", "./parts/MapGrid", "./p
                         this.map.setSprite(Object.assign({ pointer: pointer || { x: 0, y: 0 } }, this.previewPanel.PreviewSprite));
                     }
                     else {
-                        this.map.setDelete(this.removingSprite);
+                        this.map.setDelete(pointer || { x: 0, y: 0 }, this.removingSprite);
                     }
                 };
                 eventRef.onInputDown.add(() => {
