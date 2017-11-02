@@ -115,6 +115,7 @@ export class Map extends Phaser.Group {
             spriteInMap.scale.y = 2;
             spriteInMap = Container.game.add.existing(spriteInMap);
             block.sprite = spriteInMap;
+            block.tile = spriteInMap.frameName;
         });
         this.sprites = sortedByZ;
     }

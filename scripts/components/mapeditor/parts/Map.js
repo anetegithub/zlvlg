@@ -85,6 +85,7 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
                 spriteInMap.scale.y = 2;
                 spriteInMap = IoC_1.Container.game.add.existing(spriteInMap);
                 block.sprite = spriteInMap;
+                block.tile = spriteInMap.frameName;
             });
             this.sprites = sortedByZ;
         }

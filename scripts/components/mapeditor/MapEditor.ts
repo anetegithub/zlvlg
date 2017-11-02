@@ -46,8 +46,6 @@ export class MapEditor {
         return this._previewPanel;
     }
 
-
-
     private _mapGrid: MapGrid;
     get mapGrid(): MapGrid {
         if (!this._mapGrid) {

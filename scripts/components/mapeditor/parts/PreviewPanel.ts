@@ -52,7 +52,7 @@ export class PreviewPanel extends Phaser.Group {
     public get PreviewSprite(): { sprite: Phaser.Sprite, frame: string | number } {
         return {
             sprite: new Phaser.Sprite(Container.game, 0, 0, this.preview.generateTexture()),
-            frame: this.preview.frame
+            frame: this.preview.frameName
         };
     }
 

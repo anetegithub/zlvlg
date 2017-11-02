@@ -35,7 +35,7 @@ define(["require", "exports", "../../../utils/globals/IoC", "../../../utils/glob
         get PreviewSprite() {
             return {
                 sprite: new Phaser.Sprite(IoC_1.Container.game, 0, 0, this.preview.generateTexture()),
-                frame: this.preview.frame
+                frame: this.preview.frameName
             };
         }
         cursorPreview(pointer, x, y, click) {
