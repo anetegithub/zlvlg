@@ -8,6 +8,8 @@ import { Sex } from "../../../game/enums/Sex";
 import { SexSelect } from "./SexSelect";
 import { ManagedText } from "../../../ui/impl/text/ManagedText";
 import { TextFactory } from "../../../utils/ui/textfactory/TextFactory";
+import { EventApplier } from "../../../utils/ui/EventApplier";
+import { Container } from "../../../utils/globals/IoC";
 
 export class ClassSelect extends BaseBackScene {
     backScene: new (...args: any[]) => IScene = SexSelect;
@@ -57,6 +59,7 @@ export class ClassSelect extends BaseBackScene {
         return ["warrior", "ranger", "rogue", "priest", "wizard"].map(element => {
             return new ManagedComponent(game => {
                 let background = new Phaser.Sprite(game, x, y, Constants.uiAssert, "panel_blue");
+                background.inputEnabled = true;
 
                 let character = new Doll(game, ((background.width - 64) / 2) + x, ((background.height - 64) / 2) + y, element, null, this.sex);
                 character.setAnim("exceptDeath", true);
@@ -67,12 +70,21 @@ export class ClassSelect extends BaseBackScene {
                     y: (background.y + background.height) + 2
                 });
                 text.x = (background.width - text.width) / 2 + background.x;
+                text.inputEnabled = true;
 
                 x += background.width + 16;
 
-                game.add.existing(background);
-                game.add.existing(character);
-                game.add.existing(text);
+                let group = new Phaser.Group(game);
+                group.add(background);
+                group.add(character);
+                group.add(text);
+
+                group.onChildInputOver.add(() => Container.setCursor("point"));
+                group.onChildInputOut.add(() => Container.setCursor('cursor'));
+                group.onChildInputUp.add(() => Container.setCursor('cursor'));
+                group.onChildInputDown.add(() => Container.setCursor('cursor'));
+
+                game.add.existing(group);
             });
         });
     }

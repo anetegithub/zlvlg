@@ -8,6 +8,7 @@ export class Doll extends Phaser.Sprite {
         this.scale.y = 2;
         this.sex = sex || Sex.Male;
         this.fillanimationStore();
+        this.inputEnabled = true;
     }
 
     private sex: Sex;

@@ -7,7 +7,7 @@ import { ManagedText } from "../../../ui/impl/text/ManagedText";
 import { Constants } from "../../../utils/globals/Constants";
 
 export class SexSelect extends BaseBackScene {
-    backScene: new (...args: any[]) => NicknameInput;
+    backScene: new (...args: any[]) => IScene = NicknameInput;
     clear: boolean = true;
 
     get components(): IManagedComponent[] {

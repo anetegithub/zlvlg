@@ -1,9 +1,10 @@
-define(["require", "exports", "../../abstract/BaseBackScene", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../game/enums/Sex", "./ClassSelect", "../../../ui/impl/text/ManagedText", "../../../utils/globals/Constants"], function (require, exports, BaseBackScene_1, SpriteButton_1, Sex_1, ClassSelect_1, ManagedText_1, Constants_1) {
+define(["require", "exports", "../../abstract/BaseBackScene", "./NicknameInput", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../game/enums/Sex", "./ClassSelect", "../../../ui/impl/text/ManagedText", "../../../utils/globals/Constants"], function (require, exports, BaseBackScene_1, NicknameInput_1, SpriteButton_1, Sex_1, ClassSelect_1, ManagedText_1, Constants_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class SexSelect extends BaseBackScene_1.BaseBackScene {
         constructor() {
             super(...arguments);
+            this.backScene = NicknameInput_1.NicknameInput;
             this.clear = true;
         }
         get components() {

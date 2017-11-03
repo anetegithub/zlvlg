@@ -1,4 +1,4 @@
-define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../abstract/BaseBackScene", "../../../game/objects/Doll", "./SexSelect", "../../../ui/impl/text/ManagedText", "../../../utils/ui/textfactory/TextFactory"], function (require, exports, ManagedComponent_1, Constants_1, BaseBackScene_1, Doll_1, SexSelect_1, ManagedText_1, TextFactory_1) {
+define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../abstract/BaseBackScene", "../../../game/objects/Doll", "./SexSelect", "../../../ui/impl/text/ManagedText", "../../../utils/ui/textfactory/TextFactory", "../../../utils/globals/IoC"], function (require, exports, ManagedComponent_1, Constants_1, BaseBackScene_1, Doll_1, SexSelect_1, ManagedText_1, TextFactory_1, IoC_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class ClassSelect extends BaseBackScene_1.BaseBackScene {
@@ -42,6 +42,7 @@ define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../
             return ["warrior", "ranger", "rogue", "priest", "wizard"].map(element => {
                 return new ManagedComponent_1.ManagedComponent(game => {
                     let background = new Phaser.Sprite(game, x, y, Constants_1.Constants.uiAssert, "panel_blue");
+                    background.inputEnabled = true;
                     let character = new Doll_1.Doll(game, ((background.width - 64) / 2) + x, ((background.height - 64) / 2) + y, element, null, this.sex);
                     character.setAnim("exceptDeath", true);
                     let text = TextFactory_1.TextFactory.new({
@@ -50,10 +51,17 @@ define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../
                         y: (background.y + background.height) + 2
                     });
                     text.x = (background.width - text.width) / 2 + background.x;
+                    text.inputEnabled = true;
                     x += background.width + 16;
-                    game.add.existing(background);
-                    game.add.existing(character);
-                    game.add.existing(text);
+                    let group = new Phaser.Group(game);
+                    group.add(background);
+                    group.add(character);
+                    group.add(text);
+                    group.onChildInputOver.add(() => IoC_1.Container.setCursor("point"));
+                    group.onChildInputOut.add(() => IoC_1.Container.setCursor('cursor'));
+                    group.onChildInputUp.add(() => IoC_1.Container.setCursor('cursor'));
+                    group.onChildInputDown.add(() => IoC_1.Container.setCursor('cursor'));
+                    game.add.existing(group);
                 });
             });
         }

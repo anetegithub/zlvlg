@@ -8,6 +8,7 @@ define(["require", "exports", "../../utils/globals/ArrayExtensions", "../enums/S
             this.scale.y = 2;
             this.sex = sex || Sex_1.Sex.Male;
             this.fillanimationStore();
+            this.inputEnabled = true;
         }
         fillanimationStore() {
             let start = this.sex * 50;
