@@ -3,5 +3,6 @@ interface IButtonArgs<T extends PIXI.Sprite> {
     y?: number;
     text?: string;
     fontStyle?: Phaser.PhaserTextStyle,
+    fontSize?: number,
     events?: IMouseEvents<T>
 }

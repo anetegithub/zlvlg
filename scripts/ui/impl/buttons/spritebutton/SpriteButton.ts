@@ -29,7 +29,7 @@ export class SpriteButton extends BaseButton<Phaser.Button> {
         super.release(game);
 
         let fontStyle = {
-            font: '18pt ' + Constants.fontFamily,
+            font: (this.args.fontSize || 24) + 'pt ' + Constants.fontFamily,
             fill: '#ffffff'
         };
 

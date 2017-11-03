@@ -34,4 +34,7 @@ export class Constants {
         x: 16,
         y: 2
     };
+
+    static uiAssert: string = "uifull";
+    static spriteAssert: string = "sprites"
 }

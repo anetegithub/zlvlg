@@ -30,5 +30,7 @@ define(["require", "exports", "./IoC"], function (require, exports, IoC_1) {
         x: 16,
         y: 2
     };
+    Constants.uiAssert = "uifull";
+    Constants.spriteAssert = "sprites";
     exports.Constants = Constants;
 });

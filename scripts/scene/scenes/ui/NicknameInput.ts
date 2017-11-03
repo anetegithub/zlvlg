@@ -7,6 +7,8 @@ import { SpriteButton } from "../../../ui/impl/buttons/spritebutton/SpriteButton
 import { } from "../../../../node_modules/@orange-games/phaser-input/build/phaser-input";
 import { BaseBackScene } from "../../abstract/BaseBackScene";
 import { MainMenuScene } from "../MainMenuScene";
+import { ClassSelect } from "./ClassSelect";
+import { SexSelect } from "./SexSelect";
 
 export class NicknameInput extends BaseBackScene {
     backScene = MainMenuScene;
@@ -73,7 +75,11 @@ export class NicknameInput extends BaseBackScene {
             y: Constants.centerY,
             text: 'Ok',
             events: {
-                up: () => { console.log(this.inputElement.value) }
+                up: () => {
+                    if (this.inputElement.value) {
+                        new SexSelect().run();
+                    }
+                }
             },
             initFrame: 'buttonSquare_blue',
             pressedFrame: 'buttonSquare_blue_pressed'

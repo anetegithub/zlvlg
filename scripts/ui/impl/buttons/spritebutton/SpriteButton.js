@@ -16,7 +16,7 @@ define(["require", "exports", "../../../../utils/globals/Constants", "../BaseBut
         release(game) {
             super.release(game);
             let fontStyle = {
-                font: '18pt ' + Constants_1.Constants.fontFamily,
+                font: (this.args.fontSize || 24) + 'pt ' + Constants_1.Constants.fontFamily,
                 fill: '#ffffff'
             };
             let text = TextFactory_1.TextFactory.new({

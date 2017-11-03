@@ -3,7 +3,6 @@ import { } from "../interfaces/IScene";
 import { Container } from "../../utils/globals/IoC";
 
 export abstract class BaseScene implements IScene {
-    abstract name: string;
     abstract clear: boolean;
 
     constructor() {

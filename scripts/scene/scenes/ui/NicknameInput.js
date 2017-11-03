@@ -1,4 +1,4 @@
-define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../abstract/BaseBackScene", "../MainMenuScene"], function (require, exports, ManagedText_1, IoC_1, ManagedComponent_1, Constants_1, SpriteButton_1, BaseBackScene_1, MainMenuScene_1) {
+define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../abstract/BaseBackScene", "../MainMenuScene", "./SexSelect"], function (require, exports, ManagedText_1, IoC_1, ManagedComponent_1, Constants_1, SpriteButton_1, BaseBackScene_1, MainMenuScene_1, SexSelect_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class NicknameInput extends BaseBackScene_1.BaseBackScene {
@@ -59,7 +59,11 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
                 y: Constants_1.Constants.centerY,
                 text: 'Ok',
                 events: {
-                    up: () => { console.log(this.inputElement.value); }
+                    up: () => {
+                        if (this.inputElement.value) {
+                            new SexSelect_1.SexSelect().run();
+                        }
+                    }
                 },
                 initFrame: 'buttonSquare_blue',
                 pressedFrame: 'buttonSquare_blue_pressed'
