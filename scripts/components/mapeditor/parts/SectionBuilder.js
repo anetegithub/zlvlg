@@ -28,16 +28,8 @@ define(["require", "exports", "../../../utils/graphics/SpriteMap", "../../../uti
             sprite.scale.x = 2;
             sprite.scale.y = 2;
             sprite.inputEnabled = true;
-            sprite.events.onInputUp.add(() => {
-                console.log(tile.filename);
-            });
             EventApplier_1.EventApplier.applyMouse(sprite);
             blocks.push(sprite);
-            // let graph = new Phaser.Graphics(Container.game, x, y);
-            // graph.lineStyle(1, 0xd3d3d3, 1);
-            // graph.drawRect(x, y, sprite.width, sprite.height);
-            // let border = new Phaser.Sprite(Container.game, x, y, graph.generateTexture());
-            // blocks.push(border);
         }
         static checkRowOverflow(rowSwitcher, currentX) {
             if (rowSwitcher == 23) {

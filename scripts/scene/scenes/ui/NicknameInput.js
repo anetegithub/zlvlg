@@ -59,7 +59,7 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
                 y: Constants_1.Constants.centerY,
                 text: 'Ok',
                 events: {
-                    up: () => {
+                    down: () => {
                         if (this.inputElement.value) {
                             new SexSelect_1.SexSelect().run();
                         }

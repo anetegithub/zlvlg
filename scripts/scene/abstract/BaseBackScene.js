@@ -19,7 +19,7 @@ define(["require", "exports", "../../utils/globals/Constants", "../../ui/impl/bu
                 y: Constants_1.Constants.gameWindowOffset.y,
                 text: '<',
                 events: {
-                    up: () => {
+                    down: () => {
                         if (this.onBack) {
                             this.onBack();
                         }

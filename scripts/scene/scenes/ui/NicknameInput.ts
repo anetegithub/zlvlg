@@ -75,7 +75,7 @@ export class NicknameInput extends BaseBackScene {
             y: Constants.centerY,
             text: 'Ok',
             events: {
-                up: () => {
+                down: () => {
                     if (this.inputElement.value) {
                         new SexSelect().run();
                     }

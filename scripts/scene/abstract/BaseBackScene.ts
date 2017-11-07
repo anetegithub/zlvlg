@@ -27,7 +27,7 @@ export abstract class BaseBackScene extends SpriteMapScene {
             y: Constants.gameWindowOffset.y,
             text: '<',
             events: {
-                up: () => {
+                down: () => {
                     if (this.onBack) {
                         this.onBack();
                     }
