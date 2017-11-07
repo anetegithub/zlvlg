@@ -21,4 +21,12 @@ export class Container {
     static setCursor(key: keyof { cursor, hand, point }) {
         document.getElementById('content').style.cursor = `url("./images/ui/cursors/${key}.png"), auto`;
     }
+
+    static register(key: string, value: any) {
+        Container[key] = value;
+    }
+
+    static resolve<T>(key: string): T {
+        return Container[key];
+    }
 }

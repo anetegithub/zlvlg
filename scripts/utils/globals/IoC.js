@@ -12,6 +12,12 @@ define(["require", "exports"], function (require, exports) {
         static setCursor(key) {
             document.getElementById('content').style.cursor = `url("./images/ui/cursors/${key}.png"), auto`;
         }
+        static register(key, value) {
+            Container[key] = value;
+        }
+        static resolve(key) {
+            return Container[key];
+        }
     }
     Container.debug = [];
     Container.initActions = [];

@@ -9,6 +9,7 @@ import { BaseBackScene } from "../../abstract/BaseBackScene";
 import { MainMenuScene } from "../MainMenuScene";
 import { ClassSelect } from "./ClassSelect";
 import { SexSelect } from "./SexSelect";
+import { CreateCharacterState } from "../../../data/struct/CreateCharacterState";
 
 export class NicknameInput extends BaseBackScene {
     backScene = MainMenuScene;
@@ -76,7 +77,11 @@ export class NicknameInput extends BaseBackScene {
             text: 'Ok',
             events: {
                 down: () => {
-                    if (this.inputElement.value) {
+                    const value = this.inputElement.value
+                    if (value) {
+                        let charState = new CreateCharacterState();
+                        charState.name = value;
+                        Container.register("createCharater", charState);
                         new SexSelect().run();
                     }
                 }

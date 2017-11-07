@@ -15,7 +15,7 @@ export class GameStorage {
         };
     }
 
-    async empty(table: Tables): Promise<boolean> {
+    async isempty(table: Tables): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             try {
                 let request = this.db.transaction(table, "readonly")

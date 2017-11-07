@@ -5,6 +5,7 @@ import { Sex } from "../../../game/enums/Sex";
 import { ClassSelect } from "./ClassSelect";
 import { ManagedText } from "../../../ui/impl/text/ManagedText";
 import { Constants } from "../../../utils/globals/Constants";
+import { Container } from "../../../utils/globals/IoC";
 
 export class SexSelect extends BaseBackScene {
     backScene: new (...args: any[]) => IScene = NicknameInput;
@@ -40,6 +41,7 @@ export class SexSelect extends BaseBackScene {
             y: Constants.centerY - 20,
             events: {
                 down: () => {
+                    console.log(Container["nick"])
                     new ClassSelect(sex).run();
                 }
             }

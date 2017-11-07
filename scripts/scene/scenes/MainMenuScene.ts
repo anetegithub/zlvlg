@@ -78,13 +78,12 @@ export class MainMenuScene extends SpriteMapScene {
     }
 
     async loadSave(): Promise<TextButton> {
-
         let config: IButtonArgs<Phaser.Text> = {
             y: 415,
             text: 'Load Game'
         };
 
-        if (await Container.db.empty(Tables.games)) {
+        if (await Container.db.isempty(Tables.games)) {
             config.events = {
                 down: () => {
                     console.log('load');

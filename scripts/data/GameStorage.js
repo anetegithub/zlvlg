@@ -13,7 +13,7 @@ define(["require", "exports", "./Tables"], function (require, exports, Tables_1)
                 context.init(Tables_1.Tables.games);
             };
         }
-        async empty(table) {
+        async isempty(table) {
             return new Promise((resolve, reject) => {
                 try {
                     let request = this.db.transaction(table, "readonly")

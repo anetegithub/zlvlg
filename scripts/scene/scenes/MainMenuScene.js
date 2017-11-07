@@ -66,7 +66,7 @@ define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "..
                 y: 415,
                 text: 'Load Game'
             };
-            if (await IoC_1.Container.db.empty(Tables_1.Tables.games)) {
+            if (await IoC_1.Container.db.isempty(Tables_1.Tables.games)) {
                 config.events = {
                     down: () => {
                         console.log('load');
