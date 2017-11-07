@@ -16,9 +16,9 @@ export class NicknameInput extends BaseBackScene {
     name: string = 'NicknameInput';
     clear: boolean = true;
 
-    get components(): IManagedComponent[] {
+    async components(): Promise<IManagedComponent[]> {
         return [
-            ...super.components,
+            ...(await super.components()),
             this.title,
             this.input,
             this.okButton

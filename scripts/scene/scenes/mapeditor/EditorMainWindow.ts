@@ -22,9 +22,9 @@ export class EditorMainWindow extends BaseBackScene {
         this.editor = new MapEditor();
     }
 
-    protected get components(): IManagedComponent[] {
+    protected async components(): Promise<IManagedComponent[]> {
         return [
-            ...super.components,
+            ...(await super.components()),
             ...this.buttons,
             this.removeBtn,
             this.previewPanel,

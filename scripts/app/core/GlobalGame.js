@@ -1,4 +1,4 @@
-define(["require", "exports", "../../utils/globals/IoC", "../../utils/globals/Constants"], function (require, exports, IoC_1, Constants_1) {
+define(["require", "exports", "../../utils/globals/IoC", "../../utils/globals/Constants", "../../data/GameStorage"], function (require, exports, IoC_1, Constants_1, GameStorage_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -17,6 +17,7 @@ define(["require", "exports", "../../utils/globals/IoC", "../../utils/globals/Co
             this.game['args'] = this.args;
             this.game['inited'] = this.inited;
             IoC_1.Container.game = this.game;
+            IoC_1.Container.db = new GameStorage_1.GameStorage();
         }
         preload() {
             this.game.add.plugin(PhaserInput.Plugin);

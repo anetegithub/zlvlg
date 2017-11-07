@@ -3,6 +3,7 @@ import { } from "../../../node_modules/@orange-games/phaser-input/build/phaser-i
 import { GlobalArgs } from "./GlobalArgs";
 import { Container } from "../../utils/globals/IoC";
 import { Constants } from "../../utils/globals/Constants";
+import { GameStorage } from "../../data/GameStorage";
 
 /**
  * Initialize container
@@ -25,6 +26,7 @@ export class GlobalGame {
         this.game['args'] = this.args;
         this.game['inited'] = this.inited;
         Container.game = this.game;
+        Container.db = new GameStorage();
     }
 
     preload() {

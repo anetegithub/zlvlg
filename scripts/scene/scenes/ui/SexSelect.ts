@@ -10,9 +10,9 @@ export class SexSelect extends BaseBackScene {
     backScene: new (...args: any[]) => IScene = NicknameInput;
     clear: boolean = true;
 
-    get components(): IManagedComponent[] {
+    async components(): Promise<IManagedComponent[]> {
         return [
-            ...super.components,
+            ...(await super.components()),
             this.title,
             this.sexButton(Sex.Male),
             this.sexButton(Sex.Female)

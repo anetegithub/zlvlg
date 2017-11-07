@@ -9,15 +9,15 @@ export abstract class BaseScene implements IScene {
         document.getElementById('content').style.cursor = `url("./images/ui/cursors/cursor.png"), auto`;
     }
 
-    run(): void {
+    async run(): Promise<void> {
         if (this.clear) {
             Container.game.world.removeAll(true, true);
         }
 
         if (this.resources) {
+            let resources = await this.resources();
             var loader = new Phaser.Loader(Container.game);
-
-            this.resources.forEach(res => {
+            resources.forEach(res => {
                 if (res.type) {
                     loader[res.type](res.key, res.url, ...(res.args || []));
                 } else {
@@ -36,9 +36,10 @@ export abstract class BaseScene implements IScene {
         }
     }
 
-    private releaseComponents() {
+    private async releaseComponents() {
         if (this.components) {
-            this.components.forEach(this.releaseComponent);
+            let components = await this.components();
+            components.forEach(this.releaseComponent);
         }
     }
 
@@ -46,6 +47,6 @@ export abstract class BaseScene implements IScene {
         resource.release(Container.game);
     }
 
-    protected abstract get components(): IManagedComponent[];
-    protected abstract get resources(): ILoadedResource[];
+    protected abstract components(): Promise<IManagedComponent[]>;
+    protected abstract resources(): Promise<ILoadedResource[]>;
 }

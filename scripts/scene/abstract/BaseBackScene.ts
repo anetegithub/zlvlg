@@ -7,13 +7,13 @@ import { SpriteMapScene } from "./SpriteMapScene";
 
 export abstract class BaseBackScene extends SpriteMapScene {
 
-    protected get resources(): ILoadedResource[] {
+    protected async resources(): Promise<ILoadedResource[]> {
         return [
-            ...super.resources
-        ]
+            ...(await super.resources())
+        ];
     }
 
-    protected get components(): IManagedComponent[] {
+    protected async components(): Promise<IManagedComponent[]> {
         return [
             this.backBtn
         ];

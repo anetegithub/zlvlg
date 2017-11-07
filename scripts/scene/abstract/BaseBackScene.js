@@ -2,12 +2,12 @@ define(["require", "exports", "../../utils/globals/Constants", "../../ui/impl/bu
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class BaseBackScene extends SpriteMapScene_1.SpriteMapScene {
-        get resources() {
+        async resources() {
             return [
-                ...super.resources
+                ...(await super.resources())
             ];
         }
-        get components() {
+        async components() {
             return [
                 this.backBtn
             ];

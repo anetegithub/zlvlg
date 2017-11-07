@@ -7,9 +7,9 @@ define(["require", "exports", "../../abstract/BaseBackScene", "./NicknameInput",
             this.backScene = NicknameInput_1.NicknameInput;
             this.clear = true;
         }
-        get components() {
+        async components() {
             return [
-                ...super.components,
+                ...(await super.components()),
                 this.title,
                 this.sexButton(Sex_1.Sex.Male),
                 this.sexButton(Sex_1.Sex.Female)

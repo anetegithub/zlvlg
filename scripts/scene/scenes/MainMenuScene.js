@@ -1,4 +1,4 @@
-define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow", "../abstract/SpriteMapScene"], function (require, exports, TextButton_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1, SpriteMapScene_1) {
+define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow", "../abstract/SpriteMapScene", "../../data/Tables"], function (require, exports, TextButton_1, IoC_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1, SpriteMapScene_1, Tables_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class MainMenuScene extends SpriteMapScene_1.SpriteMapScene {
@@ -7,17 +7,17 @@ define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "..
             this.name = "MainMenu";
             this.clear = true;
         }
-        get resources() {
+        async resources() {
             return [
-                ...super.resources,
+                ...(await super.resources()),
                 { key: 'logo', url: './images/environment/splash.png' },
             ];
         }
-        get components() {
+        async components() {
             return [
                 this.splash,
                 this.newGame,
-                this.loadSave,
+                await this.loadSave(),
                 this.title,
                 this.mapEditor,
                 this.license
@@ -61,14 +61,24 @@ define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "..
                 }
             });
         }
-        get loadSave() {
-            var style = this.fontStyle;
-            style.fill = '#929293';
-            return new TextButton_1.TextButton({
-                fontStyle: style,
+        async loadSave() {
+            let config = {
                 y: 415,
                 text: 'Load Game'
-            });
+            };
+            if (await IoC_1.Container.db.empty(Tables_1.Tables.games)) {
+                config.events = {
+                    down: () => {
+                        console.log('load');
+                    }
+                };
+            }
+            else {
+                var style = this.fontStyle;
+                style.fill = '#929293';
+                config.fontStyle = style;
+            }
+            return await new TextButton_1.TextButton(config);
         }
         get mapEditor() {
             return new TextButton_1.TextButton({

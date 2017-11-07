@@ -5,13 +5,14 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
         constructor() {
             document.getElementById('content').style.cursor = `url("./images/ui/cursors/cursor.png"), auto`;
         }
-        run() {
+        async run() {
             if (this.clear) {
                 IoC_1.Container.game.world.removeAll(true, true);
             }
             if (this.resources) {
+                let resources = await this.resources();
                 var loader = new Phaser.Loader(IoC_1.Container.game);
-                this.resources.forEach(res => {
+                resources.forEach(res => {
                     if (res.type) {
                         loader[res.type](res.key, res.url, ...(res.args || []));
                     }
@@ -28,9 +29,10 @@ define(["require", "exports", "../../utils/globals/IoC"], function (require, exp
                 this.releaseComponents();
             }
         }
-        releaseComponents() {
+        async releaseComponents() {
             if (this.components) {
-                this.components.forEach(this.releaseComponent);
+                let components = await this.components();
+                components.forEach(this.releaseComponent);
             }
         }
         releaseComponent(resource) {

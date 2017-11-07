@@ -2,7 +2,7 @@ define(["require", "exports", "./BaseScene"], function (require, exports, BaseSc
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class SpriteMapScene extends BaseScene_1.BaseScene {
-        get resources() {
+        async resources() {
             return [
                 {
                     key: 'sprites', url: './images/environment/assets/fullset.png', type: 'atlas', args: [

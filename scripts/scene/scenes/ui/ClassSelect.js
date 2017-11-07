@@ -8,9 +8,9 @@ define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../
             this.clear = true;
             this.sex = sex;
         }
-        get resources() {
+        async resources() {
             return [
-                ...super.resources,
+                ...(await super.resources()),
                 { key: 'warrior', url: './images/dolls/warrior.png', type: 'spritesheet', args: [32, 32], },
                 { key: 'ranger', url: './images/dolls/ranger.png', type: 'spritesheet', args: [32, 32], },
                 { key: 'rogue', url: './images/dolls/rogue.png', type: 'spritesheet', args: [32, 32], },
@@ -18,9 +18,9 @@ define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../
                 { key: 'wizard', url: './images/dolls/wizard.png', type: 'spritesheet', args: [32, 32], },
             ];
         }
-        get components() {
+        async components() {
             return [
-                ...super.components,
+                ...(await super.components()),
                 this.title,
                 ...this.classTabs
             ];

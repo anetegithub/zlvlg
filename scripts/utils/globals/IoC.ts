@@ -1,5 +1,9 @@
+import { GameStorage } from "../../data/GameStorage";
+
 export class Container {
     static game: Phaser.Game
+
+    static db: GameStorage;
 
     static debug: Function[] = [];
 

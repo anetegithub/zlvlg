@@ -8,23 +8,24 @@ import { ManagedComponent } from "../../app/core/impl/ManagedComponent";
 import { EditorMainWindow } from "./mapeditor/EditorMainWindow";
 import { SpriteMapScene } from "../abstract/SpriteMapScene";
 import { SpriteButton } from "../../ui/impl/buttons/spritebutton/SpriteButton";
+import { Tables } from "../../data/Tables";
 
 export class MainMenuScene extends SpriteMapScene {
     name: string = "MainMenu";
     clear: boolean = true;
 
-    protected get resources(): ILoadedResource[] {
+    protected async resources(): Promise<ILoadedResource[]> {
         return [
-            ...super.resources,
+            ...(await super.resources()),
             { key: 'logo', url: './images/environment/splash.png' },
         ]
     }
 
-    protected get components(): IManagedComponent[] {
+    protected async components(): Promise<IManagedComponent[]> {
         return [
             this.splash,
             this.newGame,
-            this.loadSave,
+            await this.loadSave(),
             this.title,
             this.mapEditor,
             this.license
@@ -76,15 +77,26 @@ export class MainMenuScene extends SpriteMapScene {
         });
     }
 
-    get loadSave(): TextButton {
-        var style = this.fontStyle;
-        style.fill = '#929293';
+    async loadSave(): Promise<TextButton> {
 
-        return new TextButton({
-            fontStyle: style,
+        let config: IButtonArgs<Phaser.Text> = {
             y: 415,
             text: 'Load Game'
-        });
+        };
+
+        if (await Container.db.empty(Tables.games)) {
+            config.events = {
+                down: () => {
+                    console.log('load');
+                }
+            }
+        } else {
+            var style = this.fontStyle;
+            style.fill = '#929293';
+            config.fontStyle = style;
+        }
+
+        return await new TextButton(config);
     }
 
     get mapEditor(): TextButton {

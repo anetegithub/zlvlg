@@ -8,9 +8,9 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
             this.name = 'NicknameInput';
             this.clear = true;
         }
-        get components() {
+        async components() {
             return [
-                ...super.components,
+                ...(await super.components()),
                 this.title,
                 this.input,
                 this.okButton

@@ -4,7 +4,7 @@ export abstract class SpriteMapScene extends BaseScene {
     private static jsonAtlasUrl = './images/environment/assets/fullset.json';
     private static jsonAtlasUi = './images/ui/assets/uipack_rpg_sheet.json';
 
-    protected get resources(): ILoadedResource[] {
+    protected async resources(): Promise<ILoadedResource[]> {
         return [
             {
                 key: 'sprites', url: './images/environment/assets/fullset.png', type: 'atlas', args: [

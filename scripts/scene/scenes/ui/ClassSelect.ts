@@ -22,9 +22,9 @@ export class ClassSelect extends BaseBackScene {
         this.sex = sex;
     }
 
-    protected get resources(): ILoadedResource[] {
+    protected async resources(): Promise<ILoadedResource[]> {
         return [
-            ...super.resources,
+            ...(await super.resources()),
             { key: 'warrior', url: './images/dolls/warrior.png', type: 'spritesheet', args: [32, 32], },
             { key: 'ranger', url: './images/dolls/ranger.png', type: 'spritesheet', args: [32, 32], },
             { key: 'rogue', url: './images/dolls/rogue.png', type: 'spritesheet', args: [32, 32], },
@@ -33,9 +33,9 @@ export class ClassSelect extends BaseBackScene {
         ];
     }
 
-    protected get components(): IManagedComponent[] {
+    protected async components(): Promise<IManagedComponent[]> {
         return [
-            ...super.components,
+            ...(await super.components()),
             this.title,
             ...this.classTabs
         ];
