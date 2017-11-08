@@ -1,4 +1,4 @@
-define(["require", "exports", "../../abstract/BaseBackScene", "./NicknameInput", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../game/enums/Sex", "./ClassSelect", "../../../ui/impl/text/ManagedText", "../../../utils/globals/Constants", "../../../utils/globals/IoC"], function (require, exports, BaseBackScene_1, NicknameInput_1, SpriteButton_1, Sex_1, ClassSelect_1, ManagedText_1, Constants_1, IoC_1) {
+define(["require", "exports", "../../abstract/BaseBackScene", "./NicknameInput", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../game/enums/Sex", "./ClassSelect", "../../../ui/impl/text/ManagedText", "../../../utils/globals/Constants", "../../../utils/globals/IoC", "../../../data/struct/CreateCharacterState"], function (require, exports, BaseBackScene_1, NicknameInput_1, SpriteButton_1, Sex_1, ClassSelect_1, ManagedText_1, Constants_1, IoC_1, CreateCharacterState_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class SexSelect extends BaseBackScene_1.BaseBackScene {
@@ -35,11 +35,14 @@ define(["require", "exports", "../../abstract/BaseBackScene", "./NicknameInput",
                 y: Constants_1.Constants.centerY - 20,
                 events: {
                     down: () => {
-                        console.log(IoC_1.Container["nick"]);
-                        new ClassSelect_1.ClassSelect(sex).run();
+                        this.chooseSex(sex);
                     }
                 }
             });
+        }
+        chooseSex(sex) {
+            IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).sex = sex;
+            new ClassSelect_1.ClassSelect().run();
         }
     }
     exports.SexSelect = SexSelect;

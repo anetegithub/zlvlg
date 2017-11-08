@@ -76,18 +76,20 @@ export class NicknameInput extends BaseBackScene {
             y: Constants.centerY,
             text: 'Ok',
             events: {
-                down: () => {
-                    const value = this.inputElement.value
-                    if (value) {
-                        let charState = new CreateCharacterState();
-                        charState.name = value;
-                        Container.register("createCharater", charState);
-                        new SexSelect().run();
-                    }
-                }
+                down: () => { this.ok(); }
             },
             initFrame: 'buttonSquare_blue',
             pressedFrame: 'buttonSquare_blue_pressed'
         });
+    }
+
+    private ok() {
+        const value = this.inputElement.value
+        if (value) {
+            let charState = new CreateCharacterState();
+            charState.name = value;
+            Container.register(CreateCharacterState, charState);
+            new SexSelect().run();
+        }
     }
 }

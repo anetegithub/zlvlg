@@ -59,19 +59,20 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
                 y: Constants_1.Constants.centerY,
                 text: 'Ok',
                 events: {
-                    down: () => {
-                        const value = this.inputElement.value;
-                        if (value) {
-                            let charState = new CreateCharacterState_1.CreateCharacterState();
-                            charState.name = value;
-                            IoC_1.Container.register("createCharater", charState);
-                            new SexSelect_1.SexSelect().run();
-                        }
-                    }
+                    down: () => { this.ok(); }
                 },
                 initFrame: 'buttonSquare_blue',
                 pressedFrame: 'buttonSquare_blue_pressed'
             });
+        }
+        ok() {
+            const value = this.inputElement.value;
+            if (value) {
+                let charState = new CreateCharacterState_1.CreateCharacterState();
+                charState.name = value;
+                IoC_1.Container.register(CreateCharacterState_1.CreateCharacterState, charState);
+                new SexSelect_1.SexSelect().run();
+            }
         }
     }
     exports.NicknameInput = NicknameInput;

@@ -10,16 +10,15 @@ import { ManagedText } from "../../../ui/impl/text/ManagedText";
 import { TextFactory } from "../../../utils/ui/textfactory/TextFactory";
 import { EventApplier } from "../../../utils/ui/EventApplier";
 import { Container } from "../../../utils/globals/IoC";
+import { CreateCharacterState } from "../../../data/struct/CreateCharacterState";
 
 export class ClassSelect extends BaseBackScene {
     backScene: new (...args: any[]) => IScene = SexSelect;
     name: string;
     clear: boolean = true;
-    private sex: Sex;
 
-    constructor(sex: Sex) {
+    constructor() {
         super();
-        this.sex = sex;
     }
 
     protected async resources(): Promise<ILoadedResource[]> {
@@ -61,7 +60,7 @@ export class ClassSelect extends BaseBackScene {
                 let background = new Phaser.Sprite(game, x, y, Constants.uiAssert, "panel_blue");
                 background.inputEnabled = true;
 
-                let character = new Doll(game, ((background.width - 64) / 2) + x, ((background.height - 64) / 2) + y, element, null, this.sex);
+                let character = new Doll(game, ((background.width - 64) / 2) + x, ((background.height - 64) / 2) + y, element, null, Container.resolve(CreateCharacterState).sex);
                 character.setAnim("exceptDeath", true);
 
                 let text = TextFactory.new({

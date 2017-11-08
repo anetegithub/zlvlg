@@ -6,6 +6,7 @@ import { ClassSelect } from "./ClassSelect";
 import { ManagedText } from "../../../ui/impl/text/ManagedText";
 import { Constants } from "../../../utils/globals/Constants";
 import { Container } from "../../../utils/globals/IoC";
+import { CreateCharacterState } from "../../../data/struct/CreateCharacterState";
 
 export class SexSelect extends BaseBackScene {
     backScene: new (...args: any[]) => IScene = NicknameInput;
@@ -41,10 +42,14 @@ export class SexSelect extends BaseBackScene {
             y: Constants.centerY - 20,
             events: {
                 down: () => {
-                    console.log(Container["nick"])
-                    new ClassSelect(sex).run();
+                    this.chooseSex(sex);
                 }
             }
         });
+    }
+
+    private chooseSex(sex: Sex) {
+        Container.resolve(CreateCharacterState).sex = sex;
+        new ClassSelect().run();
     }
 }

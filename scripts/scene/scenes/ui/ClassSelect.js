@@ -1,12 +1,11 @@
-define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../abstract/BaseBackScene", "../../../game/objects/Doll", "./SexSelect", "../../../ui/impl/text/ManagedText", "../../../utils/ui/textfactory/TextFactory", "../../../utils/globals/IoC"], function (require, exports, ManagedComponent_1, Constants_1, BaseBackScene_1, Doll_1, SexSelect_1, ManagedText_1, TextFactory_1, IoC_1) {
+define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../abstract/BaseBackScene", "../../../game/objects/Doll", "./SexSelect", "../../../ui/impl/text/ManagedText", "../../../utils/ui/textfactory/TextFactory", "../../../utils/globals/IoC", "../../../data/struct/CreateCharacterState"], function (require, exports, ManagedComponent_1, Constants_1, BaseBackScene_1, Doll_1, SexSelect_1, ManagedText_1, TextFactory_1, IoC_1, CreateCharacterState_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class ClassSelect extends BaseBackScene_1.BaseBackScene {
-        constructor(sex) {
+        constructor() {
             super();
             this.backScene = SexSelect_1.SexSelect;
             this.clear = true;
-            this.sex = sex;
         }
         async resources() {
             return [
@@ -43,7 +42,7 @@ define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../
                 return new ManagedComponent_1.ManagedComponent(game => {
                     let background = new Phaser.Sprite(game, x, y, Constants_1.Constants.uiAssert, "panel_blue");
                     background.inputEnabled = true;
-                    let character = new Doll_1.Doll(game, ((background.width - 64) / 2) + x, ((background.height - 64) / 2) + y, element, null, this.sex);
+                    let character = new Doll_1.Doll(game, ((background.width - 64) / 2) + x, ((background.height - 64) / 2) + y, element, null, IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).sex);
                     character.setAnim("exceptDeath", true);
                     let text = TextFactory_1.TextFactory.new({
                         text: element,

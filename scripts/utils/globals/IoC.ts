@@ -22,11 +22,11 @@ export class Container {
         document.getElementById('content').style.cursor = `url("./images/ui/cursors/${key}.png"), auto`;
     }
 
-    static register(key: string, value: any) {
-        Container[key] = value;
+    static register<T>(type: new (...args: any[]) => T, value: any) {
+        Container[type.constructor.name] = value;
     }
 
-    static resolve<T>(key: string): T {
-        return Container[key];
+    static resolve<T>(type: new (...args: any[]) => T): T {
+        return Container[type.constructor.name];
     }
 }
