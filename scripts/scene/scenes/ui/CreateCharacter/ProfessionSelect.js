@@ -1,29 +1,17 @@
-define(["require", "exports", "../../abstract/BaseBackScene", "./ClassSelect", "../../../ui/impl/text/ManagedText", "../../../utils/globals/Constants", "../../../game/enums/Profession", "../../../utils/globals/IoC", "../../../components/ui/Panel"], function (require, exports, BaseBackScene_1, ClassSelect_1, ManagedText_1, Constants_1, Profession_1, IoC_1, Panel_1) {
+define(["require", "exports", "./ClassSelect", "../../../../utils/globals/Constants", "../../../../game/enums/Profession", "../../../../utils/globals/IoC", "../../../../components/ui/Panel", "../../../../data/struct/CreateCharacterState", "./CreateSceneStage", "./ConfirmCreate"], function (require, exports, ClassSelect_1, Constants_1, Profession_1, IoC_1, Panel_1, CreateCharacterState_1, CreateSceneStage_1, ConfirmCreate_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class ProfessionSelect extends BaseBackScene_1.BaseBackScene {
+    class ProfessionSelect extends CreateSceneStage_1.CreateSceneStage {
         constructor() {
-            super(...arguments);
+            super("Select your profession:");
             this.backScene = ClassSelect_1.ClassSelect;
             this.clear = true;
         }
         async components() {
             return [
                 ...(await super.components()),
-                this.title,
                 ...this.profTabs
             ];
-        }
-        get title() {
-            return new ManagedText_1.ManagedText({
-                text: 'Select your profession:',
-                y: 185,
-                fontStyle: {
-                    font: 'bold 32pt ' + Constants_1.Constants.fontFamily,
-                    fill: Constants_1.Constants.color,
-                    align: 'center'
-                }
-            });
         }
         get profTabs() {
             let x = Constants_1.Constants.mapOffset.x + 115;
@@ -34,9 +22,14 @@ define(["require", "exports", "../../abstract/BaseBackScene", "./ClassSelect", "
                 prof.scale.x = 2;
                 prof.scale.y = 2;
                 let panel = new Panel_1.Panel({ w: x, h: y }, "buttonSquare_blue", prof, enumKey);
+                panel.click = () => { this.setProf(Profession_1.Profession[enumKey]); };
                 x += panel.width + 78;
                 return panel;
             });
+        }
+        setProf(prof) {
+            IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).proffesion = prof;
+            new ConfirmCreate_1.ConfirmCreate().run();
         }
     }
     exports.ProfessionSelect = ProfessionSelect;

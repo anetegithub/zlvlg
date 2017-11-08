@@ -1,41 +1,30 @@
-import { BaseScene } from "../../abstract/BaseScene";
-import { ManagedText } from "../../../ui/impl/text/ManagedText";
-import { Container } from "../../../utils/globals/IoC";
-import { ManagedComponent } from "../../../app/core/impl/ManagedComponent";
-import { Constants } from "../../../utils/globals/Constants";
-import { SpriteButton } from "../../../ui/impl/buttons/spritebutton/SpriteButton";
-import { } from "../../../../node_modules/@orange-games/phaser-input/build/phaser-input";
-import { BaseBackScene } from "../../abstract/BaseBackScene";
-import { MainMenuScene } from "../MainMenuScene";
-import { ClassSelect } from "./ClassSelect";
+import { BaseBackScene } from "../../../abstract/BaseBackScene";
+import { MainMenuScene } from "../../MainMenuScene";
+import { ManagedText } from "../../../../ui/impl/text/ManagedText";
+import { Constants } from "../../../../utils/globals/Constants";
+import { ManagedComponent } from "../../../../app/core/impl/ManagedComponent";
+import { SpriteButton } from "../../../../ui/impl/buttons/spritebutton/SpriteButton";
+import { Container } from "../../../../utils/globals/IoC";
+import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
 import { SexSelect } from "./SexSelect";
-import { CreateCharacterState } from "../../../data/struct/CreateCharacterState";
+import { CreateSceneStage } from "./CreateSceneStage";
 
-export class NicknameInput extends BaseBackScene {
+export class NicknameInput extends CreateSceneStage {
     backScene = MainMenuScene;
 
     name: string = 'NicknameInput';
     clear: boolean = true;
 
+    constructor() {
+        super('Your Nickname:');
+    }
+
     async components(): Promise<IManagedComponent[]> {
         return [
             ...(await super.components()),
-            this.title,
             this.input,
             this.okButton
         ];
-    }
-
-    private get title(): ManagedText {
-        return new ManagedText({
-            text: 'Your Nickname:',
-            y: 200,
-            fontStyle: {
-                font: 'bold 32pt ' + Constants.fontFamily,
-                fill: Constants.color,
-                align: 'center'
-            }
-        })
     }
 
     inputElement: PhaserInput.InputField;

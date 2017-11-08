@@ -1,7 +1,7 @@
 import { BaseScene } from "../abstract/BaseScene";
 import { TextButton } from "../../ui/impl/buttons/textbutton/TextButton";
 import { Container } from "../../utils/globals/IoC";
-import { NicknameInput } from "../scenes/ui/NicknameInput";
+import { NicknameInput } from "../scenes/ui/createcharacter/NicknameInput";
 import { ManagedText } from "../../ui/impl/text/ManagedText";
 import { Constants } from "../../utils/globals/Constants";
 import { ManagedComponent } from "../../app/core/impl/ManagedComponent";

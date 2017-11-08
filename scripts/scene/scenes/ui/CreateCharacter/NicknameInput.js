@@ -1,9 +1,9 @@
-define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../abstract/BaseBackScene", "../MainMenuScene", "./SexSelect", "../../../data/struct/CreateCharacterState"], function (require, exports, ManagedText_1, IoC_1, ManagedComponent_1, Constants_1, SpriteButton_1, BaseBackScene_1, MainMenuScene_1, SexSelect_1, CreateCharacterState_1) {
+define(["require", "exports", "../../MainMenuScene", "../../../../utils/globals/Constants", "../../../../app/core/impl/ManagedComponent", "../../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../../utils/globals/IoC", "../../../../data/struct/CreateCharacterState", "./SexSelect", "./CreateSceneStage"], function (require, exports, MainMenuScene_1, Constants_1, ManagedComponent_1, SpriteButton_1, IoC_1, CreateCharacterState_1, SexSelect_1, CreateSceneStage_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class NicknameInput extends BaseBackScene_1.BaseBackScene {
+    class NicknameInput extends CreateSceneStage_1.CreateSceneStage {
         constructor() {
-            super(...arguments);
+            super('Your Nickname:');
             this.backScene = MainMenuScene_1.MainMenuScene;
             this.name = 'NicknameInput';
             this.clear = true;
@@ -11,21 +11,9 @@ define(["require", "exports", "../../../ui/impl/text/ManagedText", "../../../uti
         async components() {
             return [
                 ...(await super.components()),
-                this.title,
                 this.input,
                 this.okButton
             ];
-        }
-        get title() {
-            return new ManagedText_1.ManagedText({
-                text: 'Your Nickname:',
-                y: 200,
-                fontStyle: {
-                    font: 'bold 32pt ' + Constants_1.Constants.fontFamily,
-                    fill: Constants_1.Constants.color,
-                    align: 'center'
-                }
-            });
         }
         get input() {
             return new ManagedComponent_1.ManagedComponent(game => {

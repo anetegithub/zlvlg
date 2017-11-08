@@ -1,30 +1,18 @@
-define(["require", "exports", "../../abstract/BaseBackScene", "./NicknameInput", "../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../game/enums/Sex", "./ClassSelect", "../../../ui/impl/text/ManagedText", "../../../utils/globals/Constants", "../../../utils/globals/IoC", "../../../data/struct/CreateCharacterState"], function (require, exports, BaseBackScene_1, NicknameInput_1, SpriteButton_1, Sex_1, ClassSelect_1, ManagedText_1, Constants_1, IoC_1, CreateCharacterState_1) {
+define(["require", "exports", "./NicknameInput", "../../../../game/enums/Sex", "../../../../utils/globals/Constants", "../../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../../data/struct/CreateCharacterState", "../../../../utils/globals/IoC", "./ClassSelect", "./CreateSceneStage"], function (require, exports, NicknameInput_1, Sex_1, Constants_1, SpriteButton_1, CreateCharacterState_1, IoC_1, ClassSelect_1, CreateSceneStage_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class SexSelect extends BaseBackScene_1.BaseBackScene {
+    class SexSelect extends CreateSceneStage_1.CreateSceneStage {
         constructor() {
-            super(...arguments);
+            super('Your sex:');
             this.backScene = NicknameInput_1.NicknameInput;
             this.clear = true;
         }
         async components() {
             return [
                 ...(await super.components()),
-                this.title,
                 this.sexButton(Sex_1.Sex.Male),
                 this.sexButton(Sex_1.Sex.Female)
             ];
-        }
-        get title() {
-            return new ManagedText_1.ManagedText({
-                text: 'Your sex:',
-                y: 200,
-                fontStyle: {
-                    font: 'bold 32pt ' + Constants_1.Constants.fontFamily,
-                    fill: Constants_1.Constants.color,
-                    align: 'center'
-                }
-            });
         }
         sexButton(sex) {
             return new SpriteButton_1.SpriteButton({

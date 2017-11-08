@@ -1,9 +1,9 @@
-define(["require", "exports", "../../../utils/globals/Constants", "../../abstract/BaseBackScene", "../../../game/objects/Doll", "./SexSelect", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../data/struct/CreateCharacterState", "../../../components/ui/Panel", "../../../game/enums/Class", "../../../utils/globals/EnumExtensions", "./ProfessionSelect"], function (require, exports, Constants_1, BaseBackScene_1, Doll_1, SexSelect_1, ManagedText_1, IoC_1, CreateCharacterState_1, Panel_1, Class_1, EnumExtensions_1, ProfessionSelect_1) {
+define(["require", "exports", "./SexSelect", "../../../../utils/globals/Constants", "../../../../utils/globals/EnumExtensions", "../../../../utils/globals/IoC", "../../../../game/objects/Doll", "../../../../game/enums/Class", "../../../../data/struct/CreateCharacterState", "../../../../components/ui/Panel", "./ProfessionSelect", "./CreateSceneStage", "../../../../utils/globals/StringExtensions"], function (require, exports, SexSelect_1, Constants_1, EnumExtensions_1, IoC_1, Doll_1, Class_1, CreateCharacterState_1, Panel_1, ProfessionSelect_1, CreateSceneStage_1, StringExtensions_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    class ClassSelect extends BaseBackScene_1.BaseBackScene {
+    class ClassSelect extends CreateSceneStage_1.CreateSceneStage {
         constructor() {
-            super(...arguments);
+            super('Select your class:');
             this.backScene = SexSelect_1.SexSelect;
             this.clear = true;
         }
@@ -20,20 +20,8 @@ define(["require", "exports", "../../../utils/globals/Constants", "../../abstrac
         async components() {
             return [
                 ...(await super.components()),
-                this.title,
                 ...this.classTabs
             ];
-        }
-        get title() {
-            return new ManagedText_1.ManagedText({
-                text: 'Select your class:',
-                y: 200,
-                fontStyle: {
-                    font: 'bold 32pt ' + Constants_1.Constants.fontFamily,
-                    fill: Constants_1.Constants.color,
-                    align: 'center'
-                }
-            });
         }
         get classTabs() {
             let x = Constants_1.Constants.mapOffset.x + 100;
@@ -48,7 +36,7 @@ define(["require", "exports", "../../../utils/globals/Constants", "../../abstrac
             });
         }
         selectClass(_class) {
-            IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).class = Class_1.Class[_class];
+            IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).class = Class_1.Class[StringExtensions_1.StringExtensions.capitalize(_class)];
             new ProfessionSelect_1.ProfessionSelect().run();
         }
     }

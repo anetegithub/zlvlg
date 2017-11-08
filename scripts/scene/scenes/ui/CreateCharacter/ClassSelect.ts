@@ -1,25 +1,25 @@
-import { SpriteMapScene } from "../../abstract/SpriteMapScene";
-import { ManagedComponent } from "../../../app/core/impl/ManagedComponent";
-import { Constants } from "../../../utils/globals/Constants";
-import { TextButton } from "../../../ui/impl/buttons/textbutton/TextButton";
-import { BaseBackScene } from "../../abstract/BaseBackScene";
-import { Doll } from "../../../game/objects/Doll";
-import { Sex } from "../../../game/enums/Sex";
+import { BaseBackScene } from "../../../abstract/BaseBackScene";
 import { SexSelect } from "./SexSelect";
-import { ManagedText } from "../../../ui/impl/text/ManagedText";
-import { TextFactory } from "../../../utils/ui/textfactory/TextFactory";
-import { EventApplier } from "../../../utils/ui/EventApplier";
-import { Container } from "../../../utils/globals/IoC";
-import { CreateCharacterState } from "../../../data/struct/CreateCharacterState";
-import { Panel } from "../../../components/ui/Panel";
-import { Class } from "../../../game/enums/Class";
-import { enumKeys } from "../../../utils/globals/EnumExtensions";
+import { ManagedText } from "../../../../ui/impl/text/ManagedText";
+import { Constants } from "../../../../utils/globals/Constants";
+import { enumKeys } from "../../../../utils/globals/EnumExtensions";
+import { Container } from "../../../../utils/globals/IoC";
+import { Doll } from "../../../../game/objects/Doll";
+import { Class } from "../../../../game/enums/Class";
+import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
+import { Panel } from "../../../../components/ui/Panel";
 import { ProfessionSelect } from "./ProfessionSelect";
+import { CreateSceneStage } from "./CreateSceneStage";
+import { StringExtensions } from "../../../../utils/globals/StringExtensions";
 
-export class ClassSelect extends BaseBackScene {
+export class ClassSelect extends CreateSceneStage {
     backScene: new (...args: any[]) => IScene = SexSelect;
     name: string;
     clear: boolean = true;
+
+    constructor() {
+        super('Select your class:');
+    }
 
     protected async resources(): Promise<ILoadedResource[]> {
         return [
@@ -32,24 +32,11 @@ export class ClassSelect extends BaseBackScene {
         ];
     }
 
-    protected async components(): Promise<IManagedComponent[]> {
+    async components(): Promise<IManagedComponent[]> {
         return [
             ...(await super.components()),
-            this.title,
             ...this.classTabs
         ];
-    }
-
-    get title(): IManagedComponent {
-        return new ManagedText({
-            text: 'Select your class:',
-            y: 200,
-            fontStyle: {
-                font: 'bold 32pt ' + Constants.fontFamily,
-                fill: Constants.color,
-                align: 'center'
-            }
-        });
     }
 
     private get classTabs(): IManagedComponent[] {
@@ -70,7 +57,7 @@ export class ClassSelect extends BaseBackScene {
     }
 
     private selectClass(_class: string) {
-        Container.resolve(CreateCharacterState).class = Class[_class];
+        Container.resolve(CreateCharacterState).class = Class[StringExtensions.capitalize(_class)];
         new ProfessionSelect().run();
     }
 }

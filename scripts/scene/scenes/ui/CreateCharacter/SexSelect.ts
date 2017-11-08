@@ -1,36 +1,28 @@
-import { BaseBackScene } from "../../abstract/BaseBackScene";
+import { BaseBackScene } from "../../../abstract/BaseBackScene";
 import { NicknameInput } from "./NicknameInput";
-import { SpriteButton } from "../../../ui/impl/buttons/spritebutton/SpriteButton";
-import { Sex } from "../../../game/enums/Sex";
+import { Sex } from "../../../../game/enums/Sex";
+import { ManagedText } from "../../../../ui/impl/text/ManagedText";
+import { Constants } from "../../../../utils/globals/Constants";
+import { SpriteButton } from "../../../../ui/impl/buttons/spritebutton/SpriteButton";
+import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
+import { Container } from "../../../../utils/globals/IoC";
 import { ClassSelect } from "./ClassSelect";
-import { ManagedText } from "../../../ui/impl/text/ManagedText";
-import { Constants } from "../../../utils/globals/Constants";
-import { Container } from "../../../utils/globals/IoC";
-import { CreateCharacterState } from "../../../data/struct/CreateCharacterState";
+import { CreateSceneStage } from "./CreateSceneStage";
 
-export class SexSelect extends BaseBackScene {
+export class SexSelect extends CreateSceneStage {
     backScene: new (...args: any[]) => IScene = NicknameInput;
     clear: boolean = true;
+
+    constructor() {
+        super('Your sex:');
+    }
 
     async components(): Promise<IManagedComponent[]> {
         return [
             ...(await super.components()),
-            this.title,
             this.sexButton(Sex.Male),
             this.sexButton(Sex.Female)
         ]
-    }
-
-    get title(): IManagedComponent {
-        return new ManagedText({
-            text: 'Your sex:',
-            y: 200,
-            fontStyle: {
-                font: 'bold 32pt ' + Constants.fontFamily,
-                fill: Constants.color,
-                align: 'center'
-            }
-        })
     }
 
     private sexButton(sex: Sex): SpriteButton {

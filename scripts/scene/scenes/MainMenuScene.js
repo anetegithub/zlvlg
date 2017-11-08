@@ -1,4 +1,4 @@
-define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC", "../scenes/ui/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow", "../abstract/SpriteMapScene", "../../data/Tables"], function (require, exports, TextButton_1, IoC_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1, SpriteMapScene_1, Tables_1) {
+define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC", "../scenes/ui/createcharacter/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow", "../abstract/SpriteMapScene", "../../data/Tables"], function (require, exports, TextButton_1, IoC_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1, SpriteMapScene_1, Tables_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class MainMenuScene extends SpriteMapScene_1.SpriteMapScene {
