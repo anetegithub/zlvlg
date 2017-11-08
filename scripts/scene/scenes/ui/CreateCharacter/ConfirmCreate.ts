@@ -19,7 +19,8 @@ export class ConfirmCreate extends CreateSceneStage {
     async components(): Promise<IManagedComponent[]> {
         return [
             ...(await super.components()),
-            ...this.info
+            ...this.info,
+            this.ok
         ];
     }
 
@@ -27,8 +28,8 @@ export class ConfirmCreate extends CreateSceneStage {
         const info = Container.resolve(CreateCharacterState);
         return [
             this.text(info.name, 250),
-            this.text(Class[info.class], 270),
-            this.text(Profession[info.proffesion], 290)
+            this.text(Class[info.class], 290),
+            this.text(info.proffesion, 330)
         ]
     }
 
@@ -38,7 +39,7 @@ export class ConfirmCreate extends CreateSceneStage {
             initFrame: 'buttonSquare_blue',
             pressedFrame: 'buttonSquare_blue_pressed',
             x: Constants.centerX - 22.5,
-            y: 310,
+            y: 350,
             events: {
                 down: () => { this.okAction(); }
             }
@@ -55,8 +56,7 @@ export class ConfirmCreate extends CreateSceneStage {
             y: y,
             fontStyle: {
                 font: 'bold 32pt ' + Constants.fontFamily,
-                fill: Constants.color,
-                align: 'center'
+                fill: Constants.color
             }
         })
     }

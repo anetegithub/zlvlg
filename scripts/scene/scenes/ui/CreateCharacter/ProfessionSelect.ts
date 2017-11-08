@@ -29,13 +29,12 @@ export class ProfessionSelect extends CreateSceneStage {
         let y = 264;
 
         return Object.keys(Profession).map(enumKey => {
-            console.log(enumKey);
             let prof = new Phaser.Sprite(Container.game, 0, 0, Constants.spriteAssert, Profession[enumKey]);
             prof.scale.x = 2;
             prof.scale.y = 2;
 
             let panel = new Panel({ w: x, h: y }, "buttonSquare_blue", prof, enumKey);
-            panel.click = () => { this.setProf(Profession[enumKey]); };
+            panel.click = () => { this.setProf(enumKey); };
 
             x += panel.width + 78;
 
@@ -43,7 +42,7 @@ export class ProfessionSelect extends CreateSceneStage {
         });
     }
 
-    private setProf(prof: Profession) {
+    private setProf(prof: string) {
         Container.resolve(CreateCharacterState).proffesion = prof;
         new ConfirmCreate().run();
     }

@@ -17,12 +17,11 @@ define(["require", "exports", "./ClassSelect", "../../../../utils/globals/Consta
             let x = Constants_1.Constants.mapOffset.x + 115;
             let y = 264;
             return Object.keys(Profession_1.Profession).map(enumKey => {
-                console.log(enumKey);
                 let prof = new Phaser.Sprite(IoC_1.Container.game, 0, 0, Constants_1.Constants.spriteAssert, Profession_1.Profession[enumKey]);
                 prof.scale.x = 2;
                 prof.scale.y = 2;
                 let panel = new Panel_1.Panel({ w: x, h: y }, "buttonSquare_blue", prof, enumKey);
-                panel.click = () => { this.setProf(Profession_1.Profession[enumKey]); };
+                panel.click = () => { this.setProf(enumKey); };
                 x += panel.width + 78;
                 return panel;
             });

@@ -6,5 +6,5 @@ export class CreateCharacterState {
     name: string;
     sex: Sex;
     class: Class;
-    proffesion: Profession;
+    proffesion: Profession | string;
 }
