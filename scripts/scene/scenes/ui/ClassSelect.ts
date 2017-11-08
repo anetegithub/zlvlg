@@ -11,15 +11,15 @@ import { TextFactory } from "../../../utils/ui/textfactory/TextFactory";
 import { EventApplier } from "../../../utils/ui/EventApplier";
 import { Container } from "../../../utils/globals/IoC";
 import { CreateCharacterState } from "../../../data/struct/CreateCharacterState";
+import { Panel } from "../../../components/ui/Panel";
+import { Class } from "../../../game/enums/Class";
+import { enumKeys } from "../../../utils/globals/EnumExtensions";
+import { ProfessionSelect } from "./ProfessionSelect";
 
 export class ClassSelect extends BaseBackScene {
     backScene: new (...args: any[]) => IScene = SexSelect;
     name: string;
     clear: boolean = true;
-
-    constructor() {
-        super();
-    }
 
     protected async resources(): Promise<ILoadedResource[]> {
         return [
@@ -55,36 +55,22 @@ export class ClassSelect extends BaseBackScene {
     private get classTabs(): IManagedComponent[] {
         let x = Constants.mapOffset.x + 100;
         let y = 232;
-        return ["warrior", "ranger", "rogue", "priest", "wizard"].map(element => {
-            return new ManagedComponent(game => {
-                let background = new Phaser.Sprite(game, x, y, Constants.uiAssert, "panel_blue");
-                background.inputEnabled = true;
 
-                let character = new Doll(game, ((background.width - 64) / 2) + x, ((background.height - 64) / 2) + y, element, null, Container.resolve(CreateCharacterState).sex);
-                character.setAnim("exceptDeath", true);
+        return enumKeys(Class).map(x => x.toLowerCase()).map(element => {
+            let character = new Doll(Container.game, 0, 0, element, null, Container.resolve(CreateCharacterState).sex);
+            character.setAnim("exceptDeath", true);
 
-                let text = TextFactory.new({
-                    text: element,
-                    fontSize: 16,
-                    y: (background.y + background.height) + 2
-                });
-                text.x = (background.width - text.width) / 2 + background.x;
-                text.inputEnabled = true;
+            let panel = new Panel({ w: x, h: y }, "panel_blue", character, element);
+            panel.click = () => { this.selectClass(element); };
 
-                x += background.width + 16;
+            x += panel.width + 16;
 
-                let group = new Phaser.Group(game);
-                group.add(background);
-                group.add(character);
-                group.add(text);
-
-                group.onChildInputOver.add(() => Container.setCursor("point"));
-                group.onChildInputOut.add(() => Container.setCursor('cursor'));
-                group.onChildInputUp.add(() => Container.setCursor('cursor'));
-                group.onChildInputDown.add(() => Container.setCursor('cursor'));
-
-                game.add.existing(group);
-            });
+            return panel;
         });
+    }
+
+    private selectClass(_class: string) {
+        Container.resolve(CreateCharacterState).class = Class[_class];
+        new ProfessionSelect().run();
     }
 }

@@ -1,9 +1,9 @@
-define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../../utils/globals/Constants", "../../abstract/BaseBackScene", "../../../game/objects/Doll", "./SexSelect", "../../../ui/impl/text/ManagedText", "../../../utils/ui/textfactory/TextFactory", "../../../utils/globals/IoC", "../../../data/struct/CreateCharacterState"], function (require, exports, ManagedComponent_1, Constants_1, BaseBackScene_1, Doll_1, SexSelect_1, ManagedText_1, TextFactory_1, IoC_1, CreateCharacterState_1) {
+define(["require", "exports", "../../../utils/globals/Constants", "../../abstract/BaseBackScene", "../../../game/objects/Doll", "./SexSelect", "../../../ui/impl/text/ManagedText", "../../../utils/globals/IoC", "../../../data/struct/CreateCharacterState", "../../../components/ui/Panel", "../../../game/enums/Class", "../../../utils/globals/EnumExtensions", "./ProfessionSelect"], function (require, exports, Constants_1, BaseBackScene_1, Doll_1, SexSelect_1, ManagedText_1, IoC_1, CreateCharacterState_1, Panel_1, Class_1, EnumExtensions_1, ProfessionSelect_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class ClassSelect extends BaseBackScene_1.BaseBackScene {
         constructor() {
-            super();
+            super(...arguments);
             this.backScene = SexSelect_1.SexSelect;
             this.clear = true;
         }
@@ -38,31 +38,18 @@ define(["require", "exports", "../../../app/core/impl/ManagedComponent", "../../
         get classTabs() {
             let x = Constants_1.Constants.mapOffset.x + 100;
             let y = 232;
-            return ["warrior", "ranger", "rogue", "priest", "wizard"].map(element => {
-                return new ManagedComponent_1.ManagedComponent(game => {
-                    let background = new Phaser.Sprite(game, x, y, Constants_1.Constants.uiAssert, "panel_blue");
-                    background.inputEnabled = true;
-                    let character = new Doll_1.Doll(game, ((background.width - 64) / 2) + x, ((background.height - 64) / 2) + y, element, null, IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).sex);
-                    character.setAnim("exceptDeath", true);
-                    let text = TextFactory_1.TextFactory.new({
-                        text: element,
-                        fontSize: 16,
-                        y: (background.y + background.height) + 2
-                    });
-                    text.x = (background.width - text.width) / 2 + background.x;
-                    text.inputEnabled = true;
-                    x += background.width + 16;
-                    let group = new Phaser.Group(game);
-                    group.add(background);
-                    group.add(character);
-                    group.add(text);
-                    group.onChildInputOver.add(() => IoC_1.Container.setCursor("point"));
-                    group.onChildInputOut.add(() => IoC_1.Container.setCursor('cursor'));
-                    group.onChildInputUp.add(() => IoC_1.Container.setCursor('cursor'));
-                    group.onChildInputDown.add(() => IoC_1.Container.setCursor('cursor'));
-                    game.add.existing(group);
-                });
+            return EnumExtensions_1.enumKeys(Class_1.Class).map(x => x.toLowerCase()).map(element => {
+                let character = new Doll_1.Doll(IoC_1.Container.game, 0, 0, element, null, IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).sex);
+                character.setAnim("exceptDeath", true);
+                let panel = new Panel_1.Panel({ w: x, h: y }, "panel_blue", character, element);
+                panel.click = () => { this.selectClass(element); };
+                x += panel.width + 16;
+                return panel;
             });
+        }
+        selectClass(_class) {
+            IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).class = Class_1.Class[_class];
+            new ProfessionSelect_1.ProfessionSelect().run();
         }
     }
     exports.ClassSelect = ClassSelect;
