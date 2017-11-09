@@ -1,4 +1,5 @@
 import { GameStorage } from "../../data/GameStorage";
+import { Ctr } from "../struct/Ctr";
 
 export class Container {
     static game: Phaser.Game
@@ -22,11 +23,11 @@ export class Container {
         document.getElementById('content').style.cursor = `url("./images/ui/cursors/${key}.png"), auto`;
     }
 
-    static register<T>(type: new (...args: any[]) => T, value: any) {
+    static register<T>(type: Ctr<T>, value: any) {
         Container[type.constructor.name] = value;
     }
 
-    static resolve<T>(type: new (...args: any[]) => T): T {
+    static resolve<T>(type: Ctr<T>): T {
         return Container[type.constructor.name];
     }
 }

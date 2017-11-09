@@ -1,4 +1,4 @@
-define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC", "../scenes/ui/createcharacter/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow", "../abstract/SpriteMapScene", "../../data/Tables"], function (require, exports, TextButton_1, IoC_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1, SpriteMapScene_1, Tables_1) {
+define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "../../utils/globals/IoC", "../scenes/ui/createcharacter/NicknameInput", "../../ui/impl/text/ManagedText", "../../utils/globals/Constants", "../../app/core/impl/ManagedComponent", "./mapeditor/EditorMainWindow", "../abstract/SpriteMapScene", "../../data/entities/GameState"], function (require, exports, TextButton_1, IoC_1, NicknameInput_1, ManagedText_1, Constants_1, ManagedComponent_1, EditorMainWindow_1, SpriteMapScene_1, GameState_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class MainMenuScene extends SpriteMapScene_1.SpriteMapScene {
@@ -66,7 +66,7 @@ define(["require", "exports", "../../ui/impl/buttons/textbutton/TextButton", "..
                 y: 415,
                 text: 'Load Game'
             };
-            if (await IoC_1.Container.db.isempty(Tables_1.Tables.games)) {
+            if (!await IoC_1.Container.db.isempty(GameState_1.GameState)) {
                 config.events = {
                     down: () => {
                         console.log('load');

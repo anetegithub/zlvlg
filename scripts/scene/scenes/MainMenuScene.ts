@@ -8,7 +8,7 @@ import { ManagedComponent } from "../../app/core/impl/ManagedComponent";
 import { EditorMainWindow } from "./mapeditor/EditorMainWindow";
 import { SpriteMapScene } from "../abstract/SpriteMapScene";
 import { SpriteButton } from "../../ui/impl/buttons/spritebutton/SpriteButton";
-import { Tables } from "../../data/Tables";
+import { GameState } from "../../data/entities/GameState";
 
 export class MainMenuScene extends SpriteMapScene {
     name: string = "MainMenu";
@@ -83,7 +83,7 @@ export class MainMenuScene extends SpriteMapScene {
             text: 'Load Game'
         };
 
-        if (await Container.db.isempty(Tables.games)) {
+        if (!await Container.db.isempty(GameState)) {
             config.events = {
                 down: () => {
                     console.log('load');

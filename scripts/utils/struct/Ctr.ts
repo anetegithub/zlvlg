@@ -1,0 +1,1 @@
+export type Ctr<T> = new (...args: any[]) => T;
