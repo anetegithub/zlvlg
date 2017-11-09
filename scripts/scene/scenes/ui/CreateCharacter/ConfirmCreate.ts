@@ -27,9 +27,9 @@ export class ConfirmCreate extends CreateSceneStage {
     get info(): IManagedComponent[] {
         const info = Container.resolve(CreateCharacterState);
         return [
-            this.text(info.name, 250),
-            this.text(Class[info.class], 290),
-            this.text(info.proffesion, 330)
+            this.text("name: " + info.name, 250),
+            this.text("class: " + Class[info.class], 290),
+            this.text("proffession: " + info.proffesion, 330)
         ]
     }
 
@@ -39,7 +39,7 @@ export class ConfirmCreate extends CreateSceneStage {
             initFrame: 'buttonSquare_blue',
             pressedFrame: 'buttonSquare_blue_pressed',
             x: Constants.centerX - 22.5,
-            y: 350,
+            y: 375,
             events: {
                 down: () => { this.okAction(); }
             }
@@ -54,10 +54,15 @@ export class ConfirmCreate extends CreateSceneStage {
         return new ManagedText({
             text: val,
             y: y,
+            x: 225,
             fontStyle: {
-                font: 'bold 32pt ' + Constants.fontFamily,
-                fill: Constants.color
-            }
+                font: 'bold 20pt ' + Constants.fontFamily,
+                fill: Constants.color,
+                align: 'left',
+                boundsAlignH: "left"
+            },
+            anchor: 0,
+            boundsAlignH: "left"
         })
     }
 }

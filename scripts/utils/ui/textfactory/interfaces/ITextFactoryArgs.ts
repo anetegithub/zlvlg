@@ -4,5 +4,8 @@ interface ITextFactoryArgs {
     text?: string,
     fontStyle?: Phaser.PhaserTextStyle,
     fontSize?: number,
-    autoinit?: boolean
+    autoinit?: boolean,
+    boundsAlignH?: string,
+    boundsAlignV?: string,
+    anchor?: number,
 }

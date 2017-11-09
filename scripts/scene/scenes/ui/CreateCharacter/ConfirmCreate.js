@@ -17,9 +17,9 @@ define(["require", "exports", "./CreateSceneStage", "./ProfessionSelect", "../..
         get info() {
             const info = IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState);
             return [
-                this.text(info.name, 250),
-                this.text(Class_1.Class[info.class], 290),
-                this.text(info.proffesion, 330)
+                this.text("name: " + info.name, 250),
+                this.text("class: " + Class_1.Class[info.class], 290),
+                this.text("proffession: " + info.proffesion, 330)
             ];
         }
         get ok() {
@@ -28,7 +28,7 @@ define(["require", "exports", "./CreateSceneStage", "./ProfessionSelect", "../..
                 initFrame: 'buttonSquare_blue',
                 pressedFrame: 'buttonSquare_blue_pressed',
                 x: Constants_1.Constants.centerX - 22.5,
-                y: 350,
+                y: 375,
                 events: {
                     down: () => { this.okAction(); }
                 }
@@ -41,10 +41,15 @@ define(["require", "exports", "./CreateSceneStage", "./ProfessionSelect", "../..
             return new ManagedText_1.ManagedText({
                 text: val,
                 y: y,
+                x: 225,
                 fontStyle: {
-                    font: 'bold 32pt ' + Constants_1.Constants.fontFamily,
-                    fill: Constants_1.Constants.color
-                }
+                    font: 'bold 20pt ' + Constants_1.Constants.fontFamily,
+                    fill: Constants_1.Constants.color,
+                    align: 'left',
+                    boundsAlignH: "left"
+                },
+                anchor: 0,
+                boundsAlignH: "left"
             });
         }
     }
