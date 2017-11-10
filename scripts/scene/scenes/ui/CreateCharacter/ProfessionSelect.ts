@@ -5,7 +5,7 @@ import { Constants } from "../../../../utils/globals/Constants";
 import { Profession } from "../../../../game/enums/Profession";
 import { Container } from "../../../../utils/globals/IoC";
 import { Panel } from "../../../../components/ui/Panel";
-import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
+import { Character } from "../../../../data/struct/Character";
 import { CreateSceneStage } from "./CreateSceneStage";
 import { ConfirmCreate } from "./ConfirmCreate";
 
@@ -43,7 +43,7 @@ export class ProfessionSelect extends CreateSceneStage {
     }
 
     private setProf(prof: string) {
-        Container.resolve(CreateCharacterState).proffesion = prof;
+        Container.resolve(Character).proffesion = prof;
         new ConfirmCreate().run();
     }
 }

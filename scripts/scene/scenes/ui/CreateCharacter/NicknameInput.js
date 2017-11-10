@@ -1,4 +1,4 @@
-define(["require", "exports", "../../MainMenuScene", "../../../../utils/globals/Constants", "../../../../app/core/impl/ManagedComponent", "../../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../../utils/globals/IoC", "../../../../data/struct/CreateCharacterState", "./SexSelect", "./CreateSceneStage"], function (require, exports, MainMenuScene_1, Constants_1, ManagedComponent_1, SpriteButton_1, IoC_1, CreateCharacterState_1, SexSelect_1, CreateSceneStage_1) {
+define(["require", "exports", "../../MainMenuScene", "../../../../utils/globals/Constants", "../../../../app/core/impl/ManagedComponent", "../../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../../utils/globals/IoC", "../../../../data/struct/Character", "./SexSelect", "./CreateSceneStage"], function (require, exports, MainMenuScene_1, Constants_1, ManagedComponent_1, SpriteButton_1, IoC_1, Character_1, SexSelect_1, CreateSceneStage_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class NicknameInput extends CreateSceneStage_1.CreateSceneStage {
@@ -56,9 +56,9 @@ define(["require", "exports", "../../MainMenuScene", "../../../../utils/globals/
         ok() {
             const value = this.inputElement.value;
             if (value) {
-                let charState = new CreateCharacterState_1.CreateCharacterState();
+                let charState = new Character_1.Character();
                 charState.name = value;
-                IoC_1.Container.register(CreateCharacterState_1.CreateCharacterState, charState);
+                IoC_1.Container.register(Character_1.Character, charState);
                 new SexSelect_1.SexSelect().run();
             }
         }

@@ -4,7 +4,7 @@ import { Sex } from "../../../../game/enums/Sex";
 import { ManagedText } from "../../../../ui/impl/text/ManagedText";
 import { Constants } from "../../../../utils/globals/Constants";
 import { SpriteButton } from "../../../../ui/impl/buttons/spritebutton/SpriteButton";
-import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
+import { Character } from "../../../../data/struct/Character";
 import { Container } from "../../../../utils/globals/IoC";
 import { ClassSelect } from "./ClassSelect";
 import { CreateSceneStage } from "./CreateSceneStage";
@@ -41,7 +41,7 @@ export class SexSelect extends CreateSceneStage {
     }
 
     private chooseSex(sex: Sex) {
-        Container.resolve(CreateCharacterState).sex = sex;
+        Container.resolve(Character).sex = sex;
         new ClassSelect().run();
     }
 }

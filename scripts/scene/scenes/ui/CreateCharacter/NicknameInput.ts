@@ -5,7 +5,7 @@ import { Constants } from "../../../../utils/globals/Constants";
 import { ManagedComponent } from "../../../../app/core/impl/ManagedComponent";
 import { SpriteButton } from "../../../../ui/impl/buttons/spritebutton/SpriteButton";
 import { Container } from "../../../../utils/globals/IoC";
-import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
+import { Character } from "../../../../data/struct/Character";
 import { SexSelect } from "./SexSelect";
 import { CreateSceneStage } from "./CreateSceneStage";
 
@@ -75,9 +75,9 @@ export class NicknameInput extends CreateSceneStage {
     private ok() {
         const value = this.inputElement.value
         if (value) {
-            let charState = new CreateCharacterState();
+            let charState = new Character();
             charState.name = value;
-            Container.register(CreateCharacterState, charState);
+            Container.register(Character, charState);
             new SexSelect().run();
         }
     }

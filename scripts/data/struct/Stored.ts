@@ -7,5 +7,5 @@ export class StoredEntity {
 }
 
 export function Stored(ctor: Function) {
-    GameStorage.storeNames.push(ctor.constructor.name);
+    GameStorage.storeNames.push(ctor.name);
 }

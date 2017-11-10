@@ -27,6 +27,7 @@ export class GlobalGame {
         this.game['inited'] = this.inited;
         Container.game = this.game;
         Container.db = new GameStorage();
+        Container.db.init();
     }
 
     preload() {

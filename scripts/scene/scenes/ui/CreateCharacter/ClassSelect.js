@@ -1,4 +1,4 @@
-define(["require", "exports", "./SexSelect", "../../../../utils/globals/Constants", "../../../../utils/globals/EnumExtensions", "../../../../utils/globals/IoC", "../../../../game/objects/Doll", "../../../../game/enums/Class", "../../../../data/struct/CreateCharacterState", "../../../../components/ui/Panel", "./ProfessionSelect", "./CreateSceneStage", "../../../../utils/globals/StringExtensions"], function (require, exports, SexSelect_1, Constants_1, EnumExtensions_1, IoC_1, Doll_1, Class_1, CreateCharacterState_1, Panel_1, ProfessionSelect_1, CreateSceneStage_1, StringExtensions_1) {
+define(["require", "exports", "./SexSelect", "../../../../utils/globals/Constants", "../../../../utils/globals/EnumExtensions", "../../../../utils/globals/IoC", "../../../../game/objects/Doll", "../../../../game/enums/Class", "../../../../data/struct/Character", "../../../../components/ui/Panel", "./ProfessionSelect", "./CreateSceneStage", "../../../../utils/globals/StringExtensions"], function (require, exports, SexSelect_1, Constants_1, EnumExtensions_1, IoC_1, Doll_1, Class_1, Character_1, Panel_1, ProfessionSelect_1, CreateSceneStage_1, StringExtensions_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class ClassSelect extends CreateSceneStage_1.CreateSceneStage {
@@ -27,7 +27,7 @@ define(["require", "exports", "./SexSelect", "../../../../utils/globals/Constant
             let x = Constants_1.Constants.mapOffset.x + 100;
             let y = 232;
             return EnumExtensions_1.enumKeys(Class_1.Class).map(x => x.toLowerCase()).map(element => {
-                let character = new Doll_1.Doll(IoC_1.Container.game, 0, 0, element, null, IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).sex);
+                let character = new Doll_1.Doll(IoC_1.Container.game, 0, 0, element, null, IoC_1.Container.resolve(Character_1.Character).sex);
                 character.setAnim("exceptDeath", true);
                 let panel = new Panel_1.Panel({ w: x, h: y }, "panel_blue", character, element);
                 panel.click = () => { this.selectClass(element); };
@@ -36,7 +36,7 @@ define(["require", "exports", "./SexSelect", "../../../../utils/globals/Constant
             });
         }
         selectClass(_class) {
-            IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).class = Class_1.Class[StringExtensions_1.StringExtensions.capitalize(_class)];
+            IoC_1.Container.resolve(Character_1.Character).class = Class_1.Class[StringExtensions_1.StringExtensions.capitalize(_class)];
             new ProfessionSelect_1.ProfessionSelect().run();
         }
     }

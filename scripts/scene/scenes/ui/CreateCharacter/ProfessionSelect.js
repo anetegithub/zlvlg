@@ -1,4 +1,4 @@
-define(["require", "exports", "./ClassSelect", "../../../../utils/globals/Constants", "../../../../game/enums/Profession", "../../../../utils/globals/IoC", "../../../../components/ui/Panel", "../../../../data/struct/CreateCharacterState", "./CreateSceneStage", "./ConfirmCreate"], function (require, exports, ClassSelect_1, Constants_1, Profession_1, IoC_1, Panel_1, CreateCharacterState_1, CreateSceneStage_1, ConfirmCreate_1) {
+define(["require", "exports", "./ClassSelect", "../../../../utils/globals/Constants", "../../../../game/enums/Profession", "../../../../utils/globals/IoC", "../../../../components/ui/Panel", "../../../../data/struct/Character", "./CreateSceneStage", "./ConfirmCreate"], function (require, exports, ClassSelect_1, Constants_1, Profession_1, IoC_1, Panel_1, Character_1, CreateSceneStage_1, ConfirmCreate_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class ProfessionSelect extends CreateSceneStage_1.CreateSceneStage {
@@ -27,7 +27,7 @@ define(["require", "exports", "./ClassSelect", "../../../../utils/globals/Consta
             });
         }
         setProf(prof) {
-            IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).proffesion = prof;
+            IoC_1.Container.resolve(Character_1.Character).proffesion = prof;
             new ConfirmCreate_1.ConfirmCreate().run();
         }
     }

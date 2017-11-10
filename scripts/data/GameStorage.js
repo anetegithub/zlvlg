@@ -8,14 +8,15 @@ define(["require", "exports"], function (require, exports) {
                 let request = window.indexedDB.open('mdung', 1);
                 request.onsuccess = function (e) {
                     context.db = e.target.result;
+                    resolve();
                 };
                 request.onupgradeneeded = function (e) {
                     context.db = e.target.result;
+                    GameStorage.storeNames.forEach(async (storeName) => {
+                        await context.createObjectStore(storeName);
+                    });
                     resolve();
                 };
-            });
-            GameStorage.storeNames.forEach(async (storeName) => {
-                await this.createObjectStore(storeName);
             });
         }
         async createObjectStore(name) {
@@ -31,7 +32,8 @@ define(["require", "exports"], function (require, exports) {
             }
         }
         async isempty(type) {
-            return await this.promisifyTransaction(type, true, "count", "readonly", []);
+            const count = await this.promisifyTransaction(type, 0, "count", "readonly", []);
+            return count == 0;
         }
         async save(type, value) {
             return await this.promisifyTransaction(type, false, value.id == 0 ? "add" : "put", "readwrite", [value]);
@@ -47,7 +49,7 @@ define(["require", "exports"], function (require, exports) {
                 try {
                     let table = "";
                     if (typeof type !== "string") {
-                        table = type.constructor.name;
+                        table = type.name;
                     }
                     else {
                         table = type;

@@ -5,7 +5,7 @@ import { Constants } from "../../../../utils/globals/Constants";
 import { ManagedComponent } from "../../../../app/core/impl/ManagedComponent";
 import { SpriteButton } from "../../../../ui/impl/buttons/spritebutton/SpriteButton";
 import { Container } from "../../../../utils/globals/IoC";
-import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
+import { Character } from "../../../../data/struct/Character";
 import { SexSelect } from "./SexSelect";
 
 export abstract class CreateSceneStage extends BaseBackScene {

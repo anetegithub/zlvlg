@@ -12,15 +12,15 @@ export class GameStorage {
             let request = window.indexedDB.open('mdung', 1);
             request.onsuccess = function (e: any) {
                 context.db = e.target.result;
+                resolve();
             }
             request.onupgradeneeded = function (e: any) {
                 context.db = e.target.result;
+                GameStorage.storeNames.forEach(async storeName => {
+                    await context.createObjectStore(storeName);
+                });
                 resolve();
             };
-        });
-
-        GameStorage.storeNames.forEach(async storeName => {
-            await this.createObjectStore(storeName);
         });
     }
 
@@ -38,7 +38,8 @@ export class GameStorage {
     }
 
     async isempty<T>(type: Ctr<T> | string): Promise<boolean> {
-        return await this.promisifyTransaction(type, true, "count", "readonly", []);
+        const count = await this.promisifyTransaction<number>(type, 0, "count", "readonly", []);
+        return count == 0;
     }
 
     async save<T extends StoredEntity>(type: Ctr<T>, value: T): Promise<Boolean> {
@@ -58,7 +59,7 @@ export class GameStorage {
             try {
                 let table = "";
                 if (typeof type !== "string") {
-                    table = type.constructor.name;
+                    table = type.name;
                 } else {
                     table = type;
                 }

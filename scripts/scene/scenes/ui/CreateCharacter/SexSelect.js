@@ -1,4 +1,4 @@
-define(["require", "exports", "./NicknameInput", "../../../../game/enums/Sex", "../../../../utils/globals/Constants", "../../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../../data/struct/CreateCharacterState", "../../../../utils/globals/IoC", "./ClassSelect", "./CreateSceneStage"], function (require, exports, NicknameInput_1, Sex_1, Constants_1, SpriteButton_1, CreateCharacterState_1, IoC_1, ClassSelect_1, CreateSceneStage_1) {
+define(["require", "exports", "./NicknameInput", "../../../../game/enums/Sex", "../../../../utils/globals/Constants", "../../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../../data/struct/Character", "../../../../utils/globals/IoC", "./ClassSelect", "./CreateSceneStage"], function (require, exports, NicknameInput_1, Sex_1, Constants_1, SpriteButton_1, Character_1, IoC_1, ClassSelect_1, CreateSceneStage_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class SexSelect extends CreateSceneStage_1.CreateSceneStage {
@@ -29,7 +29,7 @@ define(["require", "exports", "./NicknameInput", "../../../../game/enums/Sex", "
             });
         }
         chooseSex(sex) {
-            IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState).sex = sex;
+            IoC_1.Container.resolve(Character_1.Character).sex = sex;
             new ClassSelect_1.ClassSelect().run();
         }
     }

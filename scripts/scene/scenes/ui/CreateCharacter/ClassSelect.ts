@@ -6,7 +6,7 @@ import { enumKeys } from "../../../../utils/globals/EnumExtensions";
 import { Container } from "../../../../utils/globals/IoC";
 import { Doll } from "../../../../game/objects/Doll";
 import { Class } from "../../../../game/enums/Class";
-import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
+import { Character } from "../../../../data/struct/Character";
 import { Panel } from "../../../../components/ui/Panel";
 import { ProfessionSelect } from "./ProfessionSelect";
 import { CreateSceneStage } from "./CreateSceneStage";
@@ -44,7 +44,7 @@ export class ClassSelect extends CreateSceneStage {
         let y = 232;
 
         return enumKeys(Class).map(x => x.toLowerCase()).map(element => {
-            let character = new Doll(Container.game, 0, 0, element, null, Container.resolve(CreateCharacterState).sex);
+            let character = new Doll(Container.game, 0, 0, element, null, Container.resolve(Character).sex);
             character.setAnim("exceptDeath", true);
 
             let panel = new Panel({ w: x, h: y }, "panel_blue", character, element);
@@ -57,7 +57,7 @@ export class ClassSelect extends CreateSceneStage {
     }
 
     private selectClass(_class: string) {
-        Container.resolve(CreateCharacterState).class = Class[StringExtensions.capitalize(_class)];
+        Container.resolve(Character).class = Class[StringExtensions.capitalize(_class)];
         new ProfessionSelect().run();
     }
 }

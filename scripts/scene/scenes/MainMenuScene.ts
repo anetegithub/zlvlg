@@ -83,7 +83,8 @@ export class MainMenuScene extends SpriteMapScene {
             text: 'Load Game'
         };
 
-        if (!await Container.db.isempty(GameState)) {
+        const isEmpty = await Container.db.isempty(GameState);
+        if (!isEmpty) {
             config.events = {
                 down: () => {
                     console.log('load');

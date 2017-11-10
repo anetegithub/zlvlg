@@ -18,6 +18,7 @@ define(["require", "exports", "../../utils/globals/IoC", "../../utils/globals/Co
             this.game['inited'] = this.inited;
             IoC_1.Container.game = this.game;
             IoC_1.Container.db = new GameStorage_1.GameStorage();
+            IoC_1.Container.db.init();
         }
         preload() {
             this.game.add.plugin(PhaserInput.Plugin);

@@ -1,12 +1,13 @@
 import { CreateSceneStage } from "./CreateSceneStage";
 import { ProfessionSelect } from "./ProfessionSelect";
 import { Container } from "../../../../utils/globals/IoC";
-import { CreateCharacterState } from "../../../../data/struct/CreateCharacterState";
+import { Character } from "../../../../data/struct/Character";
 import { ManagedText } from "../../../../ui/impl/text/ManagedText";
 import { Constants } from "../../../../utils/globals/Constants";
 import { SpriteButton } from "../../../../ui/impl/buttons/spritebutton/SpriteButton";
 import { Class } from "../../../../game/enums/Class";
 import { Profession } from "../../../../game/enums/Profession";
+import { GameState } from "../../../../data/entities/GameState";
 
 export class ConfirmCreate extends CreateSceneStage {
     backScene: new (...args: any[]) => IScene = ProfessionSelect;
@@ -25,7 +26,7 @@ export class ConfirmCreate extends CreateSceneStage {
     }
 
     get info(): IManagedComponent[] {
-        const info = Container.resolve(CreateCharacterState);
+        const info = Container.resolve(Character);
         return [
             this.text("name: " + info.name, 250),
             this.text("class: " + Class[info.class], 290),
@@ -47,10 +48,16 @@ export class ConfirmCreate extends CreateSceneStage {
     }
 
     okAction() {
-        console.log('created');
+        const char = Container.resolve(Character);
+        let state = new GameState();
+        state.character = char;
+        Container.db.save(GameState, state).then(x => {
+            console.log('created and saved');
+        })
     }
 
-    private text(val: string, y: number): ManagedText {
+
+    text(val: string, y: number): ManagedText {
         return new ManagedText({
             text: val,
             y: y,
@@ -59,10 +66,10 @@ export class ConfirmCreate extends CreateSceneStage {
                 font: 'bold 20pt ' + Constants.fontFamily,
                 fill: Constants.color,
                 align: 'left',
-                boundsAlignH: "left"
+                boundsAlignH: "left",
             },
             anchor: 0,
             boundsAlignH: "left"
-        })
+        });
     }
 }

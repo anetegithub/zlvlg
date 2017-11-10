@@ -5,7 +5,7 @@ define(["require", "exports", "../GameStorage"], function (require, exports, Gam
     }
     exports.StoredEntity = StoredEntity;
     function Stored(ctor) {
-        GameStorage_1.GameStorage.storeNames.push(ctor.constructor.name);
+        GameStorage_1.GameStorage.storeNames.push(ctor.name);
     }
     exports.Stored = Stored;
 });

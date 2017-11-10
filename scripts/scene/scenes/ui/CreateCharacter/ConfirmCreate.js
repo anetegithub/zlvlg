@@ -1,4 +1,4 @@
-define(["require", "exports", "./CreateSceneStage", "./ProfessionSelect", "../../../../utils/globals/IoC", "../../../../data/struct/CreateCharacterState", "../../../../ui/impl/text/ManagedText", "../../../../utils/globals/Constants", "../../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../../game/enums/Class"], function (require, exports, CreateSceneStage_1, ProfessionSelect_1, IoC_1, CreateCharacterState_1, ManagedText_1, Constants_1, SpriteButton_1, Class_1) {
+define(["require", "exports", "./CreateSceneStage", "./ProfessionSelect", "../../../../utils/globals/IoC", "../../../../data/struct/Character", "../../../../ui/impl/text/ManagedText", "../../../../utils/globals/Constants", "../../../../ui/impl/buttons/spritebutton/SpriteButton", "../../../../game/enums/Class", "../../../../data/entities/GameState"], function (require, exports, CreateSceneStage_1, ProfessionSelect_1, IoC_1, Character_1, ManagedText_1, Constants_1, SpriteButton_1, Class_1, GameState_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class ConfirmCreate extends CreateSceneStage_1.CreateSceneStage {
@@ -15,7 +15,7 @@ define(["require", "exports", "./CreateSceneStage", "./ProfessionSelect", "../..
             ];
         }
         get info() {
-            const info = IoC_1.Container.resolve(CreateCharacterState_1.CreateCharacterState);
+            const info = IoC_1.Container.resolve(Character_1.Character);
             return [
                 this.text("name: " + info.name, 250),
                 this.text("class: " + Class_1.Class[info.class], 290),
@@ -35,7 +35,12 @@ define(["require", "exports", "./CreateSceneStage", "./ProfessionSelect", "../..
             });
         }
         okAction() {
-            console.log('created');
+            const char = IoC_1.Container.resolve(Character_1.Character);
+            let state = new GameState_1.GameState();
+            state.character = char;
+            IoC_1.Container.db.save(GameState_1.GameState, state).then(x => {
+                console.log('created and saved');
+            });
         }
         text(val, y) {
             return new ManagedText_1.ManagedText({
@@ -46,7 +51,7 @@ define(["require", "exports", "./CreateSceneStage", "./ProfessionSelect", "../..
                     font: 'bold 20pt ' + Constants_1.Constants.fontFamily,
                     fill: Constants_1.Constants.color,
                     align: 'left',
-                    boundsAlignH: "left"
+                    boundsAlignH: "left",
                 },
                 anchor: 0,
                 boundsAlignH: "left"
